@@ -11,17 +11,22 @@
             --lightest-pink: #ffe6f2;
         }
         
-        body {
+        html, body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: white;
+            font-size: 16px;
+            height: 100vh;
+        }
+        
+        .main-container {
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            text-align: center;
         }
         
+        /* HEADER */
         .header {
             display: flex;
             align-items: center;
@@ -31,6 +36,7 @@
             border-top: 3vh solid var(--light-pink);
             box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.1);
             border-bottom: 0.4rem solid var(--light-pink);
+            flex-shrink: 0;
         }
 
         .header-left {
@@ -70,6 +76,7 @@
             margin: 0.3125rem 0;
         }
 
+        /* NAVBAR */
         .navbar {
             display: flex;
             align-items: center;
@@ -88,41 +95,47 @@
             color: var(--pink-color);
         }
         
-        .page-title {
-            color: var(--pink-color);
-            margin: 20px 0;
-            position: relative;
-            padding: 10px 0;
-            font-size: 2rem;
+        .content-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
         }
         
-        /* Removed the ::before and ::after pseudo-elements that created the pink lines */
+        /* PAGE TITLE */
+        .page-title {
+            color: var(--pink-color);
+            margin: 1.25rem 0;
+            padding: 0.625rem 0;
+            font-size: 2rem;
+            text-align: center;
+        }
         
-        /* Horizontal layout for projects */
+        /* PROJECTS SECTION */
         .projects-container {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 40px;
-            padding: 30px;
-            max-width: 1200px;
+            gap: 2.5rem;
+            padding: 1.875rem;
+            max-width: 75rem;
             margin: 0 auto;
         }
         
         .project-item {
             width: 45%;
-            max-width: 500px;
-            margin-bottom: 40px;
-            border-radius: 15px;
+            max-width: 31.25rem;
+            margin-bottom: 2.5rem;
+            border-radius: 0.9375rem;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0.3125rem 0.9375rem rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
         }
         
         .image-container {
             overflow: hidden;
-            border-radius: 15px;
-            height: 300px;
+            border-radius: 0.9375rem;
+            height: 18.75rem;
         }
         
         .image-container img {
@@ -138,7 +151,7 @@
         }
         
         .text-container {
-            padding: 20px;
+            padding: 1.25rem;
             text-align: center;
             background-color: white;
         }
@@ -146,7 +159,7 @@
         .image-title {
             font-weight: bold;
             color: var(--pink-color);
-            margin-bottom: 10px;
+            margin-bottom: 0.625rem;
             font-size: 1.3rem;
         }
         
@@ -156,13 +169,7 @@
             font-size: 0.95rem;
         }
         
-        .divider {
-            height: 10px;
-            background-color: var(--light-pink);
-            margin: 20px 0;
-            width: 100%;
-        }
-        
+        /* FOOTER */
         .pink-footer {
             background-color: var(--lightest-pink);
             height: 3.625rem;
@@ -170,7 +177,7 @@
             display: flex;
             justify-content: flex-end;
             padding-right: 1.25rem;
-            margin-top: auto;
+            flex-shrink: 0;
         }
 
         .footer-content {
@@ -203,12 +210,22 @@
             body {
                 font-size: 14px;
             }
+            
             .projects-container {
-                padding: 20px;
+                padding: 1.25rem;
+            }
+            
+            .image-container {
+                height: 15.625rem;
             }
         }
 
         @media screen and (max-width: 768px) {
+            body {
+                overflow-y: auto;
+                height: auto;
+            }
+            
             .header {
                 flex-direction: column;
                 padding: 1rem;
@@ -216,78 +233,85 @@
             
             .navbar {
                 margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
             }
             
             .project-item {
-                width: 100%;
+                width: 90%;
                 max-width: none;
             }
             
-            .image-container {
-                height: 250px;
+            .projects-container {
+                gap: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header Section -->
-    <div class="header">
-        <div class="header-left">
-            <img src="Logo/SK.png" alt="SK Logo">
-            <h1>
-                <span class="pink">SANGGUNIANG KABATAAN</span>
-                <div class="header-line"></div>
-                <span class="black">BARANGAY SAN ISIDRO</span>
-            </h1>
+    <div class="main-container">
+        <!-- Header Section -->
+        <div class="header">
+            <div class="header-left">
+                <img src="Logo/SK.png" alt="SK Logo">
+                <h1>
+                    <span class="pink">SANGGUNIANG KABATAAN</span>
+                    <div class="header-line"></div>
+                    <span class="black">BARANGAY SAN ISIDRO</span>
+                </h1>
+            </div>
+            
+            <!-- Navigation Bar -->
+            <div class="navbar">
+                <a href="Home.html">HOME</a>
+                <a href="About.html">ABOUT</a>
+                <a href="Officials.html">OFFICIALS</a>
+                <a href="News.html">NEWS</a>
+                <a href="Projects.html">PROJECTS</a>
+                <a href="Contact.html">CONTACT</a>
+            </div>
         </div>
         
-        <!-- Navigation Bar -->
-        <div class="navbar">
-            <a href="Home.html">HOME</a>
-            <a href="About.html">ABOUT</a>
-            <a href="Officials.html">OFFICIALS</a>
-            <a href="News.html">NEWS</a>
-            <a href="Projects.html">PROJECTS</a>
-            <a href="Contact.html">CONTACT</a>
-        </div>
-    </div>
-    
-    <h1 class="page-title">PROJECTS</h1>
-    
-    <div class="projects-container">
-        <!-- Project 1 -->
-        <div class="project-item">
-            <div class="image-container" onclick="openMultipleLinks()">
-                <img src="Images/GROUPPH3.png" alt="Financial Assistance Program">
-            </div>
-            <div class="text-container">
-                <div class="image-title">ISKO-ISKA: Financial Educational Assistance</div>
-                <div class="image-description">The SK Officials of Barangay San Isidro are dedicated to easing the financial burden of senior high school and college students. Led by SK Chairperson Kathleen Aragon through the effort of SK Kagawad Chino Burgos and council, this initiative is made possible with the support of Punong Barangay Noel Japlos. Together, we're making a meaningful impact on students and their families.</div>
-            </div>
-        </div>
-
-        <!-- Project 2 -->
-        <div class="project-item">
-            <a href="https://www.facebook.com/watch/?v=462032159819575&rdid=GkZzxouKDFCJO7xu" target="_blank">
-                <div class="image-container">
-                    <img src="Images/GROUPPH2.jpg" alt="Summer League 2024">
+        <div class="content-wrapper">
+            <h1 class="page-title">PROJECTS</h1>
+            
+            <div class="projects-container">
+                <!-- Project 1 -->
+                <div class="project-item">
+                    <div class="image-container" onclick="openMultipleLinks()">
+                        <img src="Images/GROUPPH3.png" alt="Financial Assistance Program">
+                    </div>
+                    <div class="text-container">
+                        <div class="image-title">ISKO-ISKA: Financial Educational Assistance</div>
+                        <div class="image-description">The SK Officials of Barangay San Isidro are dedicated to easing the financial burden of senior high school and college students. Led by SK Chairperson Kathleen Aragon through the effort of SK Kagawad Chino Burgos and council, this initiative is made possible with the support of Punong Barangay Noel Japlos. Together, we're making a meaningful impact on students and their families.</div>
+                    </div>
                 </div>
-            </a>
-            <div class="text-container">
-                <div class="image-title">SK Brgy. San Isidro Summer League 2024: The New Era!</div>
-                <div class="image-description">The Summer League 2024, held at the Parañaque City Sports Complex, kicked off with a vibrant parade from the Greenheights Covered Court. The opening event featured exciting intermissions, celebrating passion, unity, sporting excellence, and the rise of new generation leaders. This is led by SK Chairwoman Kathleen Aragon done through the effort of SK Kagawad Roland Detalo and Council.</div>
+
+                <!-- Project 2 -->
+                <div class="project-item">
+                    <a href="https://www.facebook.com/watch/?v=462032159819575&rdid=GkZzxouKDFCJO7xu" target="_blank">
+                        <div class="image-container">
+                            <img src="Images/GROUPPH2.jpg" alt="Summer League 2024">
+                        </div>
+                    </a>
+                    <div class="text-container">
+                        <div class="image-title">SK Brgy. San Isidro Summer League 2024: The New Era!</div>
+                        <div class="image-description">The Summer League 2024, held at the Parañaque City Sports Complex, kicked off with a vibrant parade from the Greenheights Covered Court. The opening event featured exciting intermissions, celebrating passion, unity, sporting excellence, and the rise of new generation leaders. This is led by SK Chairwoman Kathleen Aragon done through the effort of SK Kagawad Roland Detalo and Council.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pink Footer -->
+        <div class="pink-footer">
+            <div class="footer-content">
+                <a href="https://www.facebook.com/BrgySanIsidroSK" target="_blank">
+                    <img src="Logo/face.png" alt="Facebook" class="facebook-icon">
+                </a>
             </div>
         </div>
     </div>
     
-    <!-- Pink Footer -->
-    <div class="pink-footer">
-        <div class="footer-content">
-            <a href="https://www.facebook.com/BrgySanIsidroSK" target="_blank">
-                <img src="Logo/face.png" alt="Facebook" class="facebook-icon">
-            </a>
-        </div>
-    </div>
     <script>
         function openMultipleLinks() {
             // Open the first link
