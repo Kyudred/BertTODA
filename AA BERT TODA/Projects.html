@@ -1,7 +1,16 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sangguniang Kabataan - Barangay San Isidro</title>
     <style>
+        :root {
+            --pink-color: #ff1493;
+            --light-pink: #fdd8ef;
+            --lightest-pink: #ffe6f2;
+        }
+        
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -12,136 +21,228 @@
             min-height: 100vh;
             text-align: center;
         }
-        .top-bar {
-            background-color: #fdd8ef;
-            height: 60px;
+        
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: white;
+            padding: 0 3%;
+            border-top: 3vh solid var(--light-pink);
+            box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.1);
+            border-bottom: 0.4rem solid var(--light-pink);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .header img {
+            height: 5rem;
+            margin-right: 0.9375rem;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            margin: 0;
+            font-weight: bold;
+            position: relative;
+            text-align: center;
+        }
+
+        .header .pink {
+            font-size: 1.25rem;
+            color: var(--pink-color);
+            display: block;
+        }
+
+        .header .black {
+            font-size: 1.25rem;
+            color: black;
+            display: block;
+        }
+
+        .header-line {
+            width: 100%;
+            height: 0.125rem;
+            background-color: black;
+            margin: 0.3125rem 0;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            padding: 0.5rem 0.9375rem;
+            transition: color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: var(--pink-color);
+        }
+        
+        .page-title {
+            color: var(--pink-color);
+            margin: 20px 0;
+            position: relative;
+            padding: 10px 0;
+            font-size: 2rem;
+        }
+        
+        /* Removed the ::before and ::after pseudo-elements that created the pink lines */
+        
+        /* Horizontal layout for projects */
+        .projects-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            padding: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .project-item {
+            width: 45%;
+            max-width: 500px;
+            margin-bottom: 40px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .image-container {
+            overflow: hidden;
+            border-radius: 15px;
+            height: 300px;
+        }
+        
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            cursor: pointer;
+        }
+        
+        .image-container img:hover {
+            transform: scale(1.1);
+        }
+        
+        .text-container {
+            padding: 20px;
+            text-align: center;
+            background-color: white;
+        }
+        
+        .image-title {
+            font-weight: bold;
+            color: var(--pink-color);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .image-description {
+            color: #555;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        
+        .divider {
+            height: 10px;
+            background-color: var(--light-pink);
+            margin: 20px 0;
             width: 100%;
         }
-        .bottom-bar {
-            background-color: #fdd8ef;
-            height: 60px;
+        
+        .pink-footer {
+            background-color: var(--lightest-pink);
+            height: 3.625rem;
             width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 1.25rem;
             margin-top: auto;
         }
-        .header {
-            background-color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-            position: relative;
-        }
-        .header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background-color: #fdd8ef;
-        }
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-        .logo img {
-            height: 50px;
-            margin-right: 10px;
-        }
-        .logo-text {
+
+        .footer-content {
             display: flex;
             flex-direction: column;
             align-items: center;
-        }
-        .logo-text-top {
-            color: #ff1493;
-            font-weight: bold;
-            margin-bottom: 2px;
-        }
-        .logo-text-divider {
-            width: 100%;
-            height: 2px;
-            background-color: black;
-            margin-bottom: 2px;
-        }
-        .logo-text-bottom {
-            color: black;
-            font-weight: bold;
-        }
-        .nav {
-            display: flex;
-            gap: 20px;
-        }
-        .nav a {
-            text-decoration: none;
-            color: black;
-            transition: color 0.3s ease;
-        }
-        .nav a:hover {
-            color: #ff1493;
-        }
-        h1 {
-            color: #e91e63;
-            margin-bottom: 20px;
-        }
-        .image-container {
-            position: relative;
-            display: inline-block;
-            margin: 20px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .image-container:hover {
-            transform: translateY(-15px) scale(1.1);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
-        }
-        .image-container img {
-            width: 320px;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 15px;
-            cursor: pointer;
-        }
-        .text-container {
-            max-width: 600px;
-            margin: 0 auto;
             text-align: center;
         }
-        .image-title {
-            font-weight: bold;
-            color: #e91e63;
-            margin-top: 10px;
+
+        .facebook-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            transition: transform 0.3s ease-in-out;
+            padding-top: 0.625rem;
+            padding-right: 3.25rem;
         }
-        .image-description {
-            font-size: 14px;
-            color: #555;
-            margin-top: 5px;
-            line-height: 1.6;
+
+        .facebook-icon:hover {
+            transform: scale(1.1);
         }
-        footer {
-            margin-top: 20px;
-            background-color: #fdd8ef;
-            color: rgb(0, 0, 0);
-            text-align: center;
-            padding: 10px;
-            width: 100%;
-            position: relative;
-            left: 0;
-            height: 50px;
+
+        .footer-text {
+            color: var(--pink-color);
+            margin-top: 0.3125rem;
+            font-size: 0.6875rem;
+        }
+        
+        /* Media queries for responsive design */
+        @media screen and (max-width: 1024px) {
+            body {
+                font-size: 14px;
+            }
+            .projects-container {
+                padding: 20px;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .navbar {
+                margin-top: 1rem;
+            }
+            
+            .project-item {
+                width: 100%;
+                max-width: none;
+            }
+            
+            .image-container {
+                height: 250px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="top-bar"></div>
+    <!-- Header Section -->
     <div class="header">
-        <div class="logo">
-            <img src="Logo/SK_LOGO.jpg" alt="SK Logo">
-            <div class="logo-text">
-                <div class="logo-text-top">SANGGUNIANG KABATAAN</div>
-                <div class="logo-text-divider"></div>
-                <div class="logo-text-bottom">BARANGAY SAN ISIDRO</div>
-            </div>
+        <div class="header-left">
+            <img src="Logo/SK.png" alt="SK Logo">
+            <h1>
+                <span class="pink">SANGGUNIANG KABATAAN</span>
+                <div class="header-line"></div>
+                <span class="black">BARANGAY SAN ISIDRO</span>
+            </h1>
         </div>
-        <div class="nav">
+        
+        <!-- Navigation Bar -->
+        <div class="navbar">
             <a href="Home.html">HOME</a>
             <a href="About.html">ABOUT</a>
             <a href="Officials.html">OFFICIALS</a>
@@ -150,28 +251,51 @@
             <a href="Contact.html">CONTACT</a>
         </div>
     </div>
-    <h1>PROJECTS</h1>
     
-    <div class="image-container">
-        <a href="https://www.facebook.com/share/p/19Bm67Fpdk/?mibextid=wwXIfr" target="_blank">
-            <img src="Images/GROUPPH3.png" alt="Hover to Lift">
-        </a>
-    </div>
-    <div class="text-container">
-        <div class="image-title">ISKO-ISKA: Financial Educational Assistance</div>
-        <div class="image-description">The SK Officials of Barangay San Isidro are dedicated to easing the financial burden of senior high school and college students. Led by SK Chairperson Kathleen Aragon through the effort of SK Kagawad Chino Burgos and council, this initiative is made possible with the support of Punong Barangay Noel Japlos. Together, we're making a meaningful impact on students and their families.</div>
-    </div>
+    <h1 class="page-title">PROJECTS</h1>
+    
+    <div class="projects-container">
+        <!-- Project 1 -->
+        <div class="project-item">
+            <div class="image-container" onclick="openMultipleLinks()">
+                <img src="Images/GROUPPH3.png" alt="Financial Assistance Program">
+            </div>
+            <div class="text-container">
+                <div class="image-title">ISKO-ISKA: Financial Educational Assistance</div>
+                <div class="image-description">The SK Officials of Barangay San Isidro are dedicated to easing the financial burden of senior high school and college students. Led by SK Chairperson Kathleen Aragon through the effort of SK Kagawad Chino Burgos and council, this initiative is made possible with the support of Punong Barangay Noel Japlos. Together, we're making a meaningful impact on students and their families.</div>
+            </div>
+        </div>
 
-    <div class="image-container">
-        <a href="https://www.facebook.com/share/p/195LxTogbD/?mibextid=wwXIfr" target="_blank">
-            <img src="Images/GROUPPH2.jpg" alt="Hover to Lift">
-        </a>
-    </div>
-    <div class="text-container">
-        <div class="image-title">SK Brgy. San Isidro Summer League 2024: The New Era!</div>
-        <div class="image-description">The Summer League 2024, held at the Parañaque City Sports Complex, kicked off with a vibrant parade from the Greenheights Covered Court. The opening event featured exciting intermissions, celebrating passion, unity, sporting excellence, and the rise of new generation leaders. This is led by SK Chairwoman Kathleen Aragon done through the effort of SK Kagawad Roland Detalo and Council.</div>
+        <!-- Project 2 -->
+        <div class="project-item">
+            <a href="https://www.facebook.com/watch/?v=462032159819575&rdid=GkZzxouKDFCJO7xu" target="_blank">
+                <div class="image-container">
+                    <img src="Images/GROUPPH2.jpg" alt="Summer League 2024">
+                </div>
+            </a>
+            <div class="text-container">
+                <div class="image-title">SK Brgy. San Isidro Summer League 2024: The New Era!</div>
+                <div class="image-description">The Summer League 2024, held at the Parañaque City Sports Complex, kicked off with a vibrant parade from the Greenheights Covered Court. The opening event featured exciting intermissions, celebrating passion, unity, sporting excellence, and the rise of new generation leaders. This is led by SK Chairwoman Kathleen Aragon done through the effort of SK Kagawad Roland Detalo and Council.</div>
+            </div>
+        </div>
     </div>
     
-    <footer></footer>
+    <!-- Pink Footer -->
+    <div class="pink-footer">
+        <div class="footer-content">
+            <a href="https://www.facebook.com/BrgySanIsidroSK" target="_blank">
+                <img src="Logo/face.png" alt="Facebook" class="facebook-icon">
+            </a>
+        </div>
+    </div>
+    <script>
+        function openMultipleLinks() {
+            // Open the first link
+            window.open("https://www.facebook.com/share/p/19Bm67Fpdk/?mibextid=wwXIfr", "_blank");
+            
+            // Open the second link
+            window.open("https://www.facebook.com/story.php?story_fbid=902226552031501&id=100067324925240&rdid=esojsca10izJsjAX#,", "_blank");
+        }
+    </script>
 </body>
 </html>
