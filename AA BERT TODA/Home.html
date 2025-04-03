@@ -293,6 +293,14 @@
             body {
                 font-size: 14px;
             }
+
+            .banner-content h1 {
+                font-size: 2.5rem; /* Adjusted for medium screens */
+            }
+
+            .banner-content h3 {
+                font-size: 1.25rem; /* Adjusted for medium screens */
+            }
         }
 
         @media screen and (max-width: 768px) {
@@ -303,14 +311,17 @@
             
             .navbar {
                 margin-top: 1rem;
+                flex-wrap: wrap; /* Allow wrapping for smaller screens */
+                justify-content: center;
             }
             
             .banner {
                 flex-direction: column;
+                height: auto; /* Allow height to adjust */
             }
             
             .banner-image {
-                width: 90%;
+                width: 100%; /* Full width for smaller screens */
                 padding-left: 0;
                 margin: 1rem auto;
             }
@@ -323,7 +334,12 @@
             }
             
             .banner-content h1 {
+                font-size: 2rem; /* Adjusted for smaller screens */
                 padding-left: 0;
+            }
+            
+            .banner-content h3 {
+                font-size: 1rem; /* Adjusted for smaller screens */
             }
             
             .content-section {
@@ -334,13 +350,13 @@
             }
             
             .column {
-                width: 90%;
+                width: 90%; /* Full width for smaller screens */
                 height: auto;
                 margin-bottom: 1rem;
             }
             
             .box, .image-box {
-                width: 100%;
+                width: 100%; /* Full width for smaller screens */
                 margin-bottom: 1rem;
                 height: auto;
                 min-height: 100px;
@@ -353,6 +369,30 @@
             
             .content-wrapper {
                 overflow-y: auto;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .navbar a {
+                font-size: 0.875rem; /* Smaller font size for very small screens */
+                padding: 0.25rem 0.5rem;
+            }
+
+            .banner-content h1 {
+                font-size: 1.5rem; /* Further adjustment for very small screens */
+            }
+
+            .banner-content h3 {
+                font-size: 0.875rem; /* Further adjustment for very small screens */
+            }
+
+            .logos img {
+                width: 4rem; /* Smaller logos for very small screens */
+            }
+
+            .facebook-icon {
+                width: 2rem; /* Smaller Facebook icon */
+                height: 2rem;
             }
         }
     </style>
