@@ -11,17 +11,17 @@
             --lightest-pink: #ffe6f2;
         }
         
-        html, body {
+        body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #ffffff;
-            font-size: 16px;
-            min-height: 100vh;
+            background-color: white;
             display: flex;
             flex-direction: column;
+            min-height: 100vh;
         }
-
+        
+        /* Header styling from Home page */
         .header {
             display: flex;
             align-items: center;
@@ -70,7 +70,8 @@
             background-color: black;
             margin: 0.3125rem 0;
         }
-
+        
+        /* Nav styling from Home page */
         .navbar {
             display: flex;
             align-items: center;
@@ -88,152 +89,157 @@
         .navbar a:hover {
             color: var(--pink-color);
         }
-
+        
+        /* Main content styling */
         .main-content {
-            flex: 1;
-            padding: 1.25rem;
+            flex-grow: 1;
+            padding: 20px;
             position: relative;
         }
-
+        
         .officials-title {
             text-align: center;
-            margin: 1.25rem 0;
-            color: var(--pink-color);
+            margin: 20px 0;
         }
-
+        
         .org-chart {
             display: flex;
             flex-direction: column;
             align-items: center;
             position: relative;
             width: 100%;
-            gap: 1.875rem;
+            gap: 30px;
         }
-
+        
         .level {
             display: flex;
             justify-content: center;
-            gap: 3.125rem;
+            gap: 50px;
             position: relative;
             width: 100%;
             z-index: 10;
-            flex-wrap: wrap;
         }
-
+        
         .level-two-column {
             display: flex;
-            justify-content: center;
-            gap: 12.5rem;
+            justify-content: space-between;
+            gap: 200px;
             position: relative;
             width: 100%;
             z-index: 10;
-            flex-wrap: wrap;
         }
-
+        
         .official {
             text-align: center;
-            padding: 0.625rem;
-            background-color: var(--light-pink);
-            border-radius: 0.625rem;
-            width: 25rem;
+            padding: 10px;
+            background-color: #fdd8ef;
+            border-radius: 10px;
+            width: 400px;
             position: relative;
             z-index: 10;
             display: flex;
             align-items: center;
-            gap: 0.625rem;
-            margin-bottom: 1.25rem;
-            box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            gap: 10px;
         }
-
-        .official:hover {
-            transform: scale(1.03);
-            box-shadow: 0 0.375rem 0.75rem rgba(0, 0, 0, 0.15);
-        }
-
+        
         .official-details {
             display: flex;
             flex-direction: column;
             flex-grow: 1;
         }
-
+        
         .official-name {
             font-weight: bold;
-            margin-bottom: 0.3125rem;
+            margin-bottom: 8px;  
+            font-size: 1.1em;    
         }
-
+        
         .official-title {
             font-size: 0.9em;
+            color: #333;
+            margin-bottom: 3px;  
+            line-height: 1.4;    
         }
-
+        
         .official img {
-            width: 6.25rem;
-            height: 6.25rem;
+            width: 100px;
+            height: 100px;
             object-fit: cover;
-            border-radius: 0.625rem;
+            border-radius: 10px;
             background-color: rgba(255,255,255,0.5);
-            padding: 0.3125rem;
-            border: 0.1875rem solid white;
+            padding: 5px;
+            border: 3px solid white;
         }
-
+        
         .chairperson {
-            background-color: var(--pink-color);
+            background-color: #ff1493;
             color: white;
         }
-
+        
         .chairperson .official-details {
             align-items: center;
         }
-
+        
+        .chairperson img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+            background-color: rgba(255,255,255,0.5);
+            padding: 5px;
+            border: 3px solid white;
+        }
+        
         .kagawad-levels {
             position: relative;
             width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 1.875rem;
+            gap: 30px;
         }
-
+        
         .org-chart::before {
             content: '';
             position: absolute;
-            top: 5.625rem;
+            top: 90px;
             left: 50%;
-            width: 0.125rem;
-            height: calc(100% - 5.625rem);
-            background-color: var(--light-pink);
+            width: 2px;
+            height: calc(100% - 90px);
+            background-color: #fdd8ef;
             z-index: 1;
         }
-
+        
         .vertical-connector {
             position: absolute;
             left: 50%;
-            width: 0.125rem;
-            background-color: var(--light-pink);
+            width: 2px;
+            background-color: #fdd8ef;
             z-index: 1;
         }
-
+        
         .level-connector-1 {
-            height: 3.125rem;
-            top: -4.6875rem;
+            height: 50px;
+            top: -75px;
         }
-
+        
         .level-connector-2 {
-            height: 3.125rem;
-            top: -1.5625rem;
+            height: 50px;
+            top: -25px;
         }
-
+        
         .level-connector-3 {
-            height: 3.125rem;
-            top: 1.5625rem;
+            height: 50px;
+            top: 25px;
         }
-
+        
         .level-connector-4 {
-            height: 3.125rem;
-            top: 4.6875rem;
+            height: 50px;
+            top: 75px;
         }
-
+        
+        /* Footer styling from Home page */
         .pink-footer {
-            background-color: var(--light-pink);
+            background-color: var(--lightest-pink);
             height: 3.625rem;
             width: 100%;
             display: flex;
@@ -267,18 +273,8 @@
             font-size: 0.6875rem;
         }
 
-        /* Media queries for responsive design */
-        @media screen and (max-width: 1024px) {
-            body {
-                font-size: 14px;
-            }
-            
-            .official {
-                width: 20rem;
-            }
-        }
-
-        @media screen and (max-width: 768px) {
+        /* Responsive Design */
+        @media (max-width: 768px) {
             .header {
                 flex-direction: column;
                 padding: 1rem;
@@ -290,29 +286,56 @@
                 justify-content: center;
             }
             
-            .level, .level-two-column {
+            .level {
                 flex-direction: column;
-                align-items: center;
-                gap: 1.5rem;
+                gap: 20px;
+            }
+            
+            .level-two-column {
+                flex-direction: column;
+                gap: 20px;
             }
             
             .official {
                 width: 100%;
-                max-width: 18rem;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
             }
             
-            .org-chart::before {
-                display: none;
+            .official img {
+                width: 80px;
+                height: 80px;
             }
             
-            .vertical-connector {
-                display: none;
+            .official-details {
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar a {
+                font-size: 0.875rem;
+                padding: 0.25rem 0.5rem;
+            }
+            
+            .official-name {
+                font-size: 1em;
+            }
+            
+            .official-title {
+                font-size: 0.8em;
+            }
+            
+            .facebook-icon {
+                width: 2rem;
+                height: 2rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header Section -->
+    <!-- Header Section from Home page -->
     <div class="header">
         <div class="header-left">
             <img src="Logo/SK.png" alt="SK Logo">
@@ -323,7 +346,7 @@
             </h1>
         </div>
         
-        <!-- Navigation Bar -->
+        <!-- Navigation Bar from Home page -->
         <div class="navbar">
             <a href="Home.html">HOME</a>
             <a href="About.html">ABOUT</a>
@@ -343,8 +366,9 @@
                     <img src="Images/KATHLEEN ARAGON.jpg" alt="Charmaine Marie Kathleen B. Aragon">
                     <div class="official-details">
                         <div class="official-name">Hon. Charmaine Marie Kathleen B. Aragon</div>
-                        <div class="official-title">SK Chairperson</div>
-                        <div class="official-title">Committee on Sports, Participation, Social and Cultural Activities</div>
+                        <div class="official-title">SK Chairperson - Barangay San Isidro</div>
+                        <div class="official-title">SK Federation of Parañaque - Sergeant at Arms</div>
+                        <div class="official-title">Committee Chairperson on Sports Development, Social and Cultural Activities</div>
                     </div>
                 </div>
             </div>
@@ -365,24 +389,28 @@
                     <img src="/api/placeholder/100/100" alt="Sandy May Condino">
                 </div>
             </div>
-
             <div class="kagawad-levels">
                 <div class="vertical-connector level-connector-1"></div>
                 <div class="level">
                     <div class="official">
                         <img src="Images/GABRIEL BORJA.jpg" alt="Gabriel R. Borja">
                         <div class="official-details">
-                            <div class="official-name">Gabriel R. Borja</div>
+                            <div class="official-name">Hon. Gabriel R. Borja</div>
                             <div class="official-title">SK Kagawad</div>
-                            <div class="official-title">Committee on Appropriation, Peace and Order, Management</div>
+                            <div class="official-title">Committee Chairperson on Appropriation</div>
+                            <div class="official-title">Committee Chairperson on Disaster Risk Reduction Management</div>
+                            <div class="official-title">Committee Chairperson on Peace and Order</div>
                         </div>
                     </div>
                     <div class="official">
                         <img src="Images/SHARLLA MAE CERILLES.jpg" alt="Sharlla Mae S. Cerilles">
                         <div class="official-details">
-                            <div class="official-name">Sharlla Mae S. Cerilles</div>
+                            <div class="official-name">Hon. Sharlla Mae S. Cerilles</div>
                             <div class="official-title">SK Kagawad</div>
-                            <div class="official-title">Committee on Health and Pandemic</div>
+                            <div class="official-title">Committee Chairperson on Health and Pandemic Response</div>
+                            <div class="official-title">Vice Chairperson on Appropriation</div>
+                            <div class="official-title">Vice Chairperson on Cleanliness, Beautification, Sanitation, Environment and Climate Change</div>
+                            <div class="official-title">Vice Chairperson on Disaster Risk Reduction Management</div>
                         </div>
                     </div>
                 </div>
@@ -392,17 +420,20 @@
                     <div class="official">
                         <img src="Images/JEMIMAH ANNE BANARES.jpg" alt="Jemimah Anne R. Bañares">
                         <div class="official-details">
-                            <div class="official-name">Jemimah Anne R. Bañares</div>
+                            <div class="official-name">Hon. Jemimah Anne R. Bañares</div>
                             <div class="official-title">SK Kagawad</div>
-                            <div class="official-title">Committee on Education, Scholarship and Climate Change</div>
+                            <div class="official-title">Committee Chairperson on Cleanliness, Beautification, Sanitation, Environment and Climate Change</div>
+                            <div class="official-title">Vice Chairperson on Education</div>
+                            <div class="official-title">Vice Chairperson on Gender and Development</div>
                         </div>
                     </div>
                     <div class="official">
                         <img src="Images/NEIL CYRIL BURGOS.jpg" alt="Neil Cyril D. Burgos">
                         <div class="official-details">
-                            <div class="official-name">Neil Cyril D. Burgos</div>
+                            <div class="official-name">Hon. Neil Cyril D. Burgos</div>
                             <div class="official-title">SK Kagawad</div>
-                            <div class="official-title">Committee on Tourism</div>
+                            <div class="official-title">Committee Chairperson on Education</div>
+                            <div class="official-title">Vice Chairperson on Youth Employment and Livelihood</div>
                         </div>
                     </div>
                 </div>
@@ -412,17 +443,20 @@
                     <div class="official">
                         <img src="Images/JULIANNE MAE INVIERNO.jpg" alt="Julianne Mae C. Invierno">
                         <div class="official-details">
-                            <div class="official-name">Julianne Mae C. Invierno</div>
+                            <div class="official-name">Hon. Julianne Mae C. Invierno</div>
                             <div class="official-title">SK Kagawad</div>
-                            <div class="official-title">Committee on Good Governance</div>
+                            <div class="official-title">Committee Chairperson on Gender and Development</div>
+                            <div class="official-title">Vice Chairperson on Health and Pandemic Response</div>
+                            <div class="official-title">Vice Chairperson on Peace and Order</div>
                         </div>
                     </div>
                     <div class="official">
                         <img src="Images/ROLAND DETALO.jpg" alt="Roland D. Detalo">
                         <div class="official-details">
-                            <div class="official-name">Roland D. Detalo</div>
+                            <div class="official-name">Hon. Roland D. Detalo</div>
                             <div class="official-title">SK Kagawad</div>
-                            <div class="official-title">Committee on Public Information, Biding and Awards</div>
+                            <div class="official-title">Committee Chairperson on Prequalification, Biding and Awards</div>
+                            <div class="official-title">Vice Chairperson on Sports Development, Social and Cultural Activities</div>
                         </div>
                     </div>
                 </div>
@@ -432,9 +466,9 @@
                     <div class="official">
                         <img src="Images/ERIN RAILEY ROGACION PEREIRA.jpg" alt="Erin Railey R. Pereira">
                         <div class="official-details">
-                            <div class="official-name">Erin Railey R. Pereira</div>
+                            <div class="official-name">Hon. Erin Railey R. Pereira</div>
                             <div class="official-title">SK Kagawad</div>
-                            <div class="official-title">Committee on Local Youth Development and Tribal Youth</div>
+                            <div class="official-title">Committee Chairperson on Youth Employment and Livelihood</div>
                         </div>
                     </div>
                 </div>
@@ -442,7 +476,7 @@
         </div>
     </div>
 
-    <!-- Pink Footer -->
+    <!-- Footer from Home page -->
     <div class="pink-footer">
         <div class="footer-content">
             <a href="https://www.facebook.com/BrgySanIsidroSK" target="_blank">
