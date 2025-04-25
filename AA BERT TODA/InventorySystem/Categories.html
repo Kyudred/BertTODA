@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Categories.css">
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Categories</title>
+</head>
+<body>
+    <!-- Menu bar -->
+    <div class="menu">
+    </div>  
+
+    <!-- Sidebar --> 
+    <div class="sidebar">
+        <ul>
+            <li>
+                <a href="#">
+                    <span class="icon"><i class="fas fa-box"></i></span>
+                    <span class="text">Inventory System</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="icon"><i class="fas fa-list"></i></span>
+                    <span class="text">Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">`   
+                    <span class="icon"><i class="fas fa-boxes"></i></span>
+                    <span class="text">Items</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="icon"><i class="fas fa-undo"></i></span>
+                    <span class="text">Use/Return</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="content">
+        <h1>List of Categories</h1>
+        <button class="btn-add" onclick="openCategoryModal()">+ Add a New Category</button>
+    </br></br>
+        <div class="table-container">
+            <div class="table-controls">
+                <label for="search">Search:</label>
+                <input type="text" id="search" class="search-input" placeholder="Search categories...">
+            </div>
+            <table id = "categoryTable">
+                <thead>
+                    <tr>
+                        <th>NO.</th>
+                        <th>ID</th>
+                        <th>NAME</th>
+                        <th>ACTIONS</th>
+                    </tr>   
+                </thead>
+                <tbody id="categoryTableBody">
+                                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Add Category Modal -->
+    <div id="categoryModal" class="modal">  
+        <div class="modal-content">
+            <h3>Add a New Category</h3>
+            <label for="categoryId">Category ID:</label>
+            <input type="text" id="categoryId" placeholder="Enter category ID" />
+            
+            <label for="categoryName">Category Name:</label>
+            <input type="text" id="categoryName" placeholder="Enter category name" />
+            
+            <div class="modal-buttons">
+                <button class="btn-cancel" onclick="closeCategoryModal()">Cancel</button>
+                <button class="btn-submit" onclick="submitCategory()">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="successMessage" class="success-message" style="display: none;">
+        <div class="success-checkmark">
+            <div class="check-icon">
+                <span class="icon-line line-tip"></span>
+                <span class="icon-line line-long"></span>
+                <div class="icon-circle"></div>
+                <div class="icon-fix"></div>
+            </div>
+            <p>Category added successfully!</p>
+        </div>
+    </div>
+</body>
+<script src="Categories.js"></script>
+</html>

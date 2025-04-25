@@ -1,0 +1,101 @@
+/* Style for the pink menu bar */
+.menu {
+    width: 100%;
+    height: 50px; /* Adjust height as needed */
+    background-color: #fdd8ef;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;    
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow for better appearance */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "'Poppins', sans-serif";
+}
+
+body {
+    background: whitesmoke;
+}
+
+/* Sidebar styling */
+.sidebar {
+    position: fixed;
+    top: 50px; /* Below the menu bar */
+    left: 0;
+    height: calc(100vh - 50px); /* Full height minus the menu bar */
+    width: 80px; /* Collapsed width */
+    background: #5a5e8c; /* Sidebar background color */
+    color: white;
+    overflow-y: auto; /* Enable scrolling if content overflows */
+    padding: 20px 10px; /* Adjust padding for collapsed state */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Ensure it stays above other elements */
+    transition: width 0.3s ease; /* Smooth transition for expanding/collapsing */
+}
+
+.sidebar:hover {
+    width: 250px; /* Expanded width */
+    transition: width 0.3s ease; /* Smooth transition for expanding/collapsing */
+}
+
+/* Sidebar list items */
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li {
+    margin: 10px 0;
+}
+
+.sidebar ul li a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background 0.3s ease, color 0.3s ease;
+    white-space: nowrap; /* Prevent text wrapping */
+    overflow: hidden; /* Hide overflowing text in collapsed state */
+}
+
+.sidebar ul li a:hover {
+    background: rgba(255, 255, 255, 0.2); /* Highlight on hover */
+}
+
+.sidebar ul li a .icon {
+    margin-right: 10px; /* Space between icon and text */
+    font-size: 16px;
+    min-width: 30px; /* Ensure icons are aligned in collapsed state */
+    text-align: center;
+}   
+
+/* Hide text in collapsed state */
+.sidebar ul li a .text {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Show text in expanded state */
+.sidebar:hover ul li a .text {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+/* Main content area */
+.content {
+    margin-left: 80px; /* Adjust based on collapsed sidebar width */
+    padding: 20px;
+    transition: margin-left 0.3s ease; /* Smooth transition for toggling */
+}
+
+.sidebar:hover ~ .content {
+    margin-left: 250px; /* Adjust based on expanded sidebar width */
+}
+
