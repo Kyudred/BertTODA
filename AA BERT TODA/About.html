@@ -15,10 +15,34 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--lightest-pink);
             font-size: 16px;
             height: 100%;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background image style */
+        #bg-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            object-fit: cover;
+            object-position: center;
+        }
+        
+        /* Overlay for background with blur */
+        #bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: -1;
         }
 
         .main-container {
@@ -26,6 +50,7 @@
             flex-direction: column;
             min-height: 100vh;
             overflow: hidden;
+            position: relative;
         }
 
         /* HEADER - Updated to match Home.html */
@@ -39,6 +64,8 @@
             box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.1);
             border-bottom: 0.4rem solid var(--light-pink);
             flex-shrink: 0;
+            position: relative;
+            z-index: 1;
         }
 
         .header-left {
@@ -102,15 +129,19 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            position: relative;
+            z-index: 1;
         }
 
-        /* MISSION & VISION SECTION */
+        /* MISSION & VISION SECTION - Removed white background */
         .mission-vision {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             padding: clamp(1rem, 2vw, 1.25rem) clamp(1.5rem, 5vw, 3.125rem);
-            background-color: white;
+            margin: 1rem;
+            border-radius: 0.625rem;
+            /* Removed background-color: rgba(255, 255, 255, 0.8); */
         }
 
         .mission {
@@ -139,15 +170,17 @@
             margin-top: clamp(5rem, 9vw, 9.375rem);
         }
 
-        /* GOALS SECTION */
+        /* GOALS SECTION - Removed white background */
         .goals-section {
             text-align: center;
             padding: 0.0625rem clamp(1.5rem, 5vw, 3.125rem);
             padding-bottom: clamp(2rem, 3vw, 3.5rem);
-            background-color: white;
+            /* Removed background-color: rgba(255, 255, 255, 0.8); */
             flex-grow: 1;
             display: flex;
             flex-direction: column;
+            margin: 0 1rem 1rem 1rem;
+            border-radius: 0.625rem;
         }
 
         .goals-title {
@@ -208,6 +241,8 @@
             justify-content: flex-end;
             padding-right: 1.25rem;
             flex-shrink: 0;
+            position: relative;
+            z-index: 1;
         }
 
         .facebook-icon {
@@ -314,6 +349,10 @@
 </head>
 
 <body>
+    <!-- Background image elements -->
+    <img id="bg-image" src="REFERENCE.jpg" alt="">
+    <div id="bg-overlay"></div>
+    
     <div class="main-container">
         <!-- Header Section - Updated to match Home.html -->
         <div class="header">
@@ -383,5 +422,39 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // JavaScript to ensure the background image loads properly
+        document.addEventListener('DOMContentLoaded', function() {
+            const bgImage = document.getElementById('bg-image');
+            
+            // Try different possible paths if the image fails to load
+            bgImage.onerror = function() {
+                // Try different paths
+                const paths = [
+                    'REFERENCE.jpg',
+                    './REFERENCE.jpg',
+                    '../REFERENCE.jpg',
+                    '/REFERENCE.jpg',
+                    'img/REFERENCE.jpg',
+                    'images/REFERENCE.jpg',
+                    'assets/REFERENCE.jpg',
+                    'assets/images/REFERENCE.jpg'
+                ];
+                
+                let currentPath = 0;
+                
+                const tryNextPath = function() {
+                    currentPath++;
+                    if (currentPath < paths.length) {
+                        bgImage.src = paths[currentPath];
+                    }
+                };
+                
+                bgImage.onerror = tryNextPath;
+                tryNextPath();
+            };
+        });
+    </script>
 </body>
 </html>
