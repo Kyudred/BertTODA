@@ -111,62 +111,53 @@
             text-align: center;
         }
         
-        /* PROJECTS SECTION */
-        .projects-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 2.5rem;
-            padding: 1.875rem;
-            max-width: 75rem;
-            margin: 0 auto;
+        /* NEWS SECTION */
+        .news-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+            padding: 1.25rem 3%;
+            margin-bottom: 5rem;
         }
-        
-        .project-item {
-            width: 45%;
-            max-width: 31.25rem;
-            margin-bottom: 2.5rem;
-            border-radius: 0.9375rem;
+
+        .news-item {
+            border: 1px solid #e0e0e0;
+            border-radius: 0.625rem;
             overflow: hidden;
-            box-shadow: 0 0.3125rem 0.9375rem rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0.25rem 0.375rem rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
         }
-        
-        .image-container {
-            overflow: hidden;
-            border-radius: 0.9375rem;
-            height: 18.75rem;
+
+        .news-item:hover {
+            transform: translateY(-0.3125rem);
         }
-        
-        .image-container img {
+
+        .news-image {
+            height: 15.7rem;
+            overflow: hidden;
+        }
+
+        .news-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
-            cursor: pointer;
         }
-        
-        .image-container img:hover {
-            transform: scale(1.1);
+
+        .news-content {
+            background-color: var(--light-pink);
+            color: black;
+            padding: 0.625rem;
         }
-        
-        .text-container {
-            padding: 1.25rem;
-            text-align: center;
-            background-color: white;
-        }
-        
-        .image-title {
+
+        .news-title {
             font-weight: bold;
-            color: var(--pink-color);
-            margin-bottom: 0.625rem;
-            font-size: 1.3rem;
+            margin-bottom: 0.3125rem;
+            font-size: 1rem;
         }
-        
-        .image-description {
-            color: #555;
-            line-height: 1.6;
-            font-size: 0.95rem;
+
+        .news-meta {
+            font-size: 0.8rem;
+            color: #333;
         }
         
         /* FOOTER */
@@ -211,12 +202,8 @@
                 font-size: 14px;
             }
             
-            .projects-container {
+            .news-container {
                 padding: 1.25rem;
-            }
-            
-            .image-container {
-                height: 15.625rem;
             }
         }
 
@@ -237,13 +224,8 @@
                 justify-content: center;
             }
             
-            .project-item {
-                width: 90%;
-                max-width: none;
-            }
-            
-            .projects-container {
-                gap: 1.5rem;
+            .news-item {
+                flex-direction: column;
             }
         }
     </style>
@@ -274,29 +256,24 @@
         
         <div class="content-wrapper">
             <h1 class="page-title">PROJECTS</h1>
-            
-            <div class="projects-container">
-                <!-- Project 1 -->
-                <div class="project-item">
-                    <div class="image-container" onclick="openMultipleLinks()">
+
+            <div class="news-container">
+                <div class="news-item">
+                    <div class="news-image">
                         <img src="Images/GROUPPH3.png" alt="Financial Assistance Program">
                     </div>
-                    <div class="text-container">
-                        <div class="image-title">ISKO-ISKA: Financial Educational Assistance</div>
-                        <div class="image-description">The SK Officials of Barangay San Isidro are dedicated to easing the financial burden of senior high school and college students. Led by SK Chairperson Kathleen Aragon through the effort of SK Kagawad Chino Burgos and council, this initiative is made possible with the support of Punong Barangay Noel Japlos. Together, we're making a meaningful impact on students and their families.</div>
+                    <div class="news-content">
+                        <div class="news-title">ISKO-ISKA: Financial Educational Assistance</div>
+                        <div class="news-meta">Led by SK Chairperson Kathleen Aragon</div>
                     </div>
                 </div>
-
-                <!-- Project 2 -->
-                <div class="project-item">
-                    <a href="https://www.facebook.com/watch/?v=462032159819575&rdid=GkZzxouKDFCJO7xu" target="_blank">
-                        <div class="image-container">
-                            <img src="Images/GROUPPH2.jpg" alt="Summer League 2024">
-                        </div>
-                    </a>
-                    <div class="text-container">
-                        <div class="image-title">SK Brgy. San Isidro Summer League 2024: The New Era!</div>
-                        <div class="image-description">The Summer League 2024, held at the Parañaque City Sports Complex, kicked off with a vibrant parade from the Greenheights Covered Court. The opening event featured exciting intermissions, celebrating passion, unity, sporting excellence, and the rise of new generation leaders. This is led by SK Chairwoman Kathleen Aragon done through the effort of SK Kagawad Roland Detalo and Council.</div>
+                <div class="news-item">
+                    <div class="news-image">
+                        <img src="Images/GROUPPH2.jpg" alt="Summer League 2024">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-title">SK Brgy. San Isidro Summer League 2024: The New Era!</div>
+                        <div class="news-meta">Held at Parañaque City Sports Complex</div>
                     </div>
                 </div>
             </div>
