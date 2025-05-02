@@ -19,24 +19,6 @@
             min-height: 100vh;
             overflow-x: hidden;
             overflow-y: auto;
-            background-image: url(CONTACT_BG.jpg);
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            position: relative;
-        }
-        
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(5px);
-            z-index: -1;
         }
 
         .main-container {
@@ -56,6 +38,8 @@
             box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.1);
             border-bottom: 0.4rem solid var(--light-pink);
             flex-shrink: 0;
+            position: relative;
+            z-index: 2;
         }
 
         .header-left {
@@ -119,6 +103,31 @@
             display: flex;
             flex-direction: column;
             overflow-y: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Add background image with inline style */
+        #bg-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            object-fit: cover;
+            object-position: center;
+        }
+        
+        /* Overlay for background */
+        #bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.7);
+            z-index: -1;
         }
 
         /* CONTACT FORM */
@@ -235,6 +244,8 @@
             justify-content: flex-end;
             padding-right: 1.25rem;
             flex-shrink: 0;
+            position: relative;
+            z-index: 2;
         }
 
         .facebook-icon {
@@ -305,6 +316,10 @@
 </head>
 
 <body>
+    <!-- Background image elements -->
+    <img id="bg-image" src="meng.png" alt="">
+    <div id="bg-overlay"></div>
+
     <div class="main-container">
         <!-- Header Section -->
         <div class="header">
@@ -396,5 +411,39 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // JavaScript to ensure the background image loads properly
+        document.addEventListener('DOMContentLoaded', function() {
+            const bgImage = document.getElementById('bg-image');
+            
+            // Try different possible paths if the image fails to load
+            bgImage.onerror = function() {
+                // Try different paths
+                const paths = [
+                    'meng.png',
+                    './meng.png',
+                    '../meng.png',
+                    '/meng.png',
+                    'img/meng.png',
+                    'images/meng.png',
+                    'assets/meng.png',
+                    'assets/images/meng.png'
+                ];
+                
+                let currentPath = 0;
+                
+                const tryNextPath = function() {
+                    currentPath++;
+                    if (currentPath < paths.length) {
+                        bgImage.src = paths[currentPath];
+                    }
+                };
+                
+                bgImage.onerror = tryNextPath;
+                tryNextPath();
+            };
+        });
+    </script>
 </body>
 </html>
