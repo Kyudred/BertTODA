@@ -71,7 +71,7 @@
             margin: 0.3125rem 0;
         }
         
-        /* Nav styling from Home page */
+        /* Nav styling with dropdown */
         .navbar {
             display: flex;
             align-items: center;
@@ -90,11 +90,60 @@
             color: var(--pink-color);
         }
         
+        /* Dropdown styling */
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown > a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            padding: 0.5rem 0.9375rem;
+            transition: color 0.3s ease;
+        }
+        
+        .dropdown > a:hover {
+            color: var(--pink-color);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .dropdown-content a {
+            padding: 10px;
+            display: block;
+            text-decoration: none;
+            color: black;
+        }
+        
+        .dropdown-content a:hover {
+            color: var(--pink-color);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
         /* Main content styling */
         .main-content {
             flex-grow: 1;
             padding: 20px;
             position: relative;
+        }
+        
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
         }
         
         .officials-title {
@@ -311,10 +360,20 @@
             .official-details {
                 align-items: center;
             }
+            
+            .dropdown-content {
+                position: static;
+                box-shadow: none;
+                display: none;
+            }
+            
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
         }
 
         @media (max-width: 480px) {
-            .navbar a {
+            .navbar a, .dropdown > a {
                 font-size: 0.875rem;
                 padding: 0.25rem 0.5rem;
             }
@@ -346,11 +405,17 @@
             </h1>
         </div>
         
-        <!-- Navigation Bar from Home page -->
+        <!-- Navigation Bar with Dropdown -->
         <div class="navbar">
             <a href="Home.html">HOME</a>
             <a href="About.html">ABOUT</a>
-            <a href="Officials.html">OFFICIALS</a>
+            <div class="dropdown">
+                <a href="Officials.html">OFFICIALS</a>
+                <div class="dropdown-content">
+                    <a href="#" onclick="showSection('sk')">SK Officials</a>
+                    <a href="#" onclick="showSection('youth')">Youth Organization</a>
+                </div>
+            </div>
             <a href="News.html">NEWS</a>
             <a href="Projects.html">PROJECTS</a>
             <a href="Contact.html">CONTACT</a>
@@ -358,117 +423,174 @@
     </div>
 
     <div class="main-content">
-        <h2 class="officials-title">SK OFFICIALS</h2>
+        <!-- SK Officials Section -->
+        <div id="sk" class="section active">
+            <h2 class="officials-title">SK OFFICIALS</h2>
 
-        <div class="org-chart">
-            <div class="level">
-                <div class="official chairperson">
-                    <img src="Images/KATHLEEN ARAGON.jpg" alt="Charmaine Marie Kathleen B. Aragon">
-                    <div class="official-details">
-                        <div class="official-name">Hon. Charmaine Marie Kathleen B. Aragon</div>
-                        <div class="official-title">SK Chairperson - Barangay San Isidro</div>
-                        <div class="official-title">SK Federation of Parañaque - Sergeant at Arms</div>
-                        <div class="official-title">Committee Chairperson on Sports Development, Social and Cultural Activities</div>
+            <div class="org-chart">
+                <div class="level">
+                    <div class="official chairperson">
+                        <img src="Images/KATHLEEN ARAGON.jpg" alt="Charmaine Marie Kathleen B. Aragon">
+                        <div class="official-details">
+                            <div class="official-name">Hon. Charmaine Marie Kathleen B. Aragon</div>
+                            <div class="official-title">SK Chairperson - Barangay San Isidro</div>
+                            <div class="official-title">SK Federation of Parañaque - Sergeant at Arms</div>
+                            <div class="official-title">Committee Chairperson on Sports Development, Social and Cultural Activities</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="level-two-column">
+                    <div class="official">
+                        <div class="official-details">
+                            <div class="official-name">Jeff Niko Dela Cruz</div>
+                            <div class="official-title">SK Secretary</div>
+                        </div>
+                        <img src="/api/placeholder/100/100" alt="Jeff Niko Dela Cruz">
+                    </div>
+                    <div class="official">
+                        <div class="official-details">
+                            <div class="official-name">Sandy May Condino</div>
+                            <div class="official-title">SK Treasurer</div>
+                        </div>
+                        <img src="/api/placeholder/100/100" alt="Sandy May Condino">
+                    </div>
+                </div>
+                <div class="kagawad-levels">
+                    <div class="vertical-connector level-connector-1"></div>
+                    <div class="level">
+                        <div class="official">
+                            <img src="Images/GABRIEL BORJA.jpg" alt="Gabriel R. Borja">
+                            <div class="official-details">
+                                <div class="official-name">Hon. Gabriel R. Borja</div>
+                                <div class="official-title">SK Kagawad</div>
+                                <div class="official-title">Committee Chairperson on Appropriation</div>
+                                <div class="official-title">Committee Chairperson on Disaster Risk Reduction Management</div>
+                                <div class="official-title">Committee Chairperson on Peace and Order</div>
+                            </div>
+                        </div>
+                        <div class="official">
+                            <img src="Images/SHARLLA MAE CERILLES.jpg" alt="Sharlla Mae S. Cerilles">
+                            <div class="official-details">
+                                <div class="official-name">Hon. Sharlla Mae S. Cerilles</div>
+                                <div class="official-title">SK Kagawad</div>
+                                <div class="official-title">Committee Chairperson on Health and Pandemic Response</div>
+                                <div class="official-title">Vice Chairperson on Appropriation</div>
+                                <div class="official-title">Vice Chairperson on Cleanliness, Beautification, Sanitation, Environment and Climate Change</div>
+                                <div class="official-title">Vice Chairperson on Disaster Risk Reduction Management</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="vertical-connector level-connector-2"></div>
+                    <div class="level">
+                        <div class="official">
+                            <img src="Images/JEMIMAH ANNE BANARES.jpg" alt="Jemimah Anne R. Bañares">
+                            <div class="official-details">
+                                <div class="official-name">Hon. Jemimah Anne R. Bañares</div>
+                                <div class="official-title">SK Kagawad</div>
+                                <div class="official-title">Committee Chairperson on Cleanliness, Beautification, Sanitation, Environment and Climate Change</div>
+                                <div class="official-title">Vice Chairperson on Education</div>
+                                <div class="official-title">Vice Chairperson on Gender and Development</div>
+                            </div>
+                        </div>
+                        <div class="official">
+                            <img src="Images/NEIL CYRIL BURGOS.jpg" alt="Neil Cyril D. Burgos">
+                            <div class="official-details">
+                                <div class="official-name">Hon. Neil Cyril D. Burgos</div>
+                                <div class="official-title">SK Kagawad</div>
+                                <div class="official-title">Committee Chairperson on Education</div>
+                                <div class="official-title">Vice Chairperson on Youth Employment and Livelihood</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="vertical-connector level-connector-3"></div>
+                    <div class="level">
+                        <div class="official">
+                            <img src="Images/JULIANNE MAE INVIERNO.jpg" alt="Julianne Mae C. Invierno">
+                            <div class="official-details">
+                                <div class="official-name">Hon. Julianne Mae C. Invierno</div>
+                                <div class="official-title">SK Kagawad</div>
+                                <div class="official-title">Committee Chairperson on Gender and Development</div>
+                                <div class="official-title">Vice Chairperson on Health and Pandemic Response</div>
+                                <div class="official-title">Vice Chairperson on Peace and Order</div>
+                            </div>
+                        </div>
+                        <div class="official">
+                            <img src="Images/ROLAND DETALO.jpg" alt="Roland D. Detalo">
+                            <div class="official-details">
+                                <div class="official-name">Hon. Roland D. Detalo</div>
+                                <div class="official-title">SK Kagawad</div>
+                                <div class="official-title">Committee Chairperson on Prequalification, Biding and Awards</div>
+                                <div class="official-title">Vice Chairperson on Sports Development, Social and Cultural Activities</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="vertical-connector level-connector-4"></div>
+                    <div class="level">
+                        <div class="official">
+                            <img src="Images/ERIN RAILEY ROGACION PEREIRA.jpg" alt="Erin Railey R. Pereira">
+                            <div class="official-details">
+                                <div class="official-name">Hon. Erin Railey R. Pereira</div>
+                                <div class="official-title">SK Kagawad</div>
+                                <div class="official-title">Committee Chairperson on Youth Employment and Livelihood</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <div class="level-two-column">
-                <div class="official">
-                    <div class="official-details">
-                        <div class="official-name">Jeff Niko Dela Cruz</div>
-                        <div class="official-title">SK Secretary</div>
-                    </div>
-                    <img src="/api/placeholder/100/100" alt="Jeff Niko Dela Cruz">
-                </div>
-                <div class="official">
-                    <div class="official-details">
-                        <div class="official-name">Sandy May Condino</div>
-                        <div class="official-title">SK Treasurer</div>
-                    </div>
-                    <img src="/api/placeholder/100/100" alt="Sandy May Condino">
-                </div>
-            </div>
-            <div class="kagawad-levels">
-                <div class="vertical-connector level-connector-1"></div>
+        </div>
+        
+        <!-- Youth Organization Section -->
+        <div id="youth" class="section">
+            <h2 class="officials-title">FILINVEST CLASSIC ESTATE YOUTH</h2>
+            <h2 class="officials-title">As of December 2024</h2>
+            <div class="org-chart">
                 <div class="level">
-                    <div class="official">
-                        <img src="Images/GABRIEL BORJA.jpg" alt="Gabriel R. Borja">
+                    <div class="official chairperson">
+                        <img src="/api/placeholder/100/100" alt="Janelle Sofia L. Cruz">
                         <div class="official-details">
-                            <div class="official-name">Hon. Gabriel R. Borja</div>
-                            <div class="official-title">SK Kagawad</div>
-                            <div class="official-title">Committee Chairperson on Appropriation</div>
-                            <div class="official-title">Committee Chairperson on Disaster Risk Reduction Management</div>
-                            <div class="official-title">Committee Chairperson on Peace and Order</div>
-                        </div>
-                    </div>
-                    <div class="official">
-                        <img src="Images/SHARLLA MAE CERILLES.jpg" alt="Sharlla Mae S. Cerilles">
-                        <div class="official-details">
-                            <div class="official-name">Hon. Sharlla Mae S. Cerilles</div>
-                            <div class="official-title">SK Kagawad</div>
-                            <div class="official-title">Committee Chairperson on Health and Pandemic Response</div>
-                            <div class="official-title">Vice Chairperson on Appropriation</div>
-                            <div class="official-title">Vice Chairperson on Cleanliness, Beautification, Sanitation, Environment and Climate Change</div>
-                            <div class="official-title">Vice Chairperson on Disaster Risk Reduction Management</div>
+                            <div class="official-name">Janelle Sofia L. Cruiz</div>
+                            <div class="official-title">President</div>
+                            <div class="official-title">Phone: +63977 816 7702</div>
                         </div>
                     </div>
                 </div>
 
-                <div class="vertical-connector level-connector-2"></div>
                 <div class="level">
                     <div class="official">
-                        <img src="Images/JEMIMAH ANNE BANARES.jpg" alt="Jemimah Anne R. Bañares">
+                        <img src="/api/placeholder/100/100" alt="Trisha Puertollano">
                         <div class="official-details">
-                            <div class="official-name">Hon. Jemimah Anne R. Bañares</div>
-                            <div class="official-title">SK Kagawad</div>
-                            <div class="official-title">Committee Chairperson on Cleanliness, Beautification, Sanitation, Environment and Climate Change</div>
-                            <div class="official-title">Vice Chairperson on Education</div>
-                            <div class="official-title">Vice Chairperson on Gender and Development</div>
+                            <div class="official-name">Trisha Puertollano</div>
+                            <div class="official-title">Vice President</div>
                         </div>
                     </div>
+                    
                     <div class="official">
-                        <img src="Images/NEIL CYRIL BURGOS.jpg" alt="Neil Cyril D. Burgos">
+                        <img src="/api/placeholder/100/100" alt="Lawrence Zafe">
                         <div class="official-details">
-                            <div class="official-name">Hon. Neil Cyril D. Burgos</div>
-                            <div class="official-title">SK Kagawad</div>
-                            <div class="official-title">Committee Chairperson on Education</div>
-                            <div class="official-title">Vice Chairperson on Youth Employment and Livelihood</div>
+                            <div class="official-name">Lawrence Zafe</div>
+                            <div class="official-title">Secretary</div>
                         </div>
                     </div>
                 </div>
-
-                <div class="vertical-connector level-connector-3"></div>
+                
                 <div class="level">
                     <div class="official">
-                        <img src="Images/JULIANNE MAE INVIERNO.jpg" alt="Julianne Mae C. Invierno">
+                        <img src="/api/placeholder/100/100" alt="Elisha Barretto">
                         <div class="official-details">
-                            <div class="official-name">Hon. Julianne Mae C. Invierno</div>
-                            <div class="official-title">SK Kagawad</div>
-                            <div class="official-title">Committee Chairperson on Gender and Development</div>
-                            <div class="official-title">Vice Chairperson on Health and Pandemic Response</div>
-                            <div class="official-title">Vice Chairperson on Peace and Order</div>
+                            <div class="official-name">Elisha Barretto</div>
+                            <div class="official-title">Treasurer</div>
                         </div>
                     </div>
+                    
                     <div class="official">
-                        <img src="Images/ROLAND DETALO.jpg" alt="Roland D. Detalo">
+                        <img src="/api/placeholder/100/100" alt="Gabrielle Louise L. Ladignon">
                         <div class="official-details">
-                            <div class="official-name">Hon. Roland D. Detalo</div>
-                            <div class="official-title">SK Kagawad</div>
-                            <div class="official-title">Committee Chairperson on Prequalification, Biding and Awards</div>
-                            <div class="official-title">Vice Chairperson on Sports Development, Social and Cultural Activities</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="vertical-connector level-connector-4"></div>
-                <div class="level">
-                    <div class="official">
-                        <img src="Images/ERIN RAILEY ROGACION PEREIRA.jpg" alt="Erin Railey R. Pereira">
-                        <div class="official-details">
-                            <div class="official-name">Hon. Erin Railey R. Pereira</div>
-                            <div class="official-title">SK Kagawad</div>
-                            <div class="official-title">Committee Chairperson on Youth Employment and Livelihood</div>
+                            <div class="official-name">Gabrielle Louise L. Ladignon</div>
+                            <div class="official-title">Auditor</div>
                         </div>
                     </div>
                 </div>
@@ -484,5 +606,13 @@
             </a>
         </div>
     </div>
+
+    <!-- JavaScript for section switching -->
+    <script>
+        function showSection(id) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+    </script>
 </body>
 </html>
