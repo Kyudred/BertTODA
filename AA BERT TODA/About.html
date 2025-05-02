@@ -40,8 +40,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(5px);
+            background-color: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(3px);
             z-index: -1;
         }
 
@@ -133,7 +133,7 @@
             z-index: 1;
         }
 
-        /* MISSION & VISION SECTION - Removed white background */
+        /* MISSION & VISION SECTION - With separate text boxes */
         .mission-vision {
             display: flex;
             justify-content: space-between;
@@ -141,7 +141,6 @@
             padding: clamp(1rem, 2vw, 1.25rem) clamp(1.5rem, 5vw, 3.125rem);
             margin: 1rem;
             border-radius: 0.625rem;
-            /* Removed background-color: rgba(255, 255, 255, 0.8); */
         }
 
         .mission {
@@ -149,6 +148,8 @@
             padding: clamp(0.8rem, 1.5vw, 1.25rem);
             border-radius: 0.625rem;
             font-size: clamp(0.9rem, 1.1vw, 1.125rem);
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.1);
         }
 
         .mission h2, .vision h2 {
@@ -168,19 +169,24 @@
             text-align: right;
             font-size: clamp(0.9rem, 1.1vw, 1.125rem);
             margin-top: clamp(5rem, 9vw, 9.375rem);
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: clamp(0.8rem, 1.5vw, 1.25rem);
+            border-radius: 0.625rem;
+            box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.1);
         }
 
-        /* GOALS SECTION - Removed white background */
+        /* GOALS SECTION - Without text box background */
         .goals-section {
             text-align: center;
             padding: 0.0625rem clamp(1.5rem, 5vw, 3.125rem);
             padding-bottom: clamp(2rem, 3vw, 3.5rem);
-            /* Removed background-color: rgba(255, 255, 255, 0.8); */
+            /* Removed background-color */
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             margin: 0 1rem 1rem 1rem;
             border-radius: 0.625rem;
+            /* Removed box-shadow */
         }
 
         .goals-title {
@@ -217,11 +223,11 @@
             min-width: 200px;
             text-align: center;
             font-size: clamp(0.8rem, 1vw, 1rem);
-            box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+            box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.4);
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
-        }
+        }   
 
         .goal-box h3 {
             font-size: clamp(0.9rem, 1.1vw, 1.1rem);
@@ -350,7 +356,7 @@
 
 <body>
     <!-- Background image elements -->
-    <img id="bg-image" src="REFERENCE.jpg" alt="">
+    <img id="bg-image" src="ABOUT_BG.jpg" alt="">
     <div id="bg-overlay"></div>
     
     <div class="main-container">
@@ -432,14 +438,14 @@
             bgImage.onerror = function() {
                 // Try different paths
                 const paths = [
-                    'REFERENCE.jpg',
-                    './REFERENCE.jpg',
-                    '../REFERENCE.jpg',
-                    '/REFERENCE.jpg',
-                    'img/REFERENCE.jpg',
-                    'images/REFERENCE.jpg',
-                    'assets/REFERENCE.jpg',
-                    'assets/images/REFERENCE.jpg'
+                    'ABOUT_BG.jpg',
+                    './ABOUT_BG.jpg',
+                    '../ABOUT_BG.jpg',
+                    '/ABOUT_BG.jpg',
+                    'img/ABOUT_BG.jpg',
+                    'images/ABOUT_BG.jpg',
+                    'assets/ABOUT_BG.jpg',
+                    'assets/images/ABOUT_BG.jpg'
                 ];
                 
                 let currentPath = 0;
