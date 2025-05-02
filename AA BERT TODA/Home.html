@@ -17,14 +17,18 @@
             padding: 0;
             background-color: #ffffff;
             font-size: 16px;
-            height: 100vh; /* Set height to 100% of viewport height */
-            overflow: hidden; /* Prevent scrolling */
+            /* Changed from height: 100vh to min-height for scrolling */
+            min-height: 100vh;
+            /* Removed overflow: hidden to allow scrolling */
+            overflow-x: hidden;
         }
 
         .main-container {
             display: flex;
             flex-direction: column;
-            height: 100%; /* Fill the entire height */
+            /* Changed from height: 100% to min-height for scrolling */
+            min-height: 100vh;
+            /* Removed overflow: hidden to allow scrolling */
         }
 
         .header {
@@ -98,7 +102,7 @@
             flex: 1; /* Take up remaining space */
             display: flex;
             flex-direction: column;
-            overflow: hidden; /* Prevent scrolling */
+            /* Removed overflow: hidden to allow scrolling */
         }
 
         .banner {
@@ -110,7 +114,7 @@
             position: relative;
             background-color: rgba(255, 255, 255, 0.4);
             background-blend-mode: overlay;
-            height: 45%; /* Increased height */
+            height: 45vh; /* Changed from % to vh for better proportion */
         }
 
         .banner-image {
@@ -172,8 +176,9 @@
         .content-section {
             display: flex;
             justify-content: space-around;
-            height: 55%; /* Adjust to take up remaining space */
-            padding: 0 1.875rem;
+            /* Changed from fixed height to min-height for scrollability */
+            min-height: 50vh;
+            padding: 1.875rem;
         }
 
         .column {
@@ -182,7 +187,7 @@
             width: 30%;
             height: 100%;
             justify-content: space-between;
-            padding: 1.875rem 0;
+            padding: 0;
         }
 
         .box {
@@ -194,7 +199,9 @@
             box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
-            height: 15%; /* Adjusted height */
+            /* Changed from % to fixed height */
+            height: 6rem;
+            margin-bottom: 1.25rem;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -214,8 +221,9 @@
             background: white;
             padding: 0.625rem;
             border-radius: 0.625rem;
-            width: 104%;
-            height: 70%;
+            width: 100%;
+            /* Changed fixed height to aspect ratio */
+            height: 20rem;
             text-align: center;
             box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -318,6 +326,7 @@
             .banner {
                 flex-direction: column;
                 height: auto; /* Allow height to adjust */
+                min-height: 30vh;
             }
             
             .banner-image {
@@ -358,17 +367,10 @@
             .box, .image-box {
                 width: 100%; /* Full width for smaller screens */
                 margin-bottom: 1rem;
-                height: auto;
-                min-height: 100px;
             }
             
-            /* Allow scrolling only on mobile */
-            body {
-                overflow-y: auto;
-            }
-            
-            .content-wrapper {
-                overflow-y: auto;
+            .image-box {
+                height: 15rem;
             }
         }
 
