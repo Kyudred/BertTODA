@@ -17,18 +17,47 @@
             padding: 0;
             background-color: #ffffff;
             font-size: 16px;
-            /* Changed from height: 100vh to min-height for scrolling */
             min-height: 100vh;
-            /* Removed overflow: hidden to allow scrolling */
             overflow-x: hidden;
         }
 
         .main-container {
             display: flex;
             flex-direction: column;
-            /* Changed from height: 100% to min-height for scrolling */
             min-height: 100vh;
-            /* Removed overflow: hidden to allow scrolling */
+        }
+
+        /* Top pink bar with auth buttons */
+        .top-bar {
+            background-color: var(--light-pink);
+            padding: 0.5rem 3%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .auth-buttons a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 700;
+            font-size: 0.8rem;
+            transition: color 0.3s ease;
+        }
+
+        .auth-buttons a:hover {
+            color: var(--pink-color);
+        }
+
+        .auth-divider {
+            color: #888;
+            font-size: 0.8rem;
+            margin: 0 0.25rem;
         }
 
         .header {
@@ -37,10 +66,9 @@
             justify-content: space-between;
             background-color: white;
             padding: 0 3%;
-            border-top: 3vh solid var(--light-pink);
             box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.1);
             border-bottom: 0.4rem solid var(--light-pink);
-            flex-shrink: 0; /* Prevent header from shrinking */
+            flex-shrink: 0;
         }
 
         .header-left {
@@ -99,10 +127,9 @@
         }
 
         .content-wrapper {
-            flex: 1; /* Take up remaining space */
+            flex: 1;
             display: flex;
             flex-direction: column;
-            /* Removed overflow: hidden to allow scrolling */
         }
 
         .banner {
@@ -114,7 +141,7 @@
             position: relative;
             background-color: rgba(255, 255, 255, 0.4);
             background-blend-mode: overlay;
-            height: 45vh; /* Changed from % to vh for better proportion */
+            height: 45vh;
         }
 
         .banner-image {
@@ -176,7 +203,6 @@
         .content-section {
             display: flex;
             justify-content: space-around;
-            /* Changed from fixed height to min-height for scrollability */
             min-height: 50vh;
             padding: 1.875rem;
         }
@@ -199,7 +225,6 @@
             box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
-            /* Changed from % to fixed height */
             height: 6rem;
             margin-bottom: 1.25rem;
             display: flex;
@@ -222,7 +247,6 @@
             padding: 0.625rem;
             border-radius: 0.625rem;
             width: 100%;
-            /* Changed fixed height to aspect ratio */
             height: 20rem;
             text-align: center;
             box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
@@ -260,14 +284,13 @@
         box-shadow: none;
         }
 
-		
         .pink-footer {
         background-color: var(--lightest-pink);
         height: 3.625rem;
         width: 100%;
         display: flex;
         justify-content: flex-end;
-        padding-right: 1.25rem; /* Reduced from 3.125rem to add more padding from edge */
+        padding-right: 1.25rem;
         flex-shrink: 0;
         }
 
@@ -275,8 +298,8 @@
             width: 2.5rem;
             height: 2.5rem;
             transition: transform 0.3s ease-in-out;
-            padding-top: 0.625rem; /* Added padding to center vertically */
-            padding-right: 3.25rem; /* Reduced from 3.125rem to add more padding from edge */
+            padding-top: 0.625rem;
+            padding-right: 3.25rem;
         }
 
         .facebook-icon:hover {
@@ -296,6 +319,35 @@
             font-size: 0.6875rem;
         }
 
+        /* Button styling similar to SK site in reference image */
+        .btn {
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .btn-sign-up {
+            background-color: var(--pink-color);
+            color: white !important;
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 3px;
+        }
+
+        .btn-sign-up:hover {
+            background-color: #e00d83;
+            color: white !important;
+        }
+
+        .btn-login {
+            color: #333;
+        }
+
+        .btn-login:hover {
+            color: var(--pink-color) !important;
+        }
+
         /* Media queries for responsive design */
         @media screen and (max-width: 1024px) {
             body {
@@ -303,15 +355,19 @@
             }
 
             .banner-content h1 {
-                font-size: 2.5rem; /* Adjusted for medium screens */
+                font-size: 2.5rem;
             }
 
             .banner-content h3 {
-                font-size: 1.25rem; /* Adjusted for medium screens */
+                font-size: 1.25rem;
             }
         }
 
         @media screen and (max-width: 768px) {
+            .top-bar {
+                justify-content: center;
+            }
+            
             .header {
                 flex-direction: column;
                 padding: 1rem;
@@ -319,18 +375,18 @@
             
             .navbar {
                 margin-top: 1rem;
-                flex-wrap: wrap; /* Allow wrapping for smaller screens */
                 justify-content: center;
+                flex-wrap: wrap;
             }
             
             .banner {
                 flex-direction: column;
-                height: auto; /* Allow height to adjust */
+                height: auto;
                 min-height: 30vh;
             }
             
             .banner-image {
-                width: 100%; /* Full width for smaller screens */
+                width: 100%;
                 padding-left: 0;
                 margin: 1rem auto;
             }
@@ -343,12 +399,12 @@
             }
             
             .banner-content h1 {
-                font-size: 2rem; /* Adjusted for smaller screens */
+                font-size: 2rem;
                 padding-left: 0;
             }
             
             .banner-content h3 {
-                font-size: 1rem; /* Adjusted for smaller screens */
+                font-size: 1rem;
             }
             
             .content-section {
@@ -359,13 +415,13 @@
             }
             
             .column {
-                width: 90%; /* Full width for smaller screens */
+                width: 90%;
                 height: auto;
                 margin-bottom: 1rem;
             }
             
             .box, .image-box {
-                width: 100%; /* Full width for smaller screens */
+                width: 100%;
                 margin-bottom: 1rem;
             }
             
@@ -375,25 +431,34 @@
         }
 
         @media screen and (max-width: 480px) {
+            .auth-buttons {
+                gap: 0.5rem;
+            }
+            
+            .btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.7rem;
+            }
+            
             .navbar a {
-                font-size: 0.875rem; /* Smaller font size for very small screens */
+                font-size: 0.875rem;
                 padding: 0.25rem 0.5rem;
             }
 
             .banner-content h1 {
-                font-size: 1.5rem; /* Further adjustment for very small screens */
+                font-size: 1.5rem;
             }
 
             .banner-content h3 {
-                font-size: 0.875rem; /* Further adjustment for very small screens */
+                font-size: 0.875rem;
             }
 
             .logos img {
-                width: 4rem; /* Smaller logos for very small screens */
+                width: 4rem;
             }
 
             .facebook-icon {
-                width: 2rem; /* Smaller Facebook icon */
+                width: 2rem;
                 height: 2rem;
             }
         }
@@ -401,6 +466,13 @@
 </head>
 <body>
     <div class="main-container">
+        <!-- Top Bar with Auth Buttons -->
+        <div class="top-bar">
+            <div class="auth-buttons">
+                <a href="Login.html" class="btn btn-login">LOG IN</a>
+            </div>
+        </div>
+        
         <!-- Header Section -->
         <div class="header">
             <div class="header-left">
@@ -441,7 +513,7 @@
             <!-- Combined Content and Image Section -->
             <div class="content-section">
                 <!-- First Column: News + Image -->
-                <div class="column">
+                <div class="column" onclick = "location.href='News.html';" style="cursor: pointer;">
                     <div class="box">
                         <h2>NEWS</h2>
                         <p>(Short Information About Important Announcement)</p>
@@ -452,7 +524,7 @@
                 </div>
                 
                 <!-- Middle Column: Quote + Image -->
-                <div class="column">
+                <div class="column" onclick = "location.href='About.html';" style="cursor: pointer;">
                     <div class="box">
                         <p>" Tuloy-Tuloy na proyekto para sa KABATAAN Tuloy-Tuloy na pag ANGAT Tuloy-Tuloy TAYO "</p>
                     </div>
@@ -462,7 +534,7 @@
                 </div>
                 
                 <!-- Third Column: Projects + Image -->
-                <div class="column">
+                <div class="column" onclick = "location.href='projects.html';" style="cursor: pointer;">
                     <div class="box">
                         <h2>PROJECTS</h2>
                         <p>(Current Ongoing Project)</p>
