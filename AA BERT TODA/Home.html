@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SK Barangay San Isidro</title>
     <style>
+        /* Add the custom font */
+        @font-face {
+            font-family: 'Adlery Pro';
+            src: url('fonts/Adlery-Pro-trial.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
         :root {
             --pink-color: #ff1493;
             --light-pink: #fdd8ef;
@@ -163,10 +171,13 @@
         }
 
         .banner-content h1 {
-            font-size: 3rem;
+            font-family: 'Adlery Pro', cursive; /* Apply the custom font */
+            font-size: 3.5rem; /* Slightly increased size for better visibility */
             color: var(--pink-color);
             margin: 0;
             padding-left: 5rem;
+            letter-spacing: 1px; /* Add a bit of letter spacing for style */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* Optional: adds a subtle shadow */
         }
 
         .banner-content h3 {
@@ -355,7 +366,7 @@
             }
 
             .banner-content h1 {
-                font-size: 2.5rem;
+                font-size: 3rem;
             }
 
             .banner-content h3 {
@@ -399,7 +410,7 @@
             }
             
             .banner-content h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
                 padding-left: 0;
             }
             
@@ -446,7 +457,7 @@
             }
 
             .banner-content h1 {
-                font-size: 1.5rem;
+                font-size: 2rem;
             }
 
             .banner-content h3 {
