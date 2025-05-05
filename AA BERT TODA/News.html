@@ -101,6 +101,7 @@
             display: flex;
             flex-direction: column;
             background-color: white;
+            padding-bottom: 5rem; /* Space for footer */
         }
 
         /* FOOTER */
@@ -141,35 +142,6 @@
             font-size: 0.6875rem;
         }
 
-        /* Media queries for responsive design */
-        @media screen and (max-width: 1024px) {
-            body {
-                font-size: 14px;
-            }
-        }
-
-        @media screen and (max-width: 768px) {
-            body {
-                overflow-y: auto;
-            }
-            
-            .header {
-                flex-direction: column;
-                padding: 1rem;
-            }
-            
-            .navbar {
-                margin-top: 1rem;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .pink-footer {
-                position: static;
-                margin-top: 2rem;
-            }
-        }
-
         /* Add styles for the new grid-based design */
         .news-grid {
             display: grid;
@@ -192,14 +164,19 @@
             transform: translateY(-0.3125rem);
         }
 
+        .news-image {
+            position: relative;
+            overflow: hidden;
+        }
+
         .news-image img {
             width: 100%;
-            height: auto; /* Adjust height dynamically based on the image's aspect ratio */
-            object-fit: contain; /* Ensure the entire image fits within the container */
+            height: 200px; /* Fixed height for consistent look */
+            object-fit: cover; /* Cover to fill the space */
         }
 
         .news-text {
-            padding: 1rem; /* Reduced padding */
+            padding: 1rem;
             text-align: center;
         }
 
@@ -210,6 +187,12 @@
             font-size: 1.3rem;
         }
 
+        .news-date {
+            color: #777;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
         .news-description {
             color: #555;
             line-height: 1.6;
@@ -217,11 +200,162 @@
         }
 
         .page-title {
-            color: var(--pink-color); /* Match project title color */
-            text-align: center; /* Center the title */
+            color: var(--pink-color);
+            text-align: center;
             margin: 1.25rem 0;
             padding: 0.625rem 0;
             font-size: 2rem;
+        }
+
+        /* Add new button and container */
+        .add-new-container {
+            text-align: right;
+            padding: 0 2rem;
+            margin-top: 1rem;
+        }
+
+        .add-new-btn {
+            background-color: var(--pink-color);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-new-btn:hover {
+            background-color: #e00e84;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+        }
+
+        .modal h2 {
+            text-align: center;
+            color: var(--pink-color);
+            margin-top: 0;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .form-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .submit-btn {
+            background-color: var(--pink-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #e00e84;
+        }
+
+        .cancel-btn {
+            background-color: #777;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .cancel-btn:hover {
+            background-color: #555;
+        }
+
+        /* Media queries for responsive design */
+        @media screen and (max-width: 1024px) {
+            body {
+                font-size: 14px;
+            }
+            
+            .news-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            body {
+                overflow-y: auto;
+            }
+            
+            .header {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .navbar {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .news-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+            
+            .pink-footer {
+                position: static;
+                margin-top: 2rem;
+            }
+            
+            .modal-content {
+                padding: 1.5rem;
+                width: 95%;
+            }
         }
     </style>
 </head>
@@ -252,13 +386,20 @@
 
         <div class="content-wrapper">
             <h1 class="page-title">NEWS</h1>
+            
+            <!-- Add New Button -->
+            <div class="add-new-container">
+                <button class="add-new-btn" id="addNewBtn">Add New News</button>
+            </div>
 
             <div class="news-grid">
                 <!-- News Item 1 -->
                 <div class="news-card">
-                    <div class="news-image">
-                        <img src="Images/NEWS_SAMPLE.JPG" alt="Financial Literacy News">
-                    </div>
+                    <a href="https://www.facebook.com/BrgySanIsidroSK" target="_blank" class="news-link">
+                        <div class="news-image">
+                            <img src="Images/NEWS_SAMPLE.JPG" alt="Financial Literacy News">
+                        </div>
+                    </a>
                     <div class="news-text">
                         <h2 class="news-title">𝑬𝑴𝑷𝑶𝑾𝑬𝑹𝑰𝑵𝑮 𝑭𝑼𝑻𝑼𝑹𝑬 𝑻𝑯𝑹𝑶𝑼𝑮𝑯 𝑭𝑰𝑵𝑨𝑵𝑪𝑰𝑨𝑳 𝑳𝑰𝑻𝑬𝑹𝑨𝑪𝒀</h2>
                         <p class="news-date">Published on: March 1, 2023</p>
@@ -268,9 +409,11 @@
 
                 <!-- News Item 2 -->
                 <div class="news-card">
-                    <div class="news-image">
-                        <img src="Images/PRINTING.JPG" alt="Education News">
-                    </div>
+                    <a href="https://www.facebook.com/BrgySanIsidroSK" target="_blank" class="news-link">
+                        <div class="news-image">
+                            <img src="Images/PRINTING.JPG" alt="Education News">
+                        </div>
+                    </a>
                     <div class="news-text">
                         <h2 class="news-title">Kabataan Angat Tayo sa Malayang Edukasyon!</h2>
                         <p class="news-date">Published on: March 5, 2023</p>
@@ -280,9 +423,11 @@
 
                 <!-- News Item 3 -->
                 <div class="news-card">
-                    <div class="news-image">
-                        <img src="Images/SELF DEFENSE.JPG" alt="Self Defense Workshop">
-                    </div>
+                    <a href="https://www.facebook.com/BrgySanIsidroSK" target="_blank" class="news-link">
+                        <div class="news-image">
+                            <img src="Images/SELF DEFENSE.JPG" alt="Self Defense Workshop">
+                        </div>
+                    </a>
                     <div class="news-text">
                         <h2 class="news-title">𝑲𝑰𝑪𝑲𝑺𝑻𝑨𝑹𝑻 𝒀𝑶𝑼𝑹 𝑺𝑼𝑴𝑴𝑬𝑹 𝑾𝑰𝑻𝑯 𝑺𝑲 𝑺𝑨𝑵 𝑰𝑺𝑰𝑫𝑹𝑶!</h2>
                         <p class="news-date">Published on: March 10, 2023</p>
@@ -292,9 +437,11 @@
 
                 <!-- News Item 4 -->
                 <div class="news-card">
-                    <div class="news-image">
-                        <img src="Images/CLEANING.JPG" alt="Environmental Cleanup">
-                    </div>
+                    <a href="https://www.facebook.com/BrgySanIsidroSK" target="_blank" class="news-link">
+                        <div class="news-image">
+                            <img src="Images/CLEANING.JPG" alt="Environmental Cleanup">
+                        </div>
+                    </a>
                     <div class="news-text">
                         <h2 class="news-title">𝑬𝑴𝑷𝑶𝑾𝑬𝑹𝑰𝑵𝑮 𝑪𝑯𝑨𝑵𝑮𝑬 𝑻𝑯𝑹𝑶𝑼𝑮𝑯 𝑬𝑽𝑰𝑹𝑶𝑵𝑴𝑬𝑵𝑻𝑨𝑳 𝑨𝑪𝑻𝑰𝑶𝑵𝑺</h2>
                         <p class="news-date">Published on: March 15, 2023</p>
@@ -304,9 +451,11 @@
 
                 <!-- News Item 5 -->
                 <div class="news-card">
-                    <div class="news-image">
-                        <img src="Images/AWARENESS.JPG" alt="Awareness Campaign">
-                    </div>
+                    <a href="https://www.facebook.com/BrgySanIsidroSK" target="_blank" class="news-link">
+                        <div class="news-image">
+                            <img src="Images/AWARENESS.JPG" alt="Awareness Campaign">
+                        </div>
+                    </a>
                     <div class="news-text">
                         <h2 class="news-title">𝐁𝐑𝐄𝐀𝐊𝐈𝐍𝐆 𝐁𝐀𝐑𝐑𝐈𝐄𝐑𝐒 𝐀𝐍𝐃 𝐁𝐔𝐈𝐋𝐃𝐈𝐍𝐆 𝐀𝐖𝐀𝐑𝐄𝐍𝐄𝐒𝐒</h2>
                         <p class="news-date">Published on: March 20, 2023</p>
@@ -316,9 +465,11 @@
 
                 <!-- News Item 6 -->
                 <div class="news-card">
-                    <div class="news-image">
-                        <img src="Images/DROGA.JPG" alt="Anti-Drug Campaign">
-                    </div>
+                    <a href="https://www.facebook.com/BrgySanIsidroSK" target="_blank" class="news-link">
+                        <div class="news-image">
+                            <img src="Images/DROGA.JPG" alt="Anti-Drug Campaign">
+                        </div>
+                    </a>
                     <div class="news-text">
                         <h2 class="news-title">𝐁𝐀𝐖𝐀𝐋 𝐀𝐍𝐆 𝐃𝐑𝐎𝐆𝐀, 𝐃𝐀𝐏𝐀𝐓 𝐀𝐍𝐆 𝐋𝐈𝐆𝐀!</h2>
                         <p class="news-date">Published on: March 25, 2023</p>
@@ -326,39 +477,43 @@
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Add New News Button -->
-            <div style="text-align: right; margin: 1rem 3%;">
-                <button id="addNewNewsBtn" style="background-color: var(--pink-color); color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer;">Add New News</button>
-            </div>
-
-            <!-- Modal Form -->
-            <div id="newsModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1000; justify-content: center; align-items: center;">
-                <div style="background-color: white; padding: 2rem; border-radius: 1rem; width: 90%; max-width: 500px; position: relative;">
-                    <h2 style="text-align: center; color: var(--pink-color);">Add New News</h2>
-                    <form id="newsForm" enctype="multipart/form-data" method="POST" action="upload.php">
-                        <input type="hidden" name="type" value="news">
+        <!-- Modal Form -->
+        <div class="modal" id="newsModal">
+            <div class="modal-content">
+                <h2>Add New News</h2>
+                <form id="newsForm" method="POST" action="upload_news.php" enctype="multipart/form-data">
+                    <div class="form-group">
                         <label for="newsTitle">News Title:</label>
-                        <input type="text" id="newsTitle" name="title" required style="width: 100%; margin-bottom: 1rem; padding: 0.5rem;">
-
+                        <input type="text" id="newsTitle" name="newsTitle" required>
+                    </div>
+                    
+                    <div class="form-group">
                         <label for="newsDescription">Short Description:</label>
-                        <textarea id="newsDescription" name="description" required style="width: 100%; margin-bottom: 1rem; padding: 0.5rem;"></textarea>
-
+                        <textarea id="newsDescription" name="newsDescription" rows="3" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
                         <label for="newsDate">Date:</label>
-                        <input type="date" id="newsDate" name="date" required style="width: 100%; margin-bottom: 1rem; padding: 0.5rem;">
-
-                        <label for="newsLink">Facebook Link (type N/A if not available):</label>
-                        <input type="text" id="newsLink" name="link" required style="width: 100%; margin-bottom: 1rem; padding: 0.5rem;">
-
-                        <label for="newsImage">Cover Photo:</label>
-                        <input type="file" id="newsImage" name="image" accept="image/*" required style="width: 100%; margin-bottom: 1rem;">
-
-                        <div style="text-align: center;">
-                            <button type="submit" style="background-color: var(--pink-color); color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer;">Submit</button>
-                            <button type="button" id="closeNewsModal" style="background-color: gray; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer; margin-left: 1rem;">Cancel</button>
-                        </div>
-                    </form>
-                </div>
+                        <input type="date" id="newsDate" name="newsDate" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="facebookLink">Facebook Link (type N/A if not available):</label>
+                        <input type="text" id="facebookLink" name="facebookLink" required placeholder="https://www.facebook.com/... or N/A">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="coverPhoto">Cover Photo:</label>
+                        <input type="file" id="coverPhoto" name="coverPhoto" accept="image/*" required>
+                    </div>
+                    
+                    <div class="form-buttons">
+                        <button type="submit" class="submit-btn">Submit</button>
+                        <button type="button" class="cancel-btn" id="cancelBtn">Cancel</button>
+                    </div>
+                </form>
             </div>
         </div>
 
@@ -373,44 +528,51 @@
     </div>
 
     <script>
-        const newsModal = document.getElementById('newsModal');
-        const addNewNewsBtn = document.getElementById('addNewNewsBtn');
-        const closeNewsModal = document.getElementById('closeNewsModal');
+        // Modal functionality
+        const modal = document.getElementById('newsModal');
+        const addNewBtn = document.getElementById('addNewBtn');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const newsForm = document.getElementById('newsForm');
+        const facebookLinkInput = document.getElementById('facebookLink');
 
-        addNewNewsBtn.addEventListener('click', () => {
-            newsModal.style.display = 'flex';
+        // Open modal
+        addNewBtn.addEventListener('click', function() {
+            modal.style.display = 'flex';
         });
 
-        closeNewsModal.addEventListener('click', () => {
-            newsModal.style.display = 'none';
+        // Close modal
+        cancelBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+            newsForm.reset();
         });
 
-        document.getElementById('newsForm').addEventListener('submit', async function (e) {
-            e.preventDefault();
-            const formData = new FormData(this);
-            const facebookLink = formData.get('link');
+        // Close modal if clicked outside
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+                newsForm.reset();
+            }
+        });
 
+        // Form validation and submission
+        newsForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Validate Facebook link
+            const facebookLink = facebookLinkInput.value.trim();
+            
             if (facebookLink !== 'N/A' && !facebookLink.startsWith('http')) {
-                alert('Please enter a valid Facebook link or type "N/A".');
+                alert('Please enter a valid Facebook link or type "N/A"');
                 return;
             }
 
-            try {
-                const response = await fetch('/api/upload-news', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                if (response.ok) {
-                    alert('News uploaded successfully!');
-                    location.reload(); // Reload to show the new news item
-                } else {
-                    alert('Failed to upload news.');
-                }
-            } catch (error) {
-                console.error('Error uploading news:', error);
-                alert('An error occurred.');
-            }
+            // If all validations pass, you'd normally submit the form
+            // For now, we'll just show an alert since the PHP backend isn't set up yet
+            alert('Form would be submitted to PHP backend. This is where we would integrate with XAMPP/MySQL.');
+            
+            // For testing purposes, reset the form and close the modal
+            modal.style.display = 'none';
+            newsForm.reset();
         });
     </script>
 </body>
