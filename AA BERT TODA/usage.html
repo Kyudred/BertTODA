@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usage Management - SK Barangay San Isidro</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/usage.css">
+</head>
+<body>
+    <div class="main-container">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="user-info">
+                <span class="user-name">Welcome, Administrator</span>
+            </div>
+            <a href="Login.html" class="logout-btn">LOGOUT</a>
+        </div>
+        
+        <!-- Header Section -->
+        <div class="header">
+            <div class="header-left">
+                <img src="Logo/SK.png" alt="SK Logo">
+                <h1>
+                    <span class="pink">SANGGUNIANG KABATAAN</span>
+                    <div class="header-line"></div>
+                    <span class="black">BARANGAY SAN ISIDRO</span>
+                </h1>
+            </div>
+        </div>
+        
+        <div class="dashboard-container">
+            <!-- Sidebar -->
+            <div class="sidebar" id="sidebar">
+                <ul>
+                    <li>
+                        <a href="inventory-system.html" id="inventory-link">
+                            <span class="icon"><i class="fas fa-box"></i></span>
+                            <span class="text">Inventory System</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-dashboard.html" id="dashboard-link">
+                            <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
+                            <span class="text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="categories.html" id="categories-link">
+                            <span class="icon"><i class="fas fa-list"></i></span>
+                            <span class="text">Categories</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="items.html" id="items-link">
+                            <span class="icon"><i class="fas fa-boxes"></i></span>
+                            <span class="text">Items</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="usage.html" id="usage-link" class="active">
+                            <span class="icon"><i class="fas fa-undo"></i></span>
+                            <span class="text">Use/Return</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="events.html" id="events-link">
+                            <span class="icon"><i class="fas fa-calendar"></i></span>
+                            <span class="text">Events Calendar</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="inquiry.html" id="inquiry-link">
+                            <span class="icon"><i class="fa-solid fa-clipboard"></i></i></span>
+                            <span class="text">Inquiry History</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Home.html">
+                            <span class="icon"><i class="fas fa-home"></i></span>
+                            <span class="text">Back to Website</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="main-content" id="main-content">
+                <div class="dashboard-title">Item Usage Management</div>
+                
+                <!-- Tabs -->
+                <div class="tab-navigation">
+                    <button class="tab-button active" data-tab="items-available">Available Items</button>
+                    <button class="tab-button" data-tab="items-in-use">Items In Use</button>
+                    <button class="tab-button" data-tab="return-history">Return History</button>
+                </div>
+                
+                <!-- Available Items Tab -->
+                <div id="items-available" class="tab-content active">
+                    <div class="search-container">
+                        <input type="text" class="search-input" id="available-search" placeholder="Search available items...">
+                        <select class="form-control" id="category-filter">
+                            <option value="">All Categories</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Sports Equipment">Sports Equipment</option>
+                            <option value="Audio Equipment">Audio Equipment</option>
+                            <option value="Office Supplies">Office Supplies</option>
+                        </select>
+                        <button class="btn btn-primary" id="refresh-available-btn">
+                            <i class="fas fa-sync-alt"></i> Refresh
+                        </button>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table id="available-items-table">
+                            <thead>
+                                <tr>
+                                    <th>Item ID</th>
+                                    <th>Item Name</th>
+                                    <th>Category</th>
+                                    <th>Condition</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>001</td>
+                                    <td>Projector</td>
+                                    <td>Electronics</td>
+                                    <td>Good</td>
+                                    <td>
+                                        <button class="btn btn-primary btn-action log-use-btn" data-id="001" data-name="Projector">Log Use</button>
+                                        <button class="btn btn-secondary btn-action" onclick="viewItemDetails('001')">Details</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>003</td>
+                                    <td>Microphone Set</td>
+                                    <td>Audio Equipment</td>
+                                    <td>Excellent</td>
+                                    <td>
+                                        <button class="btn btn-primary btn-action log-use-btn" data-id="003" data-name="Microphone Set">Log Use</button>
+                                        <button class="btn btn-secondary btn-action" onclick="viewItemDetails('003')">Details</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>005</td>
+                                    <td>Folding Table</td>
+                                    <td>Furniture</td>
+                                    <td>Good</td>
+                                    <td>
+                                        <button class="btn btn-primary btn-action log-use-btn" data-id="005" data-name="Folding Table">Log Use</button>
+                                        <button class="btn btn-secondary btn-action" onclick="viewItemDetails('005')">Details</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>007</td>
+                                    <td>Volleyball</td>
+                                    <td>Sports Equipment</td>
+                                    <td>Good</td>
+                                    <td>
+                                        <button class="btn btn-primary btn-action log-use-btn" data-id="007" data-name="Volleyball">Log Use</button>
+                                        <button class="btn btn-secondary btn-action" onclick="viewItemDetails('007')">Details</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Items In Use Tab -->
+                <div id="items-in-use" class="tab-content">
+                    <div class="search-container">
+                        <input type="text" class="search-input" id="in-use-search" placeholder="Search items in use...">
+                        <button class="btn btn-primary" id="refresh-in-use-btn">
+                            <i class="fas fa-sync-alt"></i> Refresh
+                        </button>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table id="in-use-items-table">
+                            <thead>
+                                <tr>
+                                    <th>Item ID</th>
+                                    <th>Item Name</th>
+                                    <th>Borrowed By</th>
+                                    <th>Date Borrowed</th>
+                                    <th>Expected Return</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>002</td>
+                                    <td>Basketball</td>
+                                    <td>Juan Santos</td>
+                                    <td>May 3, 2025</td>
+                                    <td>May 10, 2025</td>
+                                    <td>
+                                        <button class="btn btn-success btn-action log-return-btn" data-id="002" data-name="Basketball">Log Return</button>
+                                        <button class="btn btn-secondary btn-action" onclick="viewUsageDetails('002')">Details</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>004</td>
+                                    <td>Digital Camera</td>
+                                    <td>Ana Reyes</td>
+                                    <td>May 2, 2025</td>
+                                    <td>May 9, 2025</td>
+                                    <td>
+                                        <button class="btn btn-success btn-action log-return-btn" data-id="004" data-name="Digital Camera">Log Return</button>
+                                        <button class="btn btn-secondary btn-action" onclick="viewUsageDetails('004')">Details</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>006</td>
+                                    <td>Extension Cord</td>
+                                    <td>Miguel Cruz</td>
+                                    <td>May 5, 2025</td>
+                                    <td>May 12, 2025</td>
+                                    <td>
+                                        <button class="btn btn-success btn-action log-return-btn" data-id="006" data-name="Extension Cord">Log Return</button>
+                                        <button class="btn btn-secondary btn-action" onclick="viewUsageDetails('006')">Details</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>008</td>
+                                    <td>Portable Speaker</td>
+                                    <td>Sofia Garcia</td>
+                                    <td>May 4, 2025</td>
+                                    <td>May 11, 2025</td>
+                                    <td>
+                                        <button class="btn btn-success btn-action log-return-btn" data-id="008" data-name="Portable Speaker">Log Return</button>
+                                        <button class="btn btn-secondary btn-action" onclick="viewUsageDetails('008')">Details</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Return History Tab -->
+                <div id="return-history" class="tab-content">
+                    <div class="search-container">
+                        <input type="text" class="search-input" id="history-search" placeholder="Search return history...">
+                        <input type="date" class="form-control" id="date-filter">
+                        <button class="btn btn-primary" id="refresh-history-btn">
+                            <i class="fas fa-sync-alt"></i> Refresh
+                        </button>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table id="history-table">
+                            <thead>
+                                <tr>
+                                    <th>Item ID</th>
+                                    <th>Item Name</th>
+                                    <th>Borrowed By</th>
+                                    <th>Date Borrowed</th>
+                                    <th>Date Returned</th>
+                                    <th>Return Condition</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>009</td>
+                                    <td>Volleyball Net</td>
+                                    <td>Maria Garcia</td>
+                                    <td>April 20, 2025</td>
+                                    <td>April 27, 2025</td>
+                                    <td><span class="badge badge-success">Good</span></td>
+                                    <td>
+                                        <button class="btn btn-secondary btn-action" onclick="viewReturnDetails('009')">Details</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>010</td>
+                                    <td>Wireless Microphone</td>
+                                    <td>Pedro Reyes</td>
+                                    <td>April 15, 2025</td>
+                                    <td>April 16, 2025</td>
+                                    <td><span class="badge badge-success">Good</span></td>
+                                    <td>
+                                        <button class="btn btn-secondary btn-action" onclick="viewReturnDetails('010')">Details</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>011</td>
+                                    <td>Badminton Set</td>
+                                    <td>Liza Tan</td>
+                                    <td>April 10, 2025</td>
+                                    <td>April 12, 2025</td>
+                                    <td><span class="badge badge-warning">Fair</span></td>
+                                    <td>
+                                        <button class="btn btn-secondary btn-action" onclick="viewReturnDetails('011')">Details</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>012</td>
+                                    <td>Tent</td>
+                                    <td>Ramon Diaz</td>
+                                    <td>April 5, 2025</td>
+                                    <td>April 7, 2025</td>
+                                    <td><span class="badge badge-danger">Damaged</span></td>
+                                    <td>
+                                        <button class="btn btn-secondary btn-action" onclick="viewReturnDetails('012')">Details</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal for Log Use -->
+        <div class="modal-overlay" id="log-use-modal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3 class="modal-title">Log Item Usage</h3>
+                    <button class="modal-close" id="close-log-use-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="log-use-form">
+                        <input type="hidden" id="use-item-id">
+                        <div class="form-group">
+                            <label for="use-item-name">Item Name</label>
+                            <input type="text" class="form-control" id="use-item-name" disabled>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="borrower-name">Borrower Name</label>
+                                    <input type="text" class="form-control" id="borrower-name" required>
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="borrower-contact">Contact Number</label>
+                                    <input type="text" class="form-control" id="borrower-contact" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="borrow-date">Date Borrowed</label>
+                                    <input type="date" class="form-control" id="borrow-date" required>
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="expected-return-date">Expected Return Date</label>
+                                    <input type="date" class="form-control" id="expected-return-date" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="purpose">Purpose</label>
+                            <textarea class="form-control" id="purpose" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="initial-condition">Item Condition on Borrow</label>
+                            <select class="form-control" id="initial-condition" required>
+                                <option value="">Select Condition</option>
+                                <option value="Excellent">Excellent</option>
+                                <option value="Good">Good</option>
+                                <option value="Fair">Fair</option>
+                                <option value="Poor">Poor</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="notes">Additional Notes</label>
+                            <textarea class="form-control" id="notes" rows="2"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" id="cancel-log-use">Cancel</button>
+                    <button class="btn btn-primary" id="submit-log-use">Submit</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal for Log Return -->
+        <div class="modal-overlay" id="log-return-modal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3 class="modal-title">Log Item Return</h3>
+                    <button class="modal-close" id="close-log-return-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="log-return-form">
+                        <input type="hidden" id="return-item-id">
+                        <div class="form-group">
+                            <label for="return-item-name">Item Name</label>
+                            <input type="text" class="form-control" id="return-item-name" disabled>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="return-date">Date Returned</label>
+                                    <input type="date" class="form-control" id="return-date" required>
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="return-condition">Return Condition</label>
+                                    <select class="form-control" id="return-condition" required>
+                                        <option value="">Select Condition</option>
+                                        <option value="Excellent">Excellent</option>
+                                        <option value="Good">Good</option>
+                                        <option value="Fair">Fair</option>
+                                        <option value="Poor">Poor</option>
+                                        <option value="Damaged">Damaged</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="return-notes">Return Notes</label>
+                            <textarea class="form-control" id="return-notes" rows="3" placeholder="Describe the condition of the item and any issues..."></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" id="cancel-log-return">Cancel</button>
+                    <button class="btn btn-success" id="submit-log-return">Log Return</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal for View Details -->
+        <div class="modal-overlay" id="view-details-modal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3 class="modal-title">Item Details</h3>
+                    <button class="modal-close" id="close-view-details-modal">&times;</button>
+                </div>
+                <div class="modal-body" id="details-content">
+                    <!-- Content will be loaded dynamically -->
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" id="close-details">Close</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pink Footer -->
+        <div class="pink-footer">
+            <a href="https://www.facebook.com" target="_blank">
+                <i class="fab fa-facebook fa-2x facebook-icon"></i>
+            </a>
+        </div>
+    </div>
+
+    <script src="usage.js"></script>
+</body>
+</html>

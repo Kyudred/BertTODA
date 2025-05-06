@@ -6,558 +6,8 @@
     <title>Admin Dashboard - SK Barangay San Isidro</title>
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        :root {
-            --pink-color: #ff1493;
-            --light-pink: #fdd8ef;
-            --lightest-pink: #ffe6f2;
-            --dark-grey: #333;
-            --medium-grey: #666;
-            --light-grey: #f5f5f5;
-            --border-color: #ddd;
-            --sidebar-width: 250px;
-            --sidebar-collapsed-width: 60px;
-            --transition-speed: 0.3s;
-        }
-        
-        html, body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--light-grey);
-            font-size: 16px;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        .main-container {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        /* Top Bar */
-        .top-bar {
-            background-color: var(--light-pink);
-            padding: 0.5rem 3%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .user-name {
-            font-weight: bold;
-            color: var(--dark-grey);
-        }
-
-        .logout-btn {
-            text-decoration: none;
-            color: var(--dark-grey);
-            font-weight: bold;
-            font-size: 0.8rem;
-            transition: color 0.3s ease;
-        }
-
-        .logout-btn:hover {
-            color: var(--pink-color);
-        }
-
-        /* Header */
-        .header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: white;
-            padding: 0 3%;
-            box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.1);
-            border-bottom: 0.4rem solid var(--light-pink);
-            z-index: 99;
-        }
-
-        .header-left {
-            display: flex;
-            align-items: center;
-        }
-
-        .header img {
-            height: 5rem;
-            margin-right: 0.9375rem;
-        }
-
-        .header h1 {
-            font-size: 1.5rem;
-            margin: 0;
-            font-weight: bold;
-            position: relative;
-            text-align: center;
-        }
-
-        .header .pink {
-            font-size: 1.25rem;
-            color: var(--pink-color);
-            display: block;
-        }
-
-        .header .black {
-            font-size: 1.25rem;
-            color: black;
-            display: block;
-        }
-
-        .header-line {
-            width: 100%;
-            height: 0.125rem;
-            background-color: black;
-            margin: 0.3125rem 0;
-        }
-
-        /* Dashboard Container */
-        .dashboard-container {
-            display: flex;
-            flex: 1;
-            position: relative;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            width: var(--sidebar-collapsed-width);
-            background-color: white;
-            box-shadow: 2px 0 5px rgba(0,0,0,0.05);
-            padding: 1.5rem 0;
-            transition: width var(--transition-speed) ease;
-            position: relative;
-            z-index: 10;
-            overflow: hidden;
-        }
-
-        .sidebar:hover {
-            width: var(--sidebar-width);
-        }
-
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .sidebar li {
-            margin: 0;
-            padding: 0;
-        }
-
-        .sidebar a {
-            display: flex;
-            align-items: center;
-            padding: 0.75rem 1rem;
-            color: var(--dark-grey);
-            text-decoration: none;
-            transition: all var(--transition-speed) ease;
-            border-left: 3px solid transparent;
-            white-space: nowrap;
-        }
-
-        .sidebar a:hover {
-            background-color: var(--lightest-pink);
-            border-left: 3px solid var(--pink-color);
-            color: var(--pink-color);
-        }
-
-        .sidebar a.active {
-            background-color: var(--lightest-pink);
-            border-left: 3px solid var(--pink-color);
-            color: var(--pink-color);
-        }
-
-        .sidebar .icon {
-            min-width: 40px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.1rem;
-        }
-
-        .sidebar .text {
-            opacity: 0;
-            transition: opacity var(--transition-speed) ease;
-        }
-
-        .sidebar:hover .text {
-            opacity: 1;
-        }
-
-        /* Main Content */
-        .main-content {
-            flex: 1;
-            padding: 2rem;
-            transition: margin-left var(--transition-speed) ease;
-            margin-left: 0;
-        }
-
-        .dashboard-title {
-            font-size: 1.75rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark-grey);
-            font-weight: bold;
-        }
-
-        .dashboard-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .card {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            padding: 1rem;
-            text-decoration: none;
-            color: initial;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-        }
-
-        .card-blue { border-top: 4px solid #3498db; }
-        .card-purple { border-top: 4px solid #9b59b6; }
-        .card-green { border-top: 4px solid #2ecc71; }
-        .card-orange { border-top: 4px solid #e67e22; }
-
-        .card-info {
-            flex: 1;
-        }
-
-        .card-value {
-            font-size: 2rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-
-        .card-label {
-            color: var(--medium-grey);
-            font-size: 0.9rem;
-            font-weight: bold;
-        }
-
-        .card-icon {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            color: rgba(0,0,0,0.1);
-            font-size: 1.8rem;
-        }
-
-        .more-info {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-top: 1px solid var(--light-grey);
-            margin-top: 1rem;
-            padding-top: 0.75rem;
-            font-size: 0.8rem;
-            color: var(--medium-grey);
-        }
-
-        .info-icon {
-            background-color: var(--light-pink);
-            color: var(--pink-color);
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            font-weight: bold;
-        }
-
-        .dashboard-table {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .dashboard-table h2 {
-            margin-top: 0;
-            color: var(--dark-grey);
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 0.75rem 1rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        th {
-            font-weight: bold;
-            color: var(--medium-grey);
-            background-color: var(--light-grey);
-        }
-
-        tr:last-child td {
-            border-bottom: none;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary {
-            background-color: var(--pink-color);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: #e00d83;
-        }
-
-        .btn-secondary {
-            background-color: var(--light-grey);
-            color: var(--dark-grey);
-        }
-
-        .btn-secondary:hover {
-            background-color: #e5e5e5;
-        }
-
-        .btn-action {
-            padding: 0.25rem 0.5rem;
-            font-size: 0.8rem;
-            margin-right: 0.25rem;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 0.25rem 0.5rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-
-        .badge-success {
-            background-color: #d4f8e8;
-            color: #0bb665;
-        }
-
-        .badge-warning {
-            background-color: #ffefd8;
-            color: #ff9800;
-        }
-
-        /* Pink Footer */
-        .pink-footer {
-            background-color: var(--lightest-pink);
-            height: 3.625rem;
-            display: flex;
-            justify-content: flex-end;
-            padding-right: 1.25rem;
-            align-items: center;
-        }
-
-        .facebook-icon {
-            width: 2.5rem;
-            height: 2.5rem;
-            transition: transform 0.3s ease-in-out;
-            padding-right: 3.25rem;
-            color: #3b5998;
-        }
-
-        .facebook-icon:hover {
-            transform: scale(1.1);
-        }
-
-        /* Hide sections by default */
-        .dashboard-section {
-            display: none;
-        }
-
-        /* Show the dashboard overview by default */
-        #dashboard-overview {
-            display: block;
-        }
-
-        /* NEW ADDITIONS: Search Bar & Filter Styles */
-        .search-filter-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .search-container {
-            flex: 1;
-            min-width: 250px;
-            position: relative;
-        }
-
-        .search-container input {
-            width: 100%;
-            padding: 0.75rem 1rem 0.75rem 2.5rem;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            font-size: 0.9rem;
-        }
-
-        .search-container .search-icon {
-            position: absolute;
-            left: 0.75rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--medium-grey);
-        }
-
-        .filter-container {
-            display: flex;
-            gap: 0.75rem;
-            flex-wrap: wrap;
-        }
-
-        .filter-select {
-            padding: 0.6rem 1rem;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            background-color: white;
-            min-width: 150px;
-            font-size: 0.9rem;
-        }
-
-        .top-actions {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .pagination {
-            display: flex;
-            justify-content: center;
-            margin-top: 1rem;
-            gap: 0.5rem;
-        }
-
-        .pagination-btn {
-            padding: 0.5rem 0.75rem;
-            border: 1px solid var(--border-color);
-            background-color: white;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .pagination-btn.active,
-        .pagination-btn:hover {
-            background-color: var(--light-pink);
-            color: var(--pink-color);
-        }
-
-        /* Empty state styling */
-        .empty-state {
-            text-align: center;
-            padding: 2rem;
-            color: var(--medium-grey);
-        }
-
-        .empty-state i {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: var(--light-pink);
-        }
-
-        .empty-state p {
-            margin: 0.5rem 0;
-        }
-
-        /* Media Queries */
-        @media screen and (max-width: 768px) {
-            /* Mobile sidebar handling without the toggle button */
-            .sidebar {
-                position: fixed;
-                top: 0;
-                left: 0;
-                height: 100%;
-                padding-top: 60px;
-                width: 0; /* Default hidden on mobile */
-            }
-            
-            /* Create a thin strip on the left to detect hover */
-            .sidebar:after {
-                content: '';
-                position: fixed;
-                left: 0;
-                top: 0;
-                width: 15px; /* Small touch target to trigger hover */
-                height: 100%;
-                z-index: 10;
-            }
-            
-            /* Expand sidebar on hover of strip */
-            .sidebar:hover {
-                width: var(--sidebar-width);
-            }
-            
-            .main-content {
-                margin-left: 0;
-                width: 100%;
-            }
-            
-            .search-filter-container {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            
-            .search-container,
-            .filter-container {
-                width: 100%;
-            }
-        }
-
-        @media screen and (max-width: 480px) {
-            .dashboard-cards {
-                grid-template-columns: 1fr;
-            }
-            
-            .top-bar {
-                flex-direction: column;
-                gap: 0.5rem;
-                padding: 0.5rem;
-            }
-            
-            .header {
-                flex-direction: column;
-                padding: 1rem;
-            }
-        }
-    </style>
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="css/admin-dashboard.css">
 </head>
 <body>
     <div class="main-container">
@@ -582,43 +32,49 @@
         </div>
         
         <div class="dashboard-container">
-            <!-- Sidebar - Hover Style (No Toggle Button) -->
+            <!-- Sidebar - Now with links to separate pages -->
             <div class="sidebar" id="sidebar">
                 <ul>
                     <li>
-                        <a href="#" id="inventory-link">
+                        <a href="inventory-system.html" id="inventory-link">
                             <span class="icon"><i class="fas fa-box"></i></span>
                             <span class="text">Inventory System</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" id="dashboard-link">
+                        <a href="admin-dashboard.html" id="dashboard-link" class="active">
                             <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
                             <span class="text">Dashboard</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" id="categories-link">
+                        <a href="categories.html" id="categories-link">
                             <span class="icon"><i class="fas fa-list"></i></span>
                             <span class="text">Categories</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" id="items-link">
+                        <a href="items.html" id="items-link">
                             <span class="icon"><i class="fas fa-boxes"></i></span>
                             <span class="text">Items</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" id="usage-link">
+                        <a href="usage.html" id="usage-link">
                             <span class="icon"><i class="fas fa-undo"></i></span>
                             <span class="text">Use/Return</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" id="events-link">
+                        <a href="events.html" id="events-link">
                             <span class="icon"><i class="fas fa-calendar"></i></span>
                             <span class="text">Events Calendar</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="inquiry.html" id="inquiry-link">
+                            <span class="icon"><i class="fa-solid fa-clipboard"></i></i></span>
+                            <span class="text">Inquiry History</span>
                         </a>
                     </li>
                     <li>
@@ -633,12 +89,12 @@
             <!-- Main Content -->
             <div class="main-content" id="main-content">
                 <!-- Dashboard Overview -->
-                <div id="dashboard-overview" class="dashboard-section">
+                <div id="dashboard-overview">
                     <div class="dashboard-title">Dashboard</div>
                     
                     <div class="dashboard-cards">
                         <!-- Card 1 -->
-                        <a href="#items" class="card card-blue">
+                        <a href="items.html" class="card card-blue">
                             <div class="card-info">
                                 <div class="card-value">25</div>
                                 <div class="card-label">TOTAL ITEMS</div>
@@ -652,7 +108,7 @@
                         </a>
                         
                         <!-- Card 2 -->
-                        <a href="#categories" class="card card-purple">
+                        <a href="categories.html" class="card card-purple">
                             <div class="card-info">
                                 <div class="card-value">7</div>
                                 <div class="card-label">CATEGORIES</div>
@@ -666,7 +122,7 @@
                         </a>
                         
                         <!-- Card 3 -->
-                        <a href="#in-use" class="card card-green">
+                        <a href="usage.html#in-use" class="card card-green">
                             <div class="card-info">
                                 <div class="card-value">4</div>
                                 <div class="card-label">ITEM IN USE</div>
@@ -680,7 +136,7 @@
                         </a>
                         
                         <!-- Card 4 -->
-                        <a href="#returned" class="card card-orange">
+                        <a href="usage.html#returned" class="card card-orange">
                             <div class="card-info">
                                 <div class="card-value">7</div>
                                 <div class="card-label">ITEM RETURNED</div>
@@ -713,8 +169,8 @@
                                     <td>April 28, 2025</td>
                                     <td><span class="badge badge-success">Available</span></td>
                                     <td>
-                                        <a href="#" class="btn btn-primary btn-action">Edit</a>
-                                        <a href="#" class="btn btn-secondary btn-action">View</a>
+                                        <a href="edit-item.html?id=1" class="btn btn-primary btn-action">Edit</a>
+                                        <a href="view-item.html?id=1" class="btn btn-secondary btn-action">View</a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -723,8 +179,8 @@
                                     <td>April 25, 2025</td>
                                     <td><span class="badge badge-warning">In Use</span></td>
                                     <td>
-                                        <a href="#" class="btn btn-primary btn-action">Edit</a>
-                                        <a href="#" class="btn btn-secondary btn-action">View</a>
+                                        <a href="edit-item.html?id=2" class="btn btn-primary btn-action">Edit</a>
+                                        <a href="view-item.html?id=2" class="btn btn-secondary btn-action">View</a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -733,8 +189,8 @@
                                     <td>April 20, 2025</td>
                                     <td><span class="badge badge-success">Available</span></td>
                                     <td>
-                                        <a href="#" class="btn btn-primary btn-action">Edit</a>
-                                        <a href="#" class="btn btn-secondary btn-action">View</a>
+                                        <a href="edit-item.html?id=3" class="btn btn-primary btn-action">Edit</a>
+                                        <a href="view-item.html?id=3" class="btn btn-secondary btn-action">View</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -779,119 +235,6 @@
                         </table>
                     </div>
                 </div>
-                
-                <!-- Categories Section -->
-                <div id="categories-section" class="dashboard-section">
-                    <div class="dashboard-title">Categories</div>
-                    <div class="dashboard-table">
-                        <h2>Item Categories</h2>
-                        <!-- Content for Categories -->
-                        <p>This section will show categories</p>
-                    </div>
-                </div>
-
-                <!-- Items Section - UPDATED WITH SEARCH, FILTER AND EMPTY TABLE -->
-                <div id="items-section" class="dashboard-section">
-                    <div class="dashboard-title">Items</div>
-                    
-                    <!-- Search and Filter Container -->
-                    <div class="search-filter-container">
-                        <div class="search-container">
-                            <i class="fas fa-search search-icon"></i>
-                            <input type="text" placeholder="Search for items..." id="item-search">
-                        </div>
-                        <div class="filter-container">
-                            <select class="filter-select" id="category-filter">
-                                <option value="">All Categories</option>
-                                <option value="electronics">Electronics</option>
-                                <option value="sports">Sports Equipment</option>
-                                <option value="audio">Audio Equipment</option>
-                                <option value="office">Office Supplies</option>
-                                <option value="event">Event Materials</option>
-                                <option value="furniture">Furniture</option>
-                                <option value="other">Other</option>
-                            </select>
-                            <select class="filter-select" id="status-filter">
-                                <option value="">All Status</option>
-                                <option value="available">Available</option>
-                                <option value="in-use">In Use</option>
-                                <option value="maintenance">Under Maintenance</option>
-                                <option value="damaged">Damaged</option>
-                            </select>
-                            <select class="filter-select" id="date-filter">
-                                <option value="">Date Added (Any)</option>
-                                <option value="today">Today</option>
-                                <option value="week">This Week</option>
-                                <option value="month">This Month</option>
-                                <option value="year">This Year</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="dashboard-table">
-                        <div class="top-actions">
-                            <h2>Item Management</h2>
-                            <a href="#" class="btn btn-primary">+ Add New Item</a>
-                        </div>
-                        
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Item ID</th>
-                                    <th>Item Name</th>
-                                    <th>Category</th>
-                                    <th>Quantity</th>
-                                    <th>Status</th>
-                                    <th>Date Added</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="items-table-body">
-                                <!-- Empty Table - Showing empty state message -->
-                                <tr>
-                                    <td colspan="7">
-                                        <div class="empty-state">
-                                            <i class="fas fa-box-open"></i>
-                                            <h3>No Items Found</h3>
-                                            <p>There are no items matching your search criteria.</p>
-                                            <p>Try adjusting your filters or add new items.</p>
-                                            <a href="#" class="btn btn-primary">Add Your First Item</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        
-                        <!-- Pagination -->
-                        <div class="pagination">
-                            <button class="pagination-btn active">1</button>
-                            <button class="pagination-btn">2</button>
-                            <button class="pagination-btn">3</button>
-                            <button class="pagination-btn">...</button>
-                            <button class="pagination-btn">Next</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Use/Return Section -->
-                <div id="usage-section" class="dashboard-section">
-                    <div class="dashboard-title">Use/Return</div>
-                    <div class="dashboard-table">
-                        <h2>Item Usage Management</h2>
-                        <!-- Content for Use/Return -->
-                        <p>This section will show usage tracking</p>
-                    </div>
-                </div>
-
-                <!-- Events Section -->
-                <div id="events-section" class="dashboard-section">
-                    <div class="dashboard-title">Events Calendar</div>
-                    <div class="dashboard-table">
-                        <h2>Upcoming Events</h2>
-                        <!-- Content for Events -->
-                        <p>This section will show events calendar</p>
-                    </div>
-                </div>
             </div>
         </div>
         
@@ -902,92 +245,5 @@
             </a>
         </div>
     </div>
-
-    <script>
-                // Set dashboard as active by default
-        document.getElementById('dashboard-link').classList.add('active');
-
-        // Function to show a specific section
-        function showSection(sectionId) {
-            // Hide all sections
-            document.querySelectorAll('.dashboard-section').forEach(section => {
-                section.style.display = 'none';
-            });
-            
-            // Show the selected section
-            if (document.getElementById(sectionId)) {
-                document.getElementById(sectionId).style.display = 'block';
-            }
-        }
-
-        // Function to set active menu item
-        function setActiveMenu(element) {
-            // Remove active class from all menu items
-            document.querySelectorAll('.sidebar a').forEach(item => {
-                item.classList.remove('active');
-            });
-            
-            // Add active class to clicked menu item
-            element.classList.add('active');
-        }
-
-        // Add event listeners to sidebar links
-        document.getElementById('inventory-link').addEventListener('click', function(e) {
-            e.preventDefault();
-            setActiveMenu(this);
-            // This would typically show an inventory overview
-            showSection('dashboard-overview');
-        });
-
-        document.getElementById('dashboard-link').addEventListener('click', function(e) {
-            e.preventDefault();
-            setActiveMenu(this);
-            showSection('dashboard-overview');
-        });
-
-        document.getElementById('categories-link').addEventListener('click', function(e) {
-            e.preventDefault();
-            setActiveMenu(this);
-            showSection('categories-section');
-        });
-
-        document.getElementById('items-link').addEventListener('click', function(e) {
-            e.preventDefault();
-            setActiveMenu(this);
-            showSection('items-section');
-        });
-
-        document.getElementById('usage-link').addEventListener('click', function(e) {
-            e.preventDefault();
-            setActiveMenu(this);
-            showSection('usage-section');
-        });
-
-        document.getElementById('events-link').addEventListener('click', function(e) {
-            e.preventDefault();
-            setActiveMenu(this);
-            showSection('events-section');
-        });
-
-        // Initialize search and filter functionality for items
-        document.getElementById('item-search').addEventListener('input', function() {
-            // Add search functionality here
-            console.log('Searching for:', this.value);
-            // You would typically filter the items table based on this value
-        });
-
-        document.getElementById('category-filter').addEventListener('change', function() {
-            // Add category filter functionality
-            console.log('Filtering by category:', this.value);
-        });
-
-        document.getElementById('status-filter').addEventListener('change', function() {
-            // Add status filter functionality
-            console.log('Filtering by status:', this.value);
-        });
-
-        document.getElementById('date-filter').addEventListener('change', function() {
-            // Add date filter functionality
-            console.log('Filtering by date:', this.value);
-        });
-        </script>
+</body>
+</html>
