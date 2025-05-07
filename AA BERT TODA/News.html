@@ -21,6 +21,33 @@
             overflow-x: hidden;
         }
 
+        /* Top pink bar with auth buttons */
+        .top-bar {
+            background-color: var(--light-pink);
+            padding: 0.5rem 3%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .auth-buttons a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 700;
+            font-size: 0.8rem;
+            transition: color 0.3s ease;
+        }
+
+        .auth-buttons a:hover {
+            color: var(--pink-color);
+        }
+
         .main-container {
             display: flex;
             flex-direction: column;
@@ -34,7 +61,6 @@
             justify-content: space-between;
             background-color: white;
             padding: 0 3%;
-            border-top: 3vh solid var(--light-pink);
             box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.1);
             border-bottom: 0.4rem solid var(--light-pink);
             flex-shrink: 0;
@@ -115,6 +141,14 @@
             flex-shrink: 0;
             position: fixed;
             bottom: 0;
+        }
+
+        .btn-login {
+            color: #333;
+        }
+
+        .btn-login:hover {
+            color: var(--pink-color) !important;
         }
 
         .facebook-icon {
@@ -362,6 +396,12 @@
 
 <body>
     <div class="main-container">
+        <!-- Top Bar with Auth Buttons -->
+        <div class="top-bar">
+            <div class="auth-buttons">
+                <a href="Login.html" class="btn btn-login">LOG IN</a>
+            </div>
+        </div>
         <!-- Header Section -->
         <div class="header">
             <div class="header-left">

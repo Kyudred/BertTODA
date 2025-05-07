@@ -343,6 +343,14 @@
                 alert('Please fill in all fields');
             }
         }
+        
+        // Add event listener for the Enter key
+        document.getElementById('loginForm').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                handleLogin();
+            }
+        });
     </script>
 </body>
 </html>
