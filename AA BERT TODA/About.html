@@ -44,7 +44,32 @@
             backdrop-filter: blur(3px);
             z-index: -1;
         }
+        /* Top pink bar with auth buttons */
+        .top-bar {
+            background-color: var(--light-pink);
+            padding: 0.5rem 3%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
 
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .auth-buttons a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 700;
+            font-size: 0.8rem;
+            transition: color 0.3s ease;
+        }
+
+        .auth-buttons a:hover {
+            color: var(--pink-color);
+        }
         .main-container {
             display: flex;
             flex-direction: column;
@@ -60,14 +85,10 @@
             justify-content: space-between;
             background-color: white;
             padding: 0 3%;
-            border-top: 3vh solid var(--light-pink);
             box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.1);
             border-bottom: 0.4rem solid var(--light-pink);
             flex-shrink: 0;
-            position: relative;
-            z-index: 1;
         }
-
         .header-left {
             display: flex;
             align-items: center;
@@ -275,7 +296,14 @@
             margin-top: 0.3125rem;
             font-size: 0.6875rem;
         }
+        .btn-login {
+            color: #333;
+        }
 
+        .btn-login:hover {
+            color: var(--pink-color) !important;
+        }
+    
         /* Media queries for responsive design */
         @media screen and (max-width: 1024px) {
             body {
@@ -361,6 +389,12 @@
     
     <div class="main-container">
         <!-- Header Section - Updated to match Home.html -->
+        <!-- Top Bar with Auth Buttons -->
+        <div class="top-bar">
+            <div class="auth-buttons">
+                <a href="Login.html" class="btn btn-login">LOG IN</a>
+            </div>
+        </div>
         <div class="header">
             <div class="header-left">
                 <img src="Logo/SK.png" alt="SK Logo">
@@ -370,7 +404,7 @@
                     <span class="black">BARANGAY SAN ISIDRO</span>
                 </h1>
             </div>
-            
+    
             <!-- Navigation Bar -->
             <div class="navbar">
                 <a href="Home.html">HOME</a>

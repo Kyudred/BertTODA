@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Barangay San Isidro Inventory System</title>
+
   <style>
     * {
       margin: 0;
@@ -286,11 +287,34 @@
       background-color: #2ed573;
       color: white;
     }
+    
+    .return-btn {
+      background-color: #7bed9f;
+      color: white;
+    }
+    
+    .archive-btn {
+      background-color: #747d8c;
+      color: white;
+    }
+
+    .status-available {
+      color: #2ed573;
+      font-weight: bold;
+    }
+
+    .status-in-use {
+      color: #ff4757;
+      font-weight: bold;
+    }
 
     .modal-overlay {
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      display: none;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: none; /* Hidden by default */
       justify-content: center;
       align-items: center;
       background: rgba(0, 0, 0, 0.3);
@@ -303,52 +327,7 @@
       border-radius: 10px;
       width: 400px;
       max-width: 90%;
-    }
-
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 15px;
-    }
-
-    .modal-header h2 {
-      font-size: 1.2em;
-    }
-
-    .close-btn {
-      font-size: 1.5em;
-      background: none;
-      border: none;
-      cursor: pointer;
-    }
-
-    .form-group {
-      margin-bottom: 15px;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: bold;
-    }
-
-    .form-group input, .form-group select {
-      width: 100%;
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-
-    .submit-btn {
-      padding: 10px 15px;
-      background-color: #4cd964;
-      color: white;
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
-      width: 100%;
-      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
 
     /* Footer */
@@ -378,7 +357,7 @@
 
   <!-- Barangay Header -->
   <div class="barangay-header">
-    <img src="https://via.placeholder.com/50" alt="SK Logo" />
+    <img src="/api/placeholder/50/50" alt="SK Logo" />
     <div class="barangay-title">
       <h1>SANGGUNIANG KABATAAN</h1>
       <h2>BARANGAY SAN ISIDRO</h2>
@@ -445,14 +424,16 @@
         </div>
       </div>
 
-      <table class="items-table">
+      <!-- Updated Table Structure -->
+      <table class="items-table" id="item-table">
         <thead>
           <tr>
+            <th>NO.</th>
             <th>ID</th>
             <th>ITEM</th>
-            <th>CATEGORY</th>
-            <th>AVAILABLE</th>
-            <th>TOTAL</th>
+            <th>CATEGORY ID</th>
+            <th>QTY</th>
+            <th>USE OR RETURN</th>
             <th>ACTIONS</th>
           </tr>
         </thead>
@@ -484,28 +465,106 @@
           <label for="itemCategory">Category:</label>
           <select id="itemCategory" required>
             <option value="">Select Category</option>
-            <option value="equipment">Equipment</option>
-            <option value="supplies">Supplies</option>
-            <option value="furniture">Furniture</option>
-            <option value="electronics">Electronics</option>
+            <option value="EQUIP">Equipment</option>
+            <option value="SUPP">Supplies</option>
+            <option value="FURN">Furniture</option>
+            <option value="ELEC">Electronics</option>
           </select>
         </div>
         <div class="form-group">
-          <label for="availableQuantity">Available Quantity:</label>
-          <input type="number" id="availableQuantity" placeholder="Enter available quantity" required min="0"/>
-        </div>
-        <div class="form-group">
-          <label for="totalQuantity">Total Quantity:</label>
-          <input type="number" id="totalQuantity" placeholder="Enter total quantity" required min="0"/>
+          <label for="quantity">Quantity:</label>
+          <input type="number" id="quantity" placeholder="Enter quantity" required min="1"/>
         </div>
         <button type="submit" class="submit-btn">Add Item</button>
       </form>
     </div>
   </div>
 
-  <script>
-    // Empty array to store items
-    const sampleItems = [];
+  <!-- Use Item Modal -->
+  <div class="modal-overlay" id="useItemModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Use Item</h2>
+        <button class="close-btn" onclick="closeModal('useItemModal')">&times;</button>
+      </div>
+      <form id="useItemForm">
+        <input type="hidden" id="useItemId">
+        <div class="form-group">
+          <label for="useQuantity">Quantity to Use:</label>
+          <input type="number" id="useQuantity" placeholder="Enter quantity" required min="1"/>
+        </div>
+        <div class="form-group">
+          <label for="useReason">Purpose/Event:</label>
+          <input type="text" id="useReason" placeholder="Enter purpose or event" required/>
+        </div>
+        <button type="submit" class="submit-btn">Confirm Use</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Return Item Modal -->
+  <div class="modal-overlay" id="returnItemModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Return Item</h2>
+        <button class="close-btn" onclick="closeModal('returnItemModal')">&times;</button>
+      </div>
+      <form id="returnItemForm">
+        <input type="hidden" id="returnItemId">
+        <div class="form-group">
+          <label for="returnQuantity">Quantity to Return:</label>
+          <input type="number" id="returnQuantity" placeholder="Enter quantity" required min="1"/>
+        </div>
+        <div class="form-group">
+          <label for="returnCondition">Condition:</label>
+          <select id="returnCondition" required>
+            <option value="">Select Condition</option>
+            <option value="good">Good</option>
+            <option value="damaged">Damaged</option>
+            <option value="lost">Lost</option>
+          </select>
+        </div>
+        <button type="submit" class="submit-btn">Confirm Return</button>
+      </form>
+    </div>
+  </div>
+
+  <script text="text/javascript">
+    // Sample data with status tracking
+    const sampleItems = [
+      {
+        id: 'ITM001',
+        name: 'Microphone',
+        category: 'ELEC',
+        quantity: 5,
+        inUse: 0,
+        status: 'available'
+      },
+      {
+        id: 'ITM002',
+        name: 'Folding Table',
+        category: 'FURN',
+        quantity: 10,
+        inUse: 2,
+        status: 'in-use'
+      },
+      {
+        id: 'ITM003',
+        name: 'Basketball',
+        category: 'EQUIP',
+        quantity: 3,
+        inUse: 0,
+        status: 'available'
+      }
+    ];
+
+    // Category name mapping
+    const categoryNames = {
+      'EQUIP': 'Equipment',
+      'SUPP': 'Supplies',
+      'FURN': 'Furniture',
+      'ELEC': 'Electronics'
+    };
 
     // Initialize the table with sample data
     document.addEventListener('DOMContentLoaded', function() {
@@ -515,6 +574,16 @@
       document.getElementById('addItemForm').addEventListener('submit', function(e) {
         e.preventDefault();
         addItem();
+      });
+
+      document.getElementById('useItemForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        confirmUseItem();
+      });
+
+      document.getElementById('returnItemForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        confirmReturnItem();
       });
       
       // Add event listener for category filter
@@ -533,22 +602,33 @@
       });
     });
 
+    // Updated loadItems function to match new table structure
     function loadItems(items) {
       const tbody = document.getElementById('itemsTableBody');
       tbody.innerHTML = '';
       
-      items.forEach(item => {
+      items.forEach((item, index) => {
         const row = document.createElement('tr');
+        
+        // Determine status display
+        const available = item.quantity - item.inUse;
+        const statusClass = item.inUse > 0 ? 'status-in-use' : 'status-available';
+        const statusText = item.inUse > 0 ? `${available}/${item.quantity} Available` : `${item.quantity} Available`;
+        
         row.innerHTML = `
+          <td>${index + 1}</td>
           <td>${item.id}</td>
           <td>${item.name}</td>
           <td>${item.category}</td>
-          <td>${item.available}</td>
-          <td>${item.total}</td>
+          <td class="${statusClass}">${statusText}</td>
+          <td>
+            ${available > 0 ? `<button class="action-btn use-btn" onclick="useItem('${item.id}')">Use</button>` : ''}
+            ${item.inUse > 0 ? `<button class="action-btn return-btn" onclick="returnItem('${item.id}')">Return</button>` : ''}
+          </td>
           <td>
             <button class="action-btn edit-btn" onclick="editItem('${item.id}')">Edit</button>
             <button class="action-btn delete-btn" onclick="deleteItem('${item.id}')">Delete</button>
-            <button class="action-btn use-btn" onclick="useItem('${item.id}')">Use</button>
+            <button class="action-btn archive-btn" onclick="archiveItem('${item.id}')">Archive</button>
           </td>
         `;
         tbody.appendChild(row);
@@ -560,12 +640,16 @@
       const searchText = document.getElementById('searchInput').value.toLowerCase();
       const entriesLimit = parseInt(document.getElementById('entriesDropdown').value);
       
-      let filteredItems = sampleItems;
+      let filteredItems = [...sampleItems];
       
       // Filter by category
       if (category !== 'all') {
+        const categoryCode = Object.keys(categoryNames).find(key => 
+          categoryNames[key].toLowerCase() === category.toLowerCase()
+        ) || category.toUpperCase();
+        
         filteredItems = filteredItems.filter(item => 
-          item.category.toLowerCase() === category.toLowerCase()
+          item.category.toLowerCase() === categoryCode.toLowerCase()
         );
       }
       
@@ -574,7 +658,7 @@
         filteredItems = filteredItems.filter(item => 
           item.name.toLowerCase().includes(searchText) || 
           item.id.toLowerCase().includes(searchText) ||
-          item.category.toLowerCase().includes(searchText)
+          categoryNames[item.category].toLowerCase().includes(searchText)
         );
       }
       
@@ -585,26 +669,35 @@
     }
 
     function openAddModal() {
-      document.getElementById('addItemModal').style.display = 'flex';
+      const modal = document.getElementById('addItemModal');
+      if (modal) {
+          modal.style.display = 'flex'; // Show the modal
+      }
     }
 
     function closeModal(id) {
-      document.getElementById(id).style.display = 'none';
+      const modal = document.getElementById(id);
+      if (modal) {
+          modal.style.display = 'none'; // Hide the modal
+      }
     }
+
+    // Ensure the modal overlay is hidden when clicking outside the modal content
+    document.querySelectorAll('.modal-overlay').forEach(modal => {
+        modal.addEventListener('click', function (e) {
+            if (e.target === modal) {
+                modal.style.display = 'none'; // Hide the modal when clicking outside
+            }
+        });
+    });
 
     function addItem() {
       const name = document.getElementById('itemName').value.trim();
       const category = document.getElementById('itemCategory').value;
-      const available = parseInt(document.getElementById('availableQuantity').value);
-      const total = parseInt(document.getElementById('totalQuantity').value);
+      const quantity = parseInt(document.getElementById('quantity').value);
       
-      if (!name || !category || isNaN(available) || isNaN(total)) {
+      if (!name || !category || isNaN(quantity) || quantity < 1) {
         alert("Please fill all fields with valid values.");
-        return;
-      }
-      
-      if (available > total) {
-        alert("Available quantity cannot be greater than total quantity.");
         return;
       }
       
@@ -616,8 +709,9 @@
         id: newId,
         name: name,
         category: category,
-        available: available,
-        total: total
+        quantity: quantity,
+        inUse: 0,
+        status: 'available'
       };
       
       sampleItems.push(newItem);
@@ -628,26 +722,132 @@
       // Reset form and close modal
       document.getElementById('addItemForm').reset();
       closeModal('addItemModal');
+      
+      alert(`Item "${name}" has been added successfully!`);
+    }
+
+    function useItem(id) {
+      const item = sampleItems.find(item => item.id === id);
+      if (!item) return;
+      
+      document.getElementById('useItemId').value = id;
+      document.getElementById('useQuantity').max = item.quantity - item.inUse;
+      document.getElementById('useQuantity').value = 1;
+      
+      document.getElementById('useItemModal').style.display = 'flex';
+    }
+    
+    function confirmUseItem() {
+      const id = document.getElementById('useItemId').value;
+      const quantity = parseInt(document.getElementById('useQuantity').value);
+      const reason = document.getElementById('useReason').value.trim();
+      
+      const item = sampleItems.find(item => item.id === id);
+      if (!item) return;
+      
+      if (isNaN(quantity) || quantity < 1 || quantity > (item.quantity - item.inUse)) {
+        alert("Please enter a valid quantity.");
+        return;
+      }
+      
+      if (!reason) {
+        alert("Please enter a purpose or event for using the item.");
+        return;
+      }
+      
+      // Update item status
+      item.inUse += quantity;
+      if (item.inUse > 0) {
+        item.status = 'in-use';
+      }
+      
+      // Refresh the table
+      filterItems();
+      
+      // Reset form and close modal
+      document.getElementById('useItemForm').reset();
+      closeModal('useItemModal');
+      
+      alert(`${quantity} ${item.name}(s) marked as in use for "${reason}".`);
+    }
+    
+    function returnItem(id) {
+      const item = sampleItems.find(item => item.id === id);
+      if (!item || item.inUse <= 0) return;
+      
+      document.getElementById('returnItemId').value = id;
+      document.getElementById('returnQuantity').max = item.inUse;
+      document.getElementById('returnQuantity').value = 1;
+      
+      document.getElementById('returnItemModal').style.display = 'flex';
+    }
+    
+    function confirmReturnItem() {
+      const id = document.getElementById('returnItemId').value;
+      const quantity = parseInt(document.getElementById('returnQuantity').value);
+      const condition = document.getElementById('returnCondition').value;
+      
+      const item = sampleItems.find(item => item.id === id);
+      if (!item) return;
+      
+      if (isNaN(quantity) || quantity < 1 || quantity > item.inUse) {
+        alert("Please enter a valid quantity.");
+        return;
+      }
+      
+      if (!condition) {
+        alert("Please select the condition of the returned item.");
+        return;
+      }
+      
+      // Update item status
+      item.inUse -= quantity;
+      
+      // If condition is damaged or lost, adjust total quantity
+      if (condition === 'damaged' || condition === 'lost') {
+        item.quantity -= quantity;
+      }
+      
+      if (item.inUse <= 0) {
+        item.status = 'available';
+      }
+      
+      // Refresh the table
+      filterItems();
+      
+      // Reset form and close modal
+      document.getElementById('returnItemForm').reset();
+      closeModal('returnItemModal');
+      
+      let message = `${quantity} ${item.name}(s) returned in ${condition} condition.`;
+      if (condition === 'damaged' || condition === 'lost') {
+        message += ` Total inventory has been adjusted.`;
+      }
+      alert(message);
     }
 
     function editItem(id) {
-      alert(Edit functionality for item ${id} not implemented yet.);
+      alert(`Edit functionality for item ${id} not implemented yet.`);
     }
 
     function deleteItem(id) {
-      if (confirm(Are you sure you want to delete item ${id}?)) {
+      if (confirm(`Are you sure you want to delete item ${id}?`)) {
         const index = sampleItems.findIndex(item => item.id === id);
         if (index !== -1) {
           sampleItems.splice(index, 1);
           filterItems();
+          alert(`Item ${id} has been deleted.`);
         }
       }
     }
 
-    function useItem(id) {
-      alert(Use/Return functionality for item ${id} not implemented yet.);
+    function archiveItem(id) {
+      alert(`Archive functionality for item ${id} not implemented yet.`);
     }
+
   </script>
 
+
+  
 </body>
 </html>
