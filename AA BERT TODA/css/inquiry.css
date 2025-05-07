@@ -1,0 +1,330 @@
+/* inquiry.css - Specific styles for the inquiry history page */
+
+/* Inquiry Controls Section */
+.inquiry-controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    max-width: 400px;
+    margin-right: 20px;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px 0 0 4px;
+    font-size: 14px;
+}
+
+.search-box button {
+    padding: 10px 15px;
+    background-color: #e91e63;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-box button:hover {
+    background-color: #c2185b;
+}
+
+.filter-options {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.filter-options select {
+    padding: 9px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#resetFilters {
+    padding: 9px 15px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#resetFilters:hover {
+    background-color: #5a6268;
+}
+
+/* Table Styles */
+#inquiryTable {
+    margin-top: 15px;
+}
+
+#inquiryTable th, 
+#inquiryTable td {
+    text-align: left;
+    padding: 12px 15px;
+}
+
+#inquiryTable th:first-child {
+    width: 70px;
+}
+
+#inquiryTable th:nth-child(2),
+#inquiryTable th:nth-child(3) {
+    width: 15%;
+}
+
+#inquiryTable th:nth-child(4) {
+    width: 25%;
+}
+
+#inquiryTable th:nth-child(5),
+#inquiryTable th:nth-child(6) {
+    width: 12%;
+}
+
+#inquiryTable th:last-child {
+    width: 140px;
+}
+
+/* Status Badge Colors */
+.badge-pending {
+    background-color: #ff9800;
+}
+
+.badge-processing {
+    background-color: #9c27b0;
+}
+
+.badge-resolved {
+    background-color: #4caf50;
+}
+
+.badge-closed {
+    background-color: #607d8b;
+}
+
+/* Action Buttons */
+.btn-view {
+    background-color: #2196f3;
+    margin-right: 5px;
+}
+
+.btn-view:hover {
+    background-color: #0b7dda;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 800px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: modalFadeIn 0.3s;
+}
+
+@keyframes modalFadeIn {
+    from {opacity: 0; transform: translateY(-20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.close-modal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-modal:hover {
+    color: #555;
+}
+
+/* Inquiry Details */
+.inquiry-details {
+    margin: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.detail-row {
+    display: flex;
+    width: 50%;
+    margin-bottom: 12px;
+}
+
+.detail-row.full-width {
+    width: 100%;
+    flex-direction: column;
+}
+
+.detail-label {
+    font-weight: 600;
+    width: 120px;
+    color: #555;
+}
+
+.detail-value {
+    flex: 1;
+}
+
+.message-content {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 8px;
+    min-height: 80px;
+    white-space: pre-wrap;
+}
+
+/* Response Section */
+.inquiry-response {
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+    margin-top: 20px;
+}
+
+.inquiry-response h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+#responseText {
+    width: 100%;
+    min-height: 120px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+    font-family: inherit;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.status-update {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.status-update label {
+    margin-right: 15px;
+    font-weight: 600;
+}
+
+.status-update select {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 150px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.modal-actions button {
+    padding: 10px 20px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+#sendResponse {
+    background-color: #e91e63;
+    color: white;
+}
+
+#sendResponse:hover {
+    background-color: #c2185b;
+}
+
+#closeInquiry {
+    background-color: #6c757d;
+    color: white;
+}
+
+#closeInquiry:hover {
+    background-color: #5a6268;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 992px) {
+    .search-box {
+        max-width: 100%;
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+    
+    .filter-options {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .detail-row {
+        width: 100%;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .filter-options select,
+    #resetFilters {
+        flex: 1;
+    }
+    
+    #inquiryTable {
+        font-size: 14px;
+    }
+    
+    .dashboard-cards {
+        flex-direction: column;
+    }
+    
+    .card {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+}
