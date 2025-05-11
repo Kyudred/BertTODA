@@ -427,10 +427,6 @@
         <div class="content-wrapper">
             <h1 class="page-title">NEWS</h1>
             
-            <!-- Add New Button -->
-            <div class="add-new-container">
-                <button class="add-new-btn" id="addNewBtn">Add New News</button>
-            </div>
 
             <div class="news-grid">
                 <!-- News Item 1 -->
@@ -519,44 +515,7 @@
             </div>
         </div>
 
-        <!-- Modal Form -->
-        <div class="modal" id="newsModal">
-            <div class="modal-content">
-                <h2>Add New News</h2>
-                <form id="newsForm" method="POST" action="upload_news.php" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label for="newsTitle">News Title:</label>
-                        <input type="text" id="newsTitle" name="newsTitle" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="newsDescription">Short Description:</label>
-                        <textarea id="newsDescription" name="newsDescription" rows="3" required></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="newsDate">Date:</label>
-                        <input type="date" id="newsDate" name="newsDate" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="facebookLink">Facebook Link (type N/A if not available):</label>
-                        <input type="text" id="facebookLink" name="facebookLink" required placeholder="https://www.facebook.com/... or N/A">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="coverPhoto">Cover Photo:</label>
-                        <input type="file" id="coverPhoto" name="coverPhoto" accept="image/*" required>
-                    </div>
-                    
-                    <div class="form-buttons">
-                        <button type="submit" class="submit-btn">Submit</button>
-                        <button type="button" class="cancel-btn" id="cancelBtn">Cancel</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
+       
         <!-- Pink Footer -->
         <div class="pink-footer">
             <div class="footer-content">
@@ -566,54 +525,5 @@
             </div>
         </div>
     </div>
-
-    <script>
-        // Modal functionality
-        const modal = document.getElementById('newsModal');
-        const addNewBtn = document.getElementById('addNewBtn');
-        const cancelBtn = document.getElementById('cancelBtn');
-        const newsForm = document.getElementById('newsForm');
-        const facebookLinkInput = document.getElementById('facebookLink');
-
-        // Open modal
-        addNewBtn.addEventListener('click', function() {
-            modal.style.display = 'flex';
-        });
-
-        // Close modal
-        cancelBtn.addEventListener('click', function() {
-            modal.style.display = 'none';
-            newsForm.reset();
-        });
-
-        // Close modal if clicked outside
-        window.addEventListener('click', function(event) {
-            if (event.target === modal) {
-                modal.style.display = 'none';
-                newsForm.reset();
-            }
-        });
-
-        // Form validation and submission
-        newsForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            // Validate Facebook link
-            const facebookLink = facebookLinkInput.value.trim();
-            
-            if (facebookLink !== 'N/A' && !facebookLink.startsWith('http')) {
-                alert('Please enter a valid Facebook link or type "N/A"');
-                return;
-            }
-
-            // If all validations pass, you'd normally submit the form
-            // For now, we'll just show an alert since the PHP backend isn't set up yet
-            alert('Form would be submitted to PHP backend. This is where we would integrate with XAMPP/MySQL.');
-            
-            // For testing purposes, reset the form and close the modal
-            modal.style.display = 'none';
-            newsForm.reset();
-        });
-    </script>
 </body>
 </html>
