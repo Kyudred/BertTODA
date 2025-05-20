@@ -1,22 +1,12 @@
 <?php
-class Database {
-    private $host = "localhost";
-    private $username = "root";
-    private $password = "";
-    private $dbname = "InventorySystemdb";
-    public $conn;
+$host = 'localhost';
+$user = 'root';
+$password = ''; // Default password in XAMPP is empty
+$dbname = 'InventorySystemdb'; // Replace with your actual database name
 
-    public function __construct() {
-        $this->conn = new mysqli(
-            $this->host,
-            $this->username,
-            $this->password,
-            $this->dbname
-        );
+$conn = new mysqli($host, $user, $password, $dbname);
 
-        if ($this->conn->connect_error) {
-            die("Connection failed: " . $this->conn->connect_error);
-        }
-    }
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
 ?>
