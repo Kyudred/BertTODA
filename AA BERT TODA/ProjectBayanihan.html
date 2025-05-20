@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Bayanihan - Barangay San Isidro</title>
-        <!-- Favicon -->
+    <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="180x180" href="Logo/SK_LOGO.jpg">
     <style>
         :root {
@@ -12,8 +13,9 @@
             --light-pink: #fdd8ef;
             --lightest-pink: #ffe6f2;
         }
-        
-        html, body {
+
+        html,
+        body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -21,7 +23,7 @@
             font-size: 16px;
             height: 100vh;
         }
-        
+
         .top-bar {
             background-color: var(--light-pink);
             padding: 0.5rem 3%;
@@ -53,17 +55,18 @@
             flex-direction: column;
             min-height: 100vh;
         }
-        
+
         .header {
             display: flex;
             align-items: center;
             justify-content: space-between;
             background-color: white;
             padding: 0 3%;
-            box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.1);
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
             border-bottom: 0.4rem solid var(--light-pink);
             flex-shrink: 0;
         }
+
         .header-left {
             display: flex;
             align-items: center;
@@ -126,7 +129,7 @@
             position: absolute;
             background-color: white;
             min-width: 160px;
-            box-shadow: 0 0.25rem 0.375rem rgba(0,0,0,0.1);
+            box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.1);
             z-index: 1;
         }
 
@@ -163,38 +166,46 @@
         .news-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1.25rem;
-            padding: 1.25rem 3%;
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .news-item {
-            border: 1px solid #e0e0e0;
-            border-radius: 0.625rem;
+            background-color: white;
+            border-radius: 0.9375rem;
+            box-shadow: 0 0.3125rem 0.9375rem rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            box-shadow: 0 0.25rem 0.375rem rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
         }
 
         .news-item:hover {
             transform: translateY(-0.3125rem);
         }
-
+.news-image {
+            position: relative;
+            overflow: hidden;
+        }
         .news-image img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: 200px; /* Fixed height for consistent look */
+            object-fit: cover; /* Cover to fill the space */
         }
 
         .news-content {
-            background-color: var(--light-pink);
-            color: black;
-            padding: 0.625rem;
+            color: var(--pink-color);
+            text-align: center;
+            margin: 1.25rem 0;
+            padding: 0.625rem 0;
+            font-size: 2rem;
         }
 
         .news-title {
             font-weight: bold;
-            margin-bottom: 0.3125rem;
-            font-size: 1rem;
+            color: var(--pink-color);
+            margin-bottom: 0.625rem;
+            font-size: 1.3rem;
         }
 
         .news-meta {
@@ -241,6 +252,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="main-container">
         <!-- Top Bar with Auth Buttons -->
@@ -260,7 +272,7 @@
                     <span class="black">BARANGAY SAN ISIDRO</span>
                 </h1>
             </div>
-            
+
             <!-- Navigation Bar -->
             <div class="navbar">
                 <a href="Home.html">HOME</a>
@@ -277,30 +289,100 @@
             </div>
         </div>
 
+
         <div class="content-wrapper">
             <h1 class="page-title">PROJECT BAYANIHAN</h1>
+
+
             <div class="news-container">
+
                 <div class="news-item">
                     <div class="news-image">
-                        <img src="Images/sample1.jpg" alt="Project Bayanihan Image 1">
+                        <a
+                            href="https://www.facebook.com/BrgySanIsidroSK/posts/pfbid0rfrjW7DM3GzVus8Rc5D1TCXbz8MGiDnFznxsLzArhjLD2U2V48DDjciKF7UMCLVXl">
+                            <img src="Images/1.jpg" alt="Project Bayanihan Image 1">
+                        </a>
                     </div>
                     <div class="news-content">
-                        <div class="news-title">Project Bayanihan Initiative 1</div>
-                        <div class="news-meta">Details about the initiative...</div>
+                        <div class="news-title">Riverville Fire Victims (August 2024)</div>
+                        <div class="news-meta">Distribution of relief goods to the fire victims of Riverville Ups5,
+                            Barangay San Isidro.</div>
                     </div>
                 </div>
-                <!-- Add more project items as needed -->
-            </div>
-        </div>
 
-        <!-- Pink Footer -->
-        <div class="pink-footer">
-            <div class="footer-content">
-                <a href="https://www.facebook.com/BrgySanIsidroSK" target="_blank">
-                    <img src="Logo/face.png" alt="Facebook" class="facebook-icon">
-                </a>
+                <div class="news-item">
+                    <div class="news-image">
+                        <a
+                            href="https://www.facebook.com/BrgySanIsidroSK/posts/pfbid0PKN2wBpSTBM3FEnNmUCxugEn3fo7hYBxXTJuZxUSk2EDsdHs7pNo4XTKR7SBrQCNl">
+                            <img src="Images/2.jpg" alt="Project Bayanihan Image 1">
+                        </a>
+                    </div>
+                    <div class="news-content">
+                        <div class="news-title">Scotland Fire Victims (April 2024)</div>
+                        <div class="news-meta">The goods may not be enough of what you have lost but on behalf of SK
+                            Council San Isidro, we hope this will bring little comfort to the fire Victims of Scotland.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-image">
+                        <a
+                            href="https://www.facebook.com/BrgySanIsidroSK/posts/pfbid0sesBKuBheSqmvGXksP1muYF82LYpEWd5nJ1BdmM1KFNcysZUs6eTuUGeYppxHjREl">
+                            <img src="Images/3.jpg" alt="Project Bayanihan Image 1">
+                        </a>
+                    </div>
+                    <div class="news-content">
+                        <div class="news-title">Sitio Fatima Fire Victims (August 2024)</div>
+                        <div class="news-meta">Distribution of relief goods to the fire victims of Sitio Fatima, Valley
+                            6, Barangay San Isidro.</div>
+                    </div>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-image">
+                        <a
+                            href="https://www.facebook.com/BrgySanIsidroSK/posts/pfbid0NNyas2KaHQWmwsctPmwJsRW8nML62E7HySwxoHKqqrhPxL3z7M1abxmarfAcHdY5l">
+                            <img src="Images/4.jpg" alt="Project Bayanihan Image 1">
+                        </a>
+                    </div>
+                    <div class="news-content">
+                        <div class="news-title">Lovewin Fire Victims (March 2024)</div>
+                        <div class="news-meta">The San Isidro SK Council, led by SK Chairperson Kat Aragon and the SK
+                            Council, donated goods to the fire victims of Lovewin Compound. While the donations may not
+                            be sufficient to meet all the needs of the victims, what truly matters is the initiative to
+                            help and the thoughtfulness behind it.</div>
+                    </div>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-image">
+                        <a
+                            href="https://www.facebook.com/BrgySanIsidroSK/posts/pfbid02qLyQYCyr2tzTac4pmrwkeTEKGH1mzEroXha9ooNmf5Cy8peyF4aWRunzkArGFMKKl">
+                            <img src="Images/5.jpg" alt="Project Bayanihan Image 1">
+                        </a>
+                    </div>
+                    <div class="news-content">
+                        <div class="news-title">Typhoon Kristine Victims (October 2024)</div>
+                        <div class="news-meta">Earlier this morning, the SK Council of San Isidro, led by SK Chairperson
+                            Kat Aragon, along with SK Kagawads Gabriel Borja, Roland Detalo, and Jemimah Bañares,
+                            initiated a feeding program for the evacuees of Silverio Compound affected by Typhoon
+                            Kristine, held at the Silverio Covered Court.</div>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
+    </div>
+
+    <!-- Pink Footer -->
+    <div class="pink-footer">
+        <div class="footer-content">
+            <a href="https://www.facebook.com/BrgySanIsidroSK" target="_blank">
+                <img src="Logo/face.png" alt="Facebook" class="facebook-icon">
+            </a>
+        </div>
+    </div>
     </div>
 </body>
 </html>
