@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Reset Password</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #fbe4f1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .reset-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 300px;
+        }
+        .reset-box input {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .reset-box button {
+            background: #ff1493;
+            color: white;
+            padding: 0.5rem;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+        }
+        #matchStatus {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        #matchStatus.match {
+            color: green;
+        }
+        #matchStatus.mismatch {
+            color: red;
+        }
+        #resendBtn {
+            margin-top: 1rem;
+            padding: 0.3rem 0.5rem;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            width: 100%;
+            border-radius: 4px;
+        }
+        #resendBtn:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        /* Password toggle styles */
+        .password-wrapper {
+          position: relative;
+          width: 100%;
+          margin-bottom: 1rem;
+        }
+        .password-wrapper input {
+          width: 100%;
+          padding-right: 2.5rem; /* space for the eye icon */
+          box-sizing: border-box;
+        }
+        .toggle-password {
+          position: absolute;
+          top: 50%;
+          right: 0.75rem;
+          transform: translateY(-50%);
+          cursor: pointer;
+          color: grey;
+          font-size: 1.2rem;
+          user-select: none;
+        }
+    </style>
+</head>
+<body>
+<div class="reset-box">
+    <h2>Reset Password</h2>
+    <form id="resetForm">
+        <div class="password-wrapper">
+          <input type="password" id="newPassword" placeholder="New Password" required />
+          <span class="toggle-password" data-target="newPassword">&#128065;</span>
+        </div>
+        <div class="password-wrapper">
+          <input type="password" id="confirmPassword" placeholder="Confirm Password" required />
+          <span class="toggle-password" data-target="confirmPassword">&#128065;</span>
+        </div>
+        <p id="matchStatus"></p>
+        <button type="submit">Reset Password</button>
+    </form>
+
+    <!-- New Back to Login Button -->
+    <button id="backToLoginBtn" type="button" style="margin-top: 1rem; width: 100%; padding: 0.5rem; cursor: pointer; background-color: #6c757d; color: white; border: none; border-radius: 4px;">
+        Back to Login
+    </button>
+
+    <p id="resultMessage"></p>
+</div>
+
+<script>
+    // Back to login button logic
+    document.getElementById('backToLoginBtn').addEventListener('click', () => {
+        window.location.href = 'login.html';  // Change if needed
+    });
+
+    // Password match checking and form submission
+    document.addEventListener('DOMContentLoaded', () => {
+      const newPasswordInput = document.getElementById('newPassword');
+      const confirmPasswordInput = document.getElementById('confirmPassword');
+      const matchStatus = document.getElementById('matchStatus');
+      const form = document.getElementById('resetForm');
+      const resultMessage = document.getElementById('resultMessage');
+
+      function checkPasswordsMatch() {
+        const newPassword = newPasswordInput.value;
+        const confirmPassword = confirmPasswordInput.value;
+
+        if (!newPassword || !confirmPassword) {
+          matchStatus.textContent = '';
+          matchStatus.className = '';
+          return;
+        }
+
+        if (newPassword === confirmPassword) {
+          matchStatus.textContent = '✅ Passwords match';
+          matchStatus.className = 'match';
+        } else {
+          matchStatus.textContent = '❌ Passwords do not match';
+          matchStatus.className = 'mismatch';
+        }
+      }
+
+      newPasswordInput.addEventListener('input', checkPasswordsMatch);
+      confirmPasswordInput.addEventListener('input', checkPasswordsMatch);
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const newPassword = newPasswordInput.value;
+        const confirmPassword = confirmPasswordInput.value;
+
+        if (newPassword !== confirmPassword) {
+          matchStatus.textContent = '❌ Passwords do not match';
+          matchStatus.className = 'mismatch';
+          return;
+        }
+
+        const token = new URLSearchParams(window.location.search).get('token');
+        if (!token) {
+          resultMessage.textContent = '❌ Missing token in URL.';
+          resultMessage.style.color = 'red';
+          return;
+        }
+
+        try {
+          const response = await fetch('reset_password.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ token, newPassword })
+          });
+
+          const text = await response.text();
+          let data;
+          try {
+            data = JSON.parse(text);
+          } catch {
+            throw new Error("Invalid JSON response: " + text);
+          }
+
+          if (data.success) {
+            resultMessage.textContent = '✅ Password reset successful!';
+            resultMessage.style.color = 'green';
+            matchStatus.textContent = '';
+            matchStatus.className = '';
+            form.reset();
+            removeResendButton();
+          } else if (data.tokenExpired || (data.message && data.message.toLowerCase().includes('token expired'))) {
+            showResendButton(token);
+            resultMessage.textContent = '❌ Token expired. Please resend reset email.';
+            resultMessage.style.color = 'red';
+          } else {
+            resultMessage.textContent = '❌ ' + (data.message || 'Unknown error');
+            resultMessage.style.color = 'red';
+            removeResendButton();
+          }
+
+          function removeResendButton() {
+            const btn = document.getElementById('resendBtn');
+            if (btn) {
+                btn.remove();
+            }
+          }
+
+        } catch (error) {
+          console.error('Fetch error:', error);
+          resultMessage.textContent = '❌ Server error: ' + error.message;
+          resultMessage.style.color = 'red';
+          removeResendButton();
+        }
+      });
+
+      function showResendButton(token) {
+        const existingBtn = document.getElementById('resendBtn');
+        if (existingBtn) return;
+
+        const btn = document.createElement('button');
+        btn.id = 'resendBtn';
+        btn.textContent = 'Resend reset email';
+
+        const lastSent = localStorage.getItem('lastResetEmailTime');
+        const now = Date.now();
+        const cooldown = 5 * 60 * 1000; // 5 minutes
+
+        if (lastSent && now - parseInt(lastSent) < cooldown) {
+            const remaining = Math.ceil((cooldown - (now - parseInt(lastSent))) / 1000);
+            btn.disabled = true;
+            btn.textContent = `Try again in ${Math.floor(remaining / 60)}m ${remaining % 60}s`;
+
+            const interval = setInterval(() => {
+                const elapsed = Date.now() - parseInt(localStorage.getItem('lastResetEmailTime'));
+                const timeLeft = cooldown - elapsed;
+
+                if (timeLeft <= 0) {
+                    btn.disabled = false;
+                    btn.textContent = 'Resend reset email';
+                    clearInterval(interval);
+                } else {
+                    const secondsLeft = Math.ceil(timeLeft / 1000);
+                    btn.textContent = `Try again in ${Math.floor(secondsLeft / 60)}m ${secondsLeft % 60}s`;
+                }
+            }, 1000);
+        }
+
+        btn.addEventListener('click', async () => {
+            alert('Please wait while we send the reset email...');
+            btn.disabled = true;
+            btn.textContent = 'Sending...';
+            resultMessage.textContent = '';
+
+            try {
+                const resendResponse = await fetch('/AA%20BERT%20TODA/resend_reset_email.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ token })
+                });
+
+                const resendText = await resendResponse.text();
+                let resendData;
+                try {
+                    resendData = JSON.parse(resendText);
+                } catch {
+                    throw new Error("Invalid JSON response from resend endpoint: " + resendText);
+                }
+
+                if (resendData.success) {
+                    localStorage.setItem('lastResetEmailTime', Date.now().toString());
+
+                    resultMessage.textContent = '✅ New reset link sent to your email.';
+                    resultMessage.style.color = 'green';
+
+                    // Re-run cooldown logic
+                    showResendButton(token);
+                    btn.remove();
+                } else {
+                    resultMessage.textContent = '❌ ' + (resendData.message || 'Failed to resend email.');
+                    resultMessage.style.color = 'red';
+                    btn.disabled = false;
+                    btn.textContent = 'Resend reset email';
+                }
+            } catch (err) {
+                resultMessage.textContent = '❌ Server error: ' + err.message;
+                resultMessage.style.color = 'red';
+                btn.disabled = false;
+                btn.textContent = 'Resend reset email';
+            }
+        });
+
+        resultMessage.parentNode.insertBefore(btn, resultMessage.nextSibling);
+      }
+
+      // PASSWORD VISIBILITY TOGGLE
+      document.querySelectorAll('.toggle-password').forEach(icon => {
+        icon.addEventListener('click', () => {
+          const inputId = icon.getAttribute('data-target');
+          const input = document.getElementById(inputId);
+          if (input.type === 'password') {
+            input.type = 'text';
+            icon.style.color = '#ff1493'; // highlight when visible
+          } else {
+            input.type = 'password';
+            icon.style.color = 'grey';
+          }
+        });
+      });
+    });
+</script>
+</body>
+</html>

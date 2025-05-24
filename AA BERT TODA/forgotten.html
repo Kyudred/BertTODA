@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Notification - SK Barangay San Isidro</title>
+    <!-- SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        :root {
+            --pink-color: #ff1493;
+            --light-pink: #fdd8ef;
+            --lightest-pink: #ffe6f2;
+        }
+        
+        html, body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            /* Updated to gradient background similar to the image */
+            background: linear-gradient(135deg, #ffd1e8 0%, #ffffff 50%, #ffcce6 100%);
+            background-attachment: fixed;
+            font-size: 16px;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Top pink bar with auth buttons */
+        .top-bar {
+            background-color: var(--light-pink);
+            padding: 0.5rem 3%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .auth-buttons a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 700;
+            font-size: 0.8rem;
+            transition: color 0.3s ease;
+        }
+
+        .auth-buttons a:hover {
+            color: var(--pink-color);
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: white;
+            padding: 0 3%;
+            box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.1);
+            border-bottom: 0.4rem solid var(--light-pink);
+            flex-shrink: 0;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .header img {
+            height: 5rem;
+            margin-right: 0.9375rem;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            margin: 0;
+            font-weight: bold;
+            position: relative;
+            text-align: center;
+        }
+
+        .header .pink {
+            font-size: 1.25rem;
+            color: var(--pink-color);
+            display: block;
+        }
+
+        .header .black {
+            font-size: 1.25rem;
+            color: black;
+            display: block;
+        }
+
+        .header-line {
+            width: 100%;
+            height: 0.125rem;
+            background-color: black;
+            margin: 0.3125rem 0;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            padding: 0.5rem 0.9375rem;
+            transition: color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: var(--pink-color);
+        }
+
+        .content-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .login-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .login-container h2 {
+            color: var(--pink-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .input-group .validation-icon {
+            position: absolute;
+            right: 10px;
+            top: 38px;
+            font-size: 1.2rem;
+            display: none;
+        }
+        
+        .input-group .valid-input {
+            border: 1px solid #28a745;
+            background-color: rgba(40, 167, 69, 0.1);
+        }
+        
+        .input-group .invalid-input {
+            border: 1px solid #dc3545;
+            background-color: rgba(220, 53, 69, 0.1);
+        }
+        
+        .input-group .check-icon {
+            color: #28a745;
+        }
+        
+        .input-group .x-icon {
+            color: #dc3545;
+        }
+
+        .btn-login-submit {
+            background-color: var(--pink-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-login-submit:hover {
+            background-color: #e00d83;
+        }
+
+        .back-to-home {
+            margin-top: 1rem;
+            display: block;
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .back-to-home:hover {
+            color: var(--pink-color);
+        }
+
+        .pink-footer {
+            background-color: var(--lightest-pink);
+            height: 3.625rem;
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .facebook-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            transition: transform 0.3s ease-in-out;
+            padding-top: 0.625rem;
+            padding-right: 3.25rem;
+        }
+
+        .facebook-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        @media screen and (max-width: 768px) {
+            .login-container {
+                padding: 1.5rem;
+                width: 90%;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .content-wrapper {
+                padding: 1rem;
+            }
+            
+            .login-container {
+                padding: 1rem;
+            }
+            
+            .btn-login-submit {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <!-- Top Bar with Auth Buttons -->
+        <div class="top-bar">
+            <div class="auth-buttons">
+                <a href="Home.html" class="btn btn-login">HOME</a>
+            </div>
+        </div>
+        
+        <!-- Header Section -->
+        <div class="header">
+            <div class="header-left">
+                <img src="Logo/SK.png" alt="SK Logo">
+                <h1>
+                    <span class="pink">SANGGUNIANG KABATAAN</span>
+                    <div class="header-line"></div>
+                    <span class="black">BARANGAY SAN ISIDRO</span>
+                </h1>
+            </div>
+            
+            <!-- Navigation Bar -->
+            <div class="navbar">
+                <a href="Home.html">HOME</a>
+                <a href="About.html">ABOUT</a>
+                <a href="Officials.html">OFFICIALS</a>
+                <a href="News.html">NEWS</a>
+                <a href="Projects.html">PROJECTS</a>
+                <a href="Contact.html">CONTACT</a>
+            </div>
+        </div>
+        
+        <div class="content-wrapper">
+            <div class="login-container">
+                <h2>FORGOT YOUR PASSWORD?</h2>
+                <form id="emailNotificationForm">
+                    <div class="input-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="confirmEmail">Confirm Email Address</label>
+                        <input type="email" id="confirmEmail" name="confirmEmail" required>
+                        <span class="validation-icon check-icon">✓</span>
+                        <span class="validation-icon x-icon">✗</span>
+                    </div>
+                    <button id="sendBtn" type="button" class="btn-login-submit" onclick="handleEmailNotification()">SEND NOTIFICATION</button>
+                </form>
+                <a href="Login.html" class="back-to-home">Back to Login</a>
+            </div>
+        </div>
+
+        <!-- Pink Footer -->
+        <div class="pink-footer">
+            <div class="footer-content">
+                <a href="https://www.facebook.com/BrgySanIsidroSK" target="_blank">
+                    <img src="Logo/face.png" alt="Facebook" class="facebook-icon">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to validate email and confirmation match
+        function validateEmailMatch() {
+            const email = document.getElementById('email').value;
+            const confirmEmail = document.getElementById('confirmEmail').value;
+            const confirmField = document.getElementById('confirmEmail');
+            const checkIcon = document.querySelector('.check-icon');
+            const xIcon = document.querySelector('.x-icon');
+            
+            // Only validate if confirm email field has some input
+            if (confirmEmail.length > 0) {
+                if (email === confirmEmail) {
+                    // Emails match - show green with check
+                    confirmField.classList.add('valid-input');
+                    confirmField.classList.remove('invalid-input');
+                    checkIcon.style.display = 'inline';
+                    xIcon.style.display = 'none';
+                } else {
+                    // Emails don't match - show red with X
+                    confirmField.classList.add('invalid-input');
+                    confirmField.classList.remove('valid-input');
+                    checkIcon.style.display = 'none';
+                    xIcon.style.display = 'inline';
+                }
+            } else {
+                // Clear validation if field is empty
+                confirmField.classList.remove('valid-input', 'invalid-input');
+                checkIcon.style.display = 'none';
+                xIcon.style.display = 'none';
+            }
+        }
+        
+        // Add event listeners to both email fields
+        document.getElementById('email').addEventListener('input', validateEmailMatch);
+        document.getElementById('confirmEmail').addEventListener('input', validateEmailMatch);
+        
+            function handleEmailNotification() {
+    const email = document.getElementById('email').value.trim().toLowerCase();
+    const confirmEmail = document.getElementById('confirmEmail').value.trim().toLowerCase();
+    const sendBtn = document.getElementById('sendBtn');
+
+    const now = Date.now();
+    const cooldown = 5 * 60 * 1000; // 5 minutes
+    const resetKey = `lastResetTime_${email}`;
+    const lastSentTime = localStorage.getItem(resetKey);
+
+    if (lastSentTime && now - parseInt(lastSentTime) < cooldown) {
+        const minutesLeft = Math.ceil((cooldown - (now - parseInt(lastSentTime))) / 60000);
+        Swal.fire({
+            icon: 'info',
+            title: 'Please Wait',
+            text: `You've already requested a reset for this email. Try again in ${minutesLeft} minute(s).`
+        });
+        return;
+    }
+
+    if (!email || !confirmEmail) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Missing Fields',
+            text: 'Please fill in all fields.'
+        });
+        return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Invalid Email',
+            text: 'Please enter a valid email address.'
+        });
+        return;
+    }
+
+    if (email !== confirmEmail) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Email Mismatch',
+            text: 'Email addresses do not match.'
+        });
+        return;
+    }
+
+    // Show loading alert and disable button
+    Swal.fire({
+        title: 'Sending...',
+        text: 'Please wait while we send your email.',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    sendBtn.disabled = false; // ✅ Correct: re-enable the button
+    sendBtn.textContent = 'SEND NOTIFICATION';
+
+    fetch('send_reset_email.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `email=${encodeURIComponent(email)}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        Swal.close(); // Close the loading popup
+
+        switch (data.status) {
+            case 'success':
+            case 'expired_token_resent':
+                localStorage.setItem(resetKey, now.toString());
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Email Sent',
+                    text: 'A password reset email has been sent.'
+                });
+                break;
+
+            case 'already_sent':
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Already Sent',
+                    text: 'A reset link was already sent. Please check your inbox.'
+                });
+                break;
+
+            case 'email_not_found':
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Email Not Found',
+                    text: 'This email address is not registered.'
+                });
+                break;
+
+            default:
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Unexpected Error',
+                    text: 'Something went wrong. Please try again later.'
+                });
+        }
+    })
+    .catch(error => {
+        console.error('Fetch error:', error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Server Error',
+            text: 'An error occurred while contacting the server.'
+        });
+    })
+    .finally(() => {
+        // Re-enable button
+        sendBtn.disable
+    });
+}
+    </script>
+</body>
+</html>

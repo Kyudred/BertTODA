@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - SK Barangay San Isidro</title>
-        <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="180x180" href="Logo/SK_LOGO.jpg">
-    <style>
+   <style>
         :root {
             --pink-color: #ff1493;
             --light-pink: #fdd8ef;
@@ -17,7 +15,8 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #ffffff;
+            background: linear-gradient(135deg, #ffd1e8 0%, #ffffff 50%, #ffcce6 100%);
+            background-attachment: fixed;
             font-size: 16px;
             min-height: 100vh;
             overflow-x: hidden;
@@ -38,19 +37,20 @@
             align-items: center;
         }
 
-        .auth-buttons {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        .auth-buttons a {
+                .auth-buttons a {
             text-decoration: none;
             color: #333;
             font-weight: 700;
             font-size: 0.8rem;
-            transition: color 0.3s ease;
+            padding: 0.4rem 0.8rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
         }
+
+        .auth-buttons a:hover {
+            color: white;
+        }
+
 
         .auth-buttons a:hover {
             color: var(--pink-color);
@@ -270,10 +270,12 @@
     <div class="main-container">
         <!-- Top Bar with Auth Buttons -->
         <div class="top-bar">
-            <div class="auth-buttons">
-                <a href="Home.html" class="btn btn-login">HOME</a>
-            </div>
-        </div>
+    <div class="auth-buttons">
+        <a href="Home.html" class="btn btn-login">HOME</a>
+        <a href="registration.html" class="btn btn-login">REGISTER</a>
+    </div>
+</div>
+
         
         <!-- Header Section -->
         <div class="header">
@@ -300,7 +302,7 @@
         <div class="content-wrapper">
             <div class="login-container">
                 <h2>ADMIN LOGIN</h2>
-                <form id="loginForm">
+                <form id="loginForm" method="POST" action="login.php">
                     <div class="input-group">
                         <label for="username">Username</label>
                         <input type="text" id="username" name="username" required>
@@ -309,11 +311,12 @@
                         <label for="password">Password</label>
                         <input type="password" id="password" name="password" required>
                     </div>
-                    <button type="button" class="btn-login-submit" onclick="handleLogin()">LOGIN</button>
+                    <button type="submit" class="btn-login-submit">LOGIN</button>
                 </form>
+                <a href="forgotten.html" class="back-to-home" style="display: block; margin-top: 0.5rem;">Forgot Password</a>
                 <a href="Home.html" class="back-to-home">Back to Home</a>
             </div>
-        </div>
+        </div>  
 
         <!-- Pink Footer -->
         <div class="pink-footer">
@@ -324,35 +327,40 @@
             </div>
         </div>
     </div>
+    
+<script>
+    // Custom popup using plain JS (can be replaced with a modal if needed)
+    function showPopup(message) {
+        const popup = document.createElement('div');
+        popup.textContent = message;
+        popup.style.position = 'fixed';
+        popup.style.top = '20px';
+        popup.style.left = '50%';
+        popup.style.transform = 'translateX(-50%)';
+        popup.style.backgroundColor = '#ff1493';
+        popup.style.color = 'white';
+        popup.style.padding = '1rem 2rem';
+        popup.style.borderRadius = '8px';
+        popup.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+        popup.style.zIndex = 1000;
+        document.body.appendChild(popup);
 
-    <script>
-        function handleLogin() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            
-            // In a real application, you would validate credentials against a database
-            // For demonstration purposes, we'll just check if fields are filled
-            
-            if (username && password) {
-                // For demonstration, we'll use a simple check
-                // In a real application, you would validate against a database
-                if (username === "admin" && password === "admin123") {
-                    window.location.href = 'admin-dashboard.html';
-                } else {
-                    alert('Invalid username or password. Please try again.');
-                }
-            } else {
-                alert('Please fill in all fields');
-            }
+        setTimeout(() => {
+            popup.remove();
+        }, 3000); // Hide after 3 seconds
+    }
+
+    // Parse the error from the URL
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('error')) {
+        const error = params.get('error');
+        if (error === 'usernotfound') {
+            showPopup("Username not found.");
+        } else if (error === 'wrongpassword') {
+            showPopup("Incorrect password.");
         }
-        
-        // Add event listener for the Enter key
-        document.getElementById('loginForm').addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                event.preventDefault();
-                handleLogin();
-            }
-        });
-    </script>
+    }
+</script>
+
 </body>
 </html>

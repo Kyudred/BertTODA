@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Posts - SK Barangay San Isidro</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="css/admin-dashboard.css">
+    <link rel="stylesheet" href="css/manage-posts.css">
+</head>
+<body>
+    <div class="main-container">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="user-info">
+                <span class="user-name">Welcome, Administrator</span>
+            </div>
+            <a href="Login.html" class="logout-btn">LOGOUT</a>
+        </div>
+        
+        <!-- Header Section -->
+        <div class="header">
+            <div class="header-left">
+                <img src="Logo/SK.png" alt="SK Logo">
+                <h1>
+                    <span class="pink">SANGGUNIANG KABATAAN</span>
+                    <div class="header-line"></div>
+                    <span class="black">BARANGAY SAN ISIDRO</span>
+                </h1>
+            </div>
+        </div>
+        
+        <div class="dashboard-container">
+            <!-- Sidebar -->
+            <div class="sidebar" id="sidebar">
+                <ul>
+                    <li>
+                        <a href="#" id="inventory-link" class="dropdown-toggle">
+                            <span class="icon"><i class="fas fa-box"></i></span>
+                            <span class="text">Inventory System</span>
+                            <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                        </a>
+                        <ul class="submenu">
+                            <li>
+                                <a href="items_overview.php" id="dashboard-link">
+                                    <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
+                                    <span class="text">Dashboard</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="categories.php" id="categories-link">
+                                    <span class="icon"><i class="fas fa-list"></i></span>
+                                    <span class="text">Categories</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="items.php" id="items-link">
+                                    <span class="icon"><i class="fas fa-boxes"></i></span>
+                                    <span class="text">Items</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="usage.php" id="usage-link">
+                                    <span class="icon"><i class="fas fa-undo"></i></span>
+                                    <span class="text">Use/Return</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" id="posts-link" class="dropdown-toggle">
+                            <span class="icon"><i class="fas fa-newspaper"></i></span>
+                            <span class="text">Posts</span>
+                            <span class="toggle-icon"><i class="fas fa-chevron-up"></i></span>
+                        </a>
+                        <ul class="submenu" style="display: block;">
+                            <li>
+                                <a href="post-news.html" id="post-news-link">
+                                    <span class="icon"><i class="fas fa-bullhorn"></i></span>
+                                    <span class="text">Post News</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="post-project.html" id="post-project-link">
+                                    <span class="icon"><i class="fas fa-project-diagram"></i></span>
+                                    <span class="text">Post Project</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="manage-posts.html" id="manage-posts-link" class="active">
+                                    <span class="icon"><i class="fas fa-tasks"></i></span>
+                                    <span class="text">Manage Posts</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="events.html" id="events-link">
+                            <span class="icon"><i class="fas fa-calendar"></i></span>
+                            <span class="text">Events Calendar</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="inquiry.html" id="inquiry-link">
+                            <span class="icon"><i class="fa-solid fa-clipboard"></i></span>
+                            <span class="text">Inquiry History</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Home.html">
+                            <span class="icon"><i class="fas fa-home"></i></span>
+                            <span class="text">Back to Website</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="main-content" id="main-content">
+                <div class="manage-posts-container">
+                    <div class="dashboard-title">Manage Posts</div>
+                    
+                    <!-- Filter Section -->
+                    <div class="filter-section">
+                        <div class="post-type-filter">
+                            <button class="filter-btn active" data-type="all">All Posts</button>
+                            <button class="filter-btn" data-type="news">News</button>
+                            <button class="filter-btn" data-type="projects">Projects</button>
+                        </div>
+                        <div class="search-section">
+                            <input type="text" id="search-posts" placeholder="Search posts...">
+                            <button id="search-btn"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                    
+                    <!-- Posts List Section -->
+                    <div class="posts-list-container">
+                        <table class="posts-table">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Type</th>
+                                    <th>Date Posted</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="posts-list">
+                                <!-- Posts will be loaded dynamically here -->
+                                <tr class="loading-row">
+                                    <td colspan="5">Loading posts...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div class="pagination" id="pagination">
+                        <!-- Pagination will be added dynamically -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Edit Post Modal -->
+    <div class="modal" id="edit-post-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Post</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="edit-post-form" enctype="multipart/form-data">
+                    <input type="hidden" id="edit-post-id">
+                    <input type="hidden" id="edit-post-type">
+                    <input type="hidden" id="edit-current-image">
+
+                    <!-- News Fields -->
+                    <div id="edit-news-fields" style="display:none;">
+                        <div class="form-group">
+                            <label for="edit-title">Title</label>
+                            <input type="text" id="edit-title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-summary">Summary</label>
+                            <textarea id="edit-summary" rows="2"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-content">Content</label>
+                            <textarea id="edit-content" rows="6" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-category">Category</label>
+                            <select id="edit-category" required>
+                                <option value="">-- Select Category --</option>
+                                <option value="Announcement">Announcement</option>
+                                <option value="Event">Event</option>
+                                <option value="Update">Update</option>
+                                <option value="Community">Community</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-facebook">Facebook Link</label>
+                            <input type="text" id="edit-facebook">
+                        </div>
+                    </div>
+
+                    <!-- Project Fields -->
+                    <div id="edit-project-fields" style="display:none;">
+                        <div class="form-group">
+                            <label for="edit-title-project">Title</label>
+                            <input type="text" id="edit-title-project" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-category-project">Category</label>
+                            <select id="edit-category-project" required>
+                                <option value="">-- Select Category --</option>
+                                <option value="Construction">Construction</option>
+                                <option value="Education">Education</option>
+                                <option value="Health">Health</option>
+                                <option value="Community">Community</option>
+                                <option value="Sports">Sports</option>
+                                <option value="Others">Others</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-description">Description</label>
+                            <textarea id="edit-description" rows="6" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-facebook-project">Facebook Link</label>
+                            <input type="text" id="edit-facebook-project">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-image">Featured Image</label>
+                        <div class="image-preview-container">
+                            <img id="edit-image-preview" src="#" alt="Preview" style="max-width:100px;max-height:100px;">
+                        </div>
+                        <input type="file" id="edit-image" accept="image/*">
+                        <p class="note">Leave empty to keep the current image</p>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-save">Save Changes</button>
+                        <button type="button" class="btn-cancel">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Delete Confirmation Modal -->
+    <div class="modal" id="delete-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Confirm Deletion</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete the post "<span id="delete-post-title"></span>"?</p>
+                <p class="warning">This action cannot be undone.</p>
+                
+                <div class="form-actions">
+                    <button type="button" id="confirm-delete" class="btn-delete">Delete</button>
+                    <button type="button" class="btn-cancel">Cancel</button>
+                </div>
+                <input type="hidden" id="delete-post-id">
+                <input type="hidden" id="delete-post-type">
+            </div>
+        </div>
+    </div>
+    
+    <!-- Success/Error Message Toast -->
+    <div class="toast" id="toast">
+        <div class="toast-content">
+            <i class="fas fa-check-circle toast-icon success"></i>
+            <div class="toast-message">Post updated successfully!</div>
+        </div>
+        <div class="toast-progress"></div>
+    </div>
+    
+    <!-- JavaScript files -->
+    <script src="js/sidebar.js"></script>
+    <script src="js/manage-posts.js"></script>
+    <script>
+document.getElementById('edit-image').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    const preview = document.getElementById('edit-image-preview');
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+            preview.src = evt.target.result;
+        };
+        reader.readAsDataURL(file);
+    } else {
+        preview.src = document.getElementById('edit-current-image').value || '#';
+    }
+});
+</script>
+</body>
+</html>

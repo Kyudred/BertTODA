@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Post Project - SK Barangay San Isidro</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+    <!-- Shared Admin CSS -->
+    <link rel="stylesheet" href="css/admin-dashboard.css"/>
+    <link rel="stylesheet" href="css/post-project.css"/>
+    <link rel="stylesheet" href="css/dropdown.css"/>
+    <style>
+        /* Dropdown Toggle */
+        .dropdown-toggle {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .toggle-icon {
+            margin-left: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-toggle.active .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Submenu */
+        .submenu {
+            display: none;
+            background-color: var(--light-grey);
+            padding-left: 1rem;
+            list-style: none;
+        }
+
+        .submenu li {
+            margin: 0;
+            padding: 0;
+        }
+
+        .submenu a {
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            color: var(--dark-grey);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .submenu a:hover {
+            background-color: var(--lightest-pink);
+            border-left: 3px solid var(--pink-color);
+            color: var(--pink-color);
+        }
+
+        .submenu a.active {
+            background-color: var(--lightest-pink);
+            border-left: 3px solid var(--pink-color);
+            color: var(--pink-color);
+        }
+
+        /* When sidebar is expanded */
+        .sidebar:hover .submenu {
+            display: block;
+        }
+
+        .sidebar:hover .dropdown-toggle.active + .submenu {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div class="main-container">
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="user-info">
+            <span class="user-name">Welcome, Administrator</span>
+        </div>
+        <a href="Login.html" class="logout-btn">LOGOUT</a>
+    </div>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="header-left">
+            <img src="Logo/SK.png" alt="SK Logo"/>
+            <h1>
+                <span class="pink">SANGGUNIANG KABATAAN</span>
+                <div class="header-line"></div>
+                <span class="black">BARANGAY SAN ISIDRO</span>
+            </h1>
+        </div>
+    </div>
+
+    <div class="dashboard-container">
+            <!-- Sidebar -->
+            <div class="sidebar" id="sidebar">
+                <ul>
+                    <li>
+                        <a href="#" id="inventory-link" class="dropdown-toggle">
+                            <span class="icon"><i class="fas fa-box"></i></span>
+                            <span class="text">Inventory System</span>
+                            <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>                
+                        </a>
+                        <ul class="submenu">
+                            <li>
+                                <a href="items_overview.php" id="dashboard-link" class="active">
+                                    <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
+                                    <span class="text">Dashboard</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="categories.php" id="categories-link">
+                                    <span class="icon"><i class="fas fa-list"></i></span>
+                                    <span class="text">Categories</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="items.php" id="items-link">
+                                    <span class="icon"><i class="fas fa-boxes"></i></span>
+                                    <span class="text">Items</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="usage.php" id="usage-link">
+                                    <span class="icon"><i class="fas fa-undo"></i></span>
+                                    <span class="text">Use/Return</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" id="posts-link" class="dropdown-toggle">
+                            <span class="icon"><i class="fas fa-newspaper"></i></span>
+                            <span class="text">Posts</span>
+                            <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                        </a>
+                        <ul class="submenu">
+                            <li>
+                                <a href="post-news.html" id="post-news-link">
+                                    <span class="icon"><i class="fas fa-bullhorn"></i></span>
+                                    <span class="text">Post News</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="post-project.html" id="post-project-link">
+                                    <span class="icon"><i class="fas fa-project-diagram"></i></span>
+                                    <span class="text">Post Project</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="manage-posts.html" id="manage-posts-link">
+                                    <span class="icon"><i class="fas fa-tasks"></i></span>
+                                    <span class="text">Manage Posts</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="events.html" id="events-link">
+                            <span class="icon"><i class="fas fa-calendar"></i></span>
+                            <span class="text">Events Calendar</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="inquiry.html" id="inquiry-link">
+                            <span class="icon"><i class="fa-solid fa-clipboard"></i></span>
+                            <span class="text">Inquiry History</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Home.html">
+                            <span class="icon"><i class="fas fa-home"></i></span>
+                            <span class="text">Back to Website</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        <!-- Main Content -->
+        <div class="main-content" id="main-content">
+           <div class="post-project-container">
+    <div class="dashboard-title">Post Project</div>
+    <div class="side-by-side">
+        <!-- Form Column -->
+        <div class="form-column">
+            <form id="project-form" action="submit-project.php" method="POST" enctype="multipart/form-data" novalidate>
+                <div class="form-group">
+                    <label for="project-title">Project Title</label>
+                    <input type="text" id="project-title" name="project-title" required placeholder="Enter project title">
+                </div>
+
+                <div class="form-group">
+                    <label for="project-category">Category</label>
+                    <select id="project-category" name="project-category" required>
+                        <option value="">-- Select Category --</option>
+                        <option value="construction">Construction</option>
+                        <option value="education">Education</option>
+                        <option value="health">Health</option>
+                        <option value="community">Community</option>
+						<option value="sports">Sports</option>
+                        <option value="others">Others</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="project-description">Description</label>
+                    <textarea id="project-description" name="project-description" required placeholder="Brief Description (will appear in Project listings)" maxlength="500"></textarea>
+                    <div class="char-count"><span id="description-char-count">0</span>/500</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="project-facebook">Facebook Link (optional)</label>
+                    <input type="url" id="project-facebook" name="project-facebook" placeholder="https://www.facebook.com/your-post">
+                </div>
+
+                <div class="form-group">
+                    <label for="project-featured-image">Featured Image</label>
+                    <input type="file" id="project-featured-image" name="project-featured-image" accept="image/*">
+					<div class="image-preview" id="image-preview">
+                    <i class="fas fa-image"></i>
+                    <span>No image selected</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="publish-option">
+                        <input type="checkbox" id="project-publish" name="project-publish" checked>
+                        <label for="project-publish">Publish Immediately</label>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" id="publish-project" class="btn btn-primary">Publish Project</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Preview Column -->
+        <div class="preview-column">
+            <div class="preview-container">
+                <h3>Live Preview</h3>
+                <div class="project-card preview-card" id="project-preview">
+                    <div class="project-image">
+                        <img id="preview-image" src="Logo/SK.png" alt="Project Image"/>
+                    </div>
+                    <div class="project-text">
+                        <h2 class="project-title" id="preview-title">Your project title will appear here</h2>
+                        <p class="project-date" id="preview-date">Today's Date</p>
+                        <p class="project-description" id="preview-description">Your project description will appear here...</p>
+                        <a href="#" id="preview-facebook" target="_blank" class="fb-link" style="display: none;">
+                            <i class="fab fa-facebook"></i> View on Facebook
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- side-by-side -->
+</div> <!-- post-project-container -->
+
+<!-- JS -->
+<script src="js/sidebar.js"></script>
+<script src="js/post-project.js"></script>
+<script src="js/dropdown.js"></script>
+</body>
+</html>

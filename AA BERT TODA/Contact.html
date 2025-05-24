@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SK Barangay San Isidro - Contact</title>
-        <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="180x180" href="Logo/SK_LOGO.jpg">
     <style>
         :root {
             --pink-color: #ff1493;
@@ -214,22 +212,6 @@
             text-align: center;
         }
 
-        .consent-group {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.75rem;
-        }
-
-        .consent-group input[type="checkbox"] {
-            margin-right: 0.375rem;
-            width: auto;
-        }
-
-        .consent-group label {
-            font-size: 0.75rem;
-            margin: 0;
-        }
-
         .submit-btn {
             width: 100%;
             padding: 0.5rem;
@@ -307,6 +289,28 @@
             font-size: 0.6875rem;
         }
 
+        /* Success message */
+        .success-message {
+            display: none;
+            background-color: #dff0d8;
+            color: #3c763d;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        /* Error message */
+        .error-message {
+            display: none;
+            background-color: #f2dede;
+            color: #a94442;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
         /* Media queries for responsive design */
         @media screen and (max-width: 1024px) {
             body {
@@ -355,6 +359,7 @@
         <div class="top-bar">
             <div class="auth-buttons">
                 <a href="Login.html" class="btn btn-login">LOG IN</a>
+                <a href="registration.html" class="btn btn-login">REGISTER</a>
             </div>
         </div>
         
@@ -390,7 +395,11 @@
             <div class="contact-container">
                 <div class="contact-form">
                     <h1>CONTACT US</h1>
-                    <form>
+                    <!-- Add success and error message display -->
+                    <div id="successMessage" style="display: none; background-color: #dff0d8; color: #3c763d; padding: 10px; border-radius: 5px; margin-bottom: 15px; text-align: center;"></div>
+                    <div id="errorMessage" style="display: none; background-color: #f2dede; color: #a94442; padding: 10px; border-radius: 5px; margin-bottom: 15px; text-align: center;"></div>
+                    
+                    <form id="inquiryForm">
                         <div class="form-group">
                             <label for="name">YOUR NAME:</label>
                             <input type="text" id="name" name="name" required>
@@ -402,6 +411,20 @@
                         <div class="form-group">
                             <label for="age">YOUR AGE:</label>
                             <input type="number" id="age" name="age" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact">YOUR CONTACT NUMBER:</label>
+                            <input type="text" id="contact" name="contact" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="gender-type">YOUR GENDER:</label>
+                            <select id="gender-type" name="gender-type" required>
+                                <option value="" disabled selected>Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="GOthers">Others</option>
+                                <option value="NoSay">Prefer not to say</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="address">YOUR ADDRESS:</label>
@@ -420,16 +443,6 @@
                         <div class="form-group">
                             <label for="message">YOUR MESSAGE:</label>
                             <textarea id="message" name="message" rows="3" required></textarea>
-                        </div>
-                        <div class="privacy-note">
-                            DATA PRIVACY ACT OF 2012 (RA 10173) 
-                            THE SK WILL PROTECT ALL DATA IN ACCORDANCE WITH THE PHILIPPINE DATA PRIVACY ACT OF 
-                            2012 (RA 10173). ENSURING THAT PERSONAL INFORMATION, E.G. NAME, AGE, ADDRESS REMAINS 
-                            CONFIDENTIAL AND IS DISCLOSED ONLY WITH THE RESPONDENT'S CONSENT.
-                        </div>
-                        <div class="consent-group">
-                            <input type="checkbox" id="consent" name="consent" required>
-                            <label for="consent">I AGREE TO SUBMIT MY INQUIRY AND MY INFORMATION</label>
                         </div>
                         <button type="submit" class="submit-btn">SUBMIT</button>
                     </form>
@@ -486,6 +499,107 @@
                 tryNextPath();
             };
         });
+
+        // Form submission handling
+        document.getElementById('inquiryForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const age = document.getElementById('age').value;
+            const contact = document.getElementById('contact').value;
+            const gender = document.getElementById('gender-type').value;
+            const address = document.getElementById('address').value;
+            const inquiryType = document.getElementById('inquiry-type').value;
+            const message = document.getElementById('message').value;
+            
+            // Validate form
+            if (!name || !email || !age || !contact || !gender || !address || !inquiryType || !message) {
+                showError('Please fill in all required fields and accept the privacy policy.');
+                return;
+            }
+            
+            // Create form data for submission
+            const formData = new FormData();
+            formData.append('name', name);
+            formData.append('email', email);
+            formData.append('age', age);
+            formData.append('contact', contact);
+            formData.append('gender-type', gender);
+            formData.append('address', address);
+            formData.append('inquiry-type', inquiryType);
+            formData.append('message', message);
+            
+            // Show loading state
+            const submitBtn = document.querySelector('.submit-btn');
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.textContent = 'Submitting...';
+            submitBtn.disabled = true;
+            
+            // Submit form using fetch API
+            fetch('submit_inquiry.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    // Show success message
+                    showSuccess(data.message);
+                    // Reset form
+                    document.getElementById('inquiryForm').reset();
+                } else {
+                    // Show error message
+                    showError(data.message || 'An error occurred while submitting your inquiry.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showError('An error occurred while submitting your inquiry. Please try again later.');
+            })
+            .finally(() => {
+                // Reset button state
+                submitBtn.textContent = originalBtnText;
+                submitBtn.disabled = false;
+            });
+        });
+        
+        // Function to show success message
+        function showSuccess(message) {
+            const successMessage = document.getElementById('successMessage');
+            successMessage.textContent = message;
+            successMessage.style.display = 'block';
+            
+            // Hide error message if shown
+            document.getElementById('errorMessage').style.display = 'none';
+            
+            // Scroll to message
+            successMessage.scrollIntoView({ behavior: 'smooth' });
+            
+            // Hide message after 5 seconds
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 5000);
+        }
+        
+        // Function to show error message
+        function showError(message) {
+            const errorMessage = document.getElementById('errorMessage');
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+            
+            // Hide success message if shown
+            document.getElementById('successMessage').style.display = 'none';
+            
+            // Scroll to message
+            errorMessage.scrollIntoView({ behavior: 'smooth' });
+            
+            // Hide message after 5 seconds
+            setTimeout(() => {
+                errorMessage.style.display = 'none';
+            }, 5000);
+        }
     </script>
 </body>
 </html>

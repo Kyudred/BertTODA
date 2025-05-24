@@ -1,3 +1,4 @@
+ProjectBayanihan.html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,6 +8,8 @@
     <title>Project Bayanihan - Barangay San Isidro</title>
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="180x180" href="Logo/SK_LOGO.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <style>
         :root {
             --pink-color: #ff1493;
@@ -238,6 +241,48 @@
         .facebook-icon:hover {
             transform: scale(1.1);
         }
+        .search-bar-container {
+    padding-right: 60px;
+    display: flex;
+    justify-content: flex-end;
+    /* Aligns search bar to the right */
+    padding-top: 10px;
+    /* Space above the search bar */
+    padding-bottom: 15px;
+    /* Space below the search bar, before the news grid */
+    /* Right padding will be inherited or controlled by .content-wrapper's padding */
+}
+
+.search-bar-container input[type="text"] {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+    /* Rounded left corners */
+    font-size: 14px;
+    width: 250px;
+    /* Adjust width as needed */
+}
+
+.search-bar-container button {
+    padding: 8px 12px;
+    background-color: #e83e8c;
+    /* Pink color to match theme accents */
+    color: white;
+    border: 1px solid #e83e8c;
+    /* Border to match input field */
+    border-left: none;
+    /* Remove left border to blend with input */
+    border-radius: 0 4px 4px 0;
+    /* Rounded right corners */
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.search-bar-container button:hover {
+    background-color: #d1307a;
+    /* Darker pink on hover */
+    border-color: #d1307a;
+}
 
         @media screen and (max-width: 768px) {
             .news-container {
@@ -250,6 +295,8 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        
     </style>
 </head>
 
@@ -291,7 +338,17 @@
 
 
         <div class="content-wrapper">
-            <h1 class="page-title">PROJECT BAYANIHAN</h1>
+        <h1 class="page-title">PROJECTS BAYANIHAN</h1>
+
+        <div class="search-bar-container">
+            <input type="text" id="projectSearchInput" placeholder="Search projects...">
+            <button type="submit" id="projectSearchButton"><i class="fas fa-search"></i></button>
+        </div>
+
+        <div id="project-grid" class="projects-grid"></div>
+
+        <div class="pagination" id="pagination"></div>
+    </div>
 
 
             <div class="news-container">

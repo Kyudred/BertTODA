@@ -1,0 +1,69 @@
+/* Dropdown Toggle */
+.dropdown-toggle {
+    position: relative;
+    cursor: pointer;
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.toggle-icon {
+    margin-left: auto;
+    transition: transform 0.3s ease;
+}
+
+.dropdown-toggle.active .toggle-icon {
+    transform: rotate(180deg);
+}
+
+/* Submenu */
+.submenu {
+    max-height: 0;
+    overflow: hidden;
+    background-color: var(--light-grey);
+    padding-left: 1rem;
+    list-style: none;
+    transition: max-height 0.3s ease-out;
+}
+
+.submenu.show {
+    max-height: 500px; /* Adjust based on your needs */
+    transition: max-height 0.5s ease-in;
+}
+
+.submenu li {
+    margin: 0;
+    padding: 0;
+}
+
+.submenu a {
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    color: var(--dark-grey);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+}
+
+.submenu a:hover {
+    background-color: var(--lightest-pink);
+    border-left: 3px solid var(--pink-color);
+    color: var(--pink-color);
+}
+
+.submenu a.active {
+    background-color: var(--lightest-pink);
+    border-left: 3px solid var(--pink-color);
+    color: var(--pink-color);
+}
+
+/* When sidebar is expanded */
+.sidebar:hover .submenu {
+    max-height: 500px;
+}
+
+.sidebar:hover .dropdown-toggle.active + .submenu {
+    max-height: 500px;
+} 

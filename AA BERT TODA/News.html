@@ -1,410 +1,23 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SK Barangay San Isidro - News</title>
-        <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="180x180" href="Logo/SK_LOGO.jpg">
-    <style>
-        :root {
-            --pink-color: #ff1493;
-            --light-pink: #fdd8ef;
-            --lightest-pink: #ffe6f2;
-        }
-        
-        html, body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: white;
-            font-size: 16px;
-            height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* Top pink bar with auth buttons */
-        .top-bar {
-            background-color: var(--light-pink);
-            padding: 0.5rem 3%;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-        }
-
-        .auth-buttons {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        .auth-buttons a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 700;
-            font-size: 0.8rem;
-            transition: color 0.3s ease;
-        }
-
-        .auth-buttons a:hover {
-            color: var(--pink-color);
-        }
-
-        .main-container {
-            display: flex;
-            flex-direction: column;
-            min-height: 100%;
-        }
-
-        /* HEADER */
-        .header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: white;
-            padding: 0 3%;
-            box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.1);
-            border-bottom: 0.4rem solid var(--light-pink);
-            flex-shrink: 0;
-        }
-
-        .header-left {
-            display: flex;
-            align-items: center;
-        }
-
-        .header img {
-            height: 5rem;
-            margin-right: 0.9375rem;
-        }
-
-        .header h1 {
-            font-size: 1.5rem;
-            margin: 0;
-            font-weight: bold;
-            position: relative;
-            text-align: center;
-        }
-
-        .header .pink {
-            font-size: 1.25rem;
-            color: var(--pink-color);
-            display: block;
-        }
-
-        .header .black {
-            font-size: 1.25rem;
-            color: black;
-            display: block;
-        }
-
-        .header-line {
-            width: 100%;
-            height: 0.125rem;
-            background-color: black;
-            margin: 0.3125rem 0;
-        }
-
-        /* NAVBAR */
-        .navbar {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .navbar a {
-            text-decoration: none;
-            color: black;
-            font-weight: bold;
-            padding: 0.5rem 0.9375rem;
-            transition: color 0.3s ease;
-        }
-
-        .navbar a:hover {
-            color: var(--pink-color);
-        }
-
-        .content-wrapper {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            background-color: white;
-            padding-bottom: 5rem; /* Space for footer */
-        }
-
-        /* FOOTER */
-        .pink-footer {
-            background-color: var(--lightest-pink);
-            height: 3.625rem;
-            width: 100%;
-            display: flex;
-            justify-content: flex-end;
-            padding-right: 1.25rem;
-            flex-shrink: 0;
-            position: fixed;
-            bottom: 0;
-        }
-
-        .btn-login {
-            color: #333;
-        }
-
-        .btn-login:hover {
-            color: var(--pink-color) !important;
-        }
-
-        .facebook-icon {
-            width: 2.5rem;
-            height: 2.5rem;
-            transition: transform 0.3s ease-in-out;
-            padding-top: 0.625rem;
-            padding-right: 3.25rem;
-        }
-
-        .facebook-icon:hover {
-            transform: scale(1.1);
-        }
-
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .footer-text {
-            color: var(--pink-color);
-            margin-top: 0.3125rem;
-            font-size: 0.6875rem;
-        }
-
-        /* Add styles for the new grid-based design */
-        .news-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            padding: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .news-card {
-            background-color: white;
-            border-radius: 0.9375rem;
-            box-shadow: 0 0.3125rem 0.9375rem rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            transition: transform 0.3s ease;
-        }
-
-        .news-card:hover {
-            transform: translateY(-0.3125rem);
-        }
-
-        .news-image {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .news-image img {
-            width: 100%;
-            height: 200px; /* Fixed height for consistent look */
-            object-fit: cover; /* Cover to fill the space */
-        }
-
-        .news-text {
-            padding: 1rem;
-            text-align: center;
-        }
-
-        .news-title {
-            font-weight: bold;
-            color: var(--pink-color);
-            margin-bottom: 0.625rem;
-            font-size: 1.3rem;
-        }
-
-        .news-date {
-            color: #777;
-            font-size: 0.85rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .news-description {
-            color: #555;
-            line-height: 1.6;
-            font-size: 0.95rem;
-        }
-
-        .page-title {
-            color: var(--pink-color);
-            text-align: center;
-            margin: 1.25rem 0;
-            padding: 0.625rem 0;
-            font-size: 2rem;
-        }
-
-        /* Add new button and container */
-        .add-new-container {
-            text-align: right;
-            padding: 0 2rem;
-            margin-top: 1rem;
-        }
-
-        .add-new-btn {
-            background-color: var(--pink-color);
-            color: white;
-            border: none;
-            padding: 0.6rem 1.2rem;
-            border-radius: 0.5rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .add-new-btn:hover {
-            background-color: #e00e84;
-        }
-
-        /* Modal styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 1rem;
-            width: 90%;
-            max-width: 500px;
-            position: relative;
-            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
-        }
-
-        .modal h2 {
-            text-align: center;
-            color: var(--pink-color);
-            margin-top: 0;
-        }
-
-        .form-group {
-            margin-bottom: 1.25rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #ddd;
-            border-radius: 0.5rem;
-            font-size: 1rem;
-        }
-
-        .form-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .submit-btn {
-            background-color: var(--pink-color);
-            color: white;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .submit-btn:hover {
-            background-color: #e00e84;
-        }
-
-        .cancel-btn {
-            background-color: #777;
-            color: white;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .cancel-btn:hover {
-            background-color: #555;
-        }
-
-        /* Media queries for responsive design */
-        @media screen and (max-width: 1024px) {
-            body {
-                font-size: 14px;
-            }
-            
-            .news-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media screen and (max-width: 768px) {
-            body {
-                overflow-y: auto;
-            }
-            
-            .header {
-                flex-direction: column;
-                padding: 1rem;
-            }
-            
-            .navbar {
-                margin-top: 1rem;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .news-grid {
-                grid-template-columns: 1fr;
-                padding: 1rem;
-            }
-            
-            .pink-footer {
-                position: static;
-                margin-top: 2rem;
-            }
-            
-            .modal-content {
-                padding: 1.5rem;
-                width: 95%;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/news.css">
 </head>
 
 <body>
-    <div class="main-container">
-        <!-- Top Bar with Auth Buttons -->
+     <div class="main-container">
         <div class="top-bar">
             <div class="auth-buttons">
                 <a href="Login.html" class="btn btn-login">LOG IN</a>
             </div>
         </div>
-        <!-- Header Section -->
+
         <div class="header">
             <div class="header-left">
                 <img src="Logo/SK.png" alt="SK Logo">
@@ -414,8 +27,6 @@
                     <span class="black">BARANGAY SAN ISIDRO</span>
                 </h1>
             </div>
-            
-            <!-- Navigation Bar -->
             <div class="navbar">
                 <a href="Home.html">HOME</a>
                 <a href="About.html">ABOUT</a>
@@ -428,97 +39,17 @@
 
         <div class="content-wrapper">
             <h1 class="page-title">NEWS</h1>
-            
 
-            <div class="news-grid">
-                <!-- News Item 1 -->
-                <div class="news-card">
-                    <a href="https://www.facebook.com/share/p/15eLoyM44t/" target="_blank" class="news-link">
-                        <div class="news-image">
-                            <img src="Images/NEWS_SAMPLE.JPG" alt="Financial Literacy News">
-                        </div>
-                    </a>
-                    <div class="news-text">
-                        <h2 class="news-title">𝑬𝑴𝑷𝑶𝑾𝑬𝑹𝑰𝑵𝑮 𝑭𝑼𝑻𝑼𝑹𝑬 𝑻𝑯𝑹𝑶𝑼𝑮𝑯 𝑭𝑰𝑵𝑨𝑵𝑪𝑰𝑨𝑳 𝑳𝑰𝑻𝑬𝑹𝑨𝑪𝒀</h2>
-                        <p class="news-date">Published on: March 1, 2023</p>
-                        <p class="news-description">This program aims to educate the youth on financial literacy and empower them to make informed financial decisions.</p>
-                    </div>
-                </div>
-
-                <!-- News Item 2 -->
-                <div class="news-card">
-                    <a href="https://www.facebook.com/share/p/15DXLpCLfh/" target="_blank" class="news-link">
-                        <div class="news-image">
-                            <img src="Images/PRINTING.JPG" alt="Education News">
-                        </div>
-                    </a>
-                    <div class="news-text">
-                        <h2 class="news-title">Kabataan Angat Tayo sa Malayang Edukasyon!</h2>
-                        <p class="news-date">Published on: March 5, 2023</p>
-                        <p class="news-description">A campaign to promote free and accessible education for all youth in Barangay San Isidro.</p>
-                    </div>
-                </div>
-
-                <!-- News Item 3 -->
-                <div class="news-card">
-                    <a href="https://www.facebook.com/share/p/16XrV7YhpM/" target="_blank" class="news-link">
-                        <div class="news-image">
-                            <img src="Images/SELF DEFENSE.JPG" alt="Self Defense Workshop">
-                        </div>
-                    </a>
-                    <div class="news-text">
-                        <h2 class="news-title">𝑲𝑰𝑪𝑲𝑺𝑻𝑨𝑹𝑻 𝒀𝑶𝑼𝑹 𝑺𝑼𝑴𝑴𝑬𝑹 𝑾𝑰𝑻𝑯 𝑺𝑲 𝑺𝑨𝑵 𝑰𝑺𝑰𝑫𝑹𝑶!</h2>
-                        <p class="news-date">Published on: March 10, 2023</p>
-                        <p class="news-description">A summer workshop focused on self-defense techniques to empower the youth.</p>
-                    </div>
-                </div>
-
-                <!-- News Item 4 -->
-                <div class="news-card">
-                    <a href="https://www.facebook.com/share/166HUzETwo/" target="_blank" class="news-link">
-                        <div class="news-image">
-                            <img src="Images/CLEANING.JPG" alt="Environmental Cleanup">
-                        </div>
-                    </a>
-                    <div class="news-text">
-                        <h2 class="news-title">𝑬𝑴𝑷𝑶𝑾𝑬𝑹𝑰𝑵𝑮 𝑪𝑯𝑨𝑵𝑮𝑬 𝑻𝑯𝑹𝑶𝑼𝑮𝑯 𝑬𝑽𝑰𝑹𝑶𝑵𝑴𝑬𝑵𝑻𝑨𝑳 𝑨𝑪𝑻𝑰𝑶𝑵𝑺</h2>
-                        <p class="news-date">Published on: March 15, 2023</p>
-                        <p class="news-description">A community-driven initiative to clean and preserve the environment in Barangay San Isidro.</p>
-                    </div>
-                </div>
-
-                <!-- News Item 5 -->
-                <div class="news-card">
-                    <a href="https://www.facebook.com/share/1FTZbjd31v/" target="_blank" class="news-link">
-                        <div class="news-image">
-                            <img src="Images/AWARENESS.JPG" alt="Awareness Campaign">
-                        </div>
-                    </a>
-                    <div class="news-text">
-                        <h2 class="news-title">𝐁𝐑𝐄𝐀𝐊𝐈𝐍𝐆 𝐁𝐀𝐑𝐑𝐈𝐄𝐑𝐒 𝐀𝐍𝐃 𝐁𝐔𝐈𝐋𝐃𝐈𝐍𝐆 𝐀𝐖𝐀𝐑𝐄𝐍𝐄𝐒𝐒</h2>
-                        <p class="news-date">Published on: March 20, 2023</p>
-                        <p class="news-description">An awareness campaign to educate the youth on important social issues.</p>
-                    </div>
-                </div>
-
-                <!-- News Item 6 -->
-                <div class="news-card">
-                    <a href="https://www.facebook.com/share/p/19HLdw36b3/" target="_blank" class="news-link">
-                        <div class="news-image">
-                            <img src="Images/DROGA.JPG" alt="Anti-Drug Campaign">
-                        </div>
-                    </a>
-                    <div class="news-text">
-                        <h2 class="news-title">𝐁𝐀𝐖𝐀𝐋 𝐀𝐍𝐆 𝐃𝐑𝐎𝐆𝐀, 𝐃𝐀𝐏𝐀𝐓 𝐀𝐍𝐆 𝐋𝐈𝐆𝐀!</h2>
-                        <p class="news-date">Published on: March 25, 2023</p>
-                        <p class="news-description">A campaign to raise awareness about the dangers of drug use and promote a drug-free community.</p>
-                    </div>
-                </div>
+            <div class="search-bar-container">
+                <input type="text" id="newsSearchInput" placeholder="Search news...">
+                <button type="submit" id="newsSearchButton"><i class="fas fa-search"></i></button>
             </div>
+
+            <div class="news-grid" id="news-grid"></div>
+
+            <div class="pagination" id="pagination"></div>
         </div>
 
-       
-        <!-- Pink Footer -->
         <div class="pink-footer">
             <div class="footer-content">
                 <a href="https://www.facebook.com/BrgySanIsidroSK" target="_blank">
@@ -527,5 +58,22 @@
             </div>
         </div>
     </div>
+
+    <div id="news-modal" class="news-modal" style="display: none;">
+  <div class="news-modal-content">
+    <span class="news-modal-close">&times;</span>
+    <h2 id="modal-title">Title</h2>
+    <p id="modal-category">Category</p>
+    <p id="modal-date">Date</p>
+    <img id="modal-image" src="" alt="News Image">
+    <p id="modal-summary"></p>
+    <div id="modal-content"></div>
+    <a id="modal-facebook" href="#" target="_blank">View on Facebook</a>
+  </div>
+</div>
+
+
+    <script src="js/news.js"></script>
 </body>
+
 </html>

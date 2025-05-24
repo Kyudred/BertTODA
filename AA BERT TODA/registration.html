@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration - SK Barangay San Isidro</title>
+    <style>
+        :root {
+            --pink-color: #ff1493;
+            --light-pink: #fdd8ef;
+            --lightest-pink: #ffe6f2;
+        }
+        
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            color: #666;
+            padding: 0;
+        }
+        .toggle-password:hover {
+            color: var(--pink-color);
+        }
+
+    
+        html, body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            /* Updated to gradient background similar to the image */
+            background: linear-gradient(135deg, #ffd1e8 0%, #ffffff 50%, #ffcce6 100%);
+            background-attachment: fixed;
+            font-size: 16px;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Top pink bar with auth buttons */
+        .top-bar {
+            background-color: var(--light-pink);
+            padding: 0.5rem 3%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .auth-buttons a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 700;
+            font-size: 0.8rem;
+            transition: color 0.3s ease;
+        }
+
+        .auth-buttons a:hover {
+            color: var(--pink-color);
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: white;
+            padding: 0 3%;
+            box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.1);
+            border-bottom: 0.4rem solid var(--light-pink);
+            flex-shrink: 0;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .header img {
+            height: 5rem;
+            margin-right: 0.9375rem;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            margin: 0;
+            font-weight: bold;
+            position: relative;
+            text-align: center;
+        }
+
+        .header .pink {
+            font-size: 1.25rem;
+            color: var(--pink-color);
+            display: block;
+        }
+
+        .header .black {
+            font-size: 1.25rem;
+            color: black;
+            display: block;
+        }
+
+        .header-line {
+            width: 100%;
+            height: 0.125rem;
+            background-color: black;
+            margin: 0.3125rem 0;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            padding: 0.5rem 0.9375rem;
+            transition: color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: var(--pink-color);
+        }
+
+        .content-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .login-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .login-container h2 {
+            color: var(--pink-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .input-group .validation-icon {
+            position: absolute;
+            right: 10px;
+            top: 38px;
+            font-size: 1.2rem;
+            display: none;
+        }
+        
+        .input-group .valid-input {
+            border: 1px solid #28a745;
+            background-color: rgba(40, 167, 69, 0.1);
+        }
+        
+        .input-group .invalid-input {
+            border: 1px solid #dc3545;
+            background-color: rgba(220, 53, 69, 0.1);
+        }
+        
+        .input-group .check-icon {
+            color: #28a745;
+        }
+        
+        .input-group .x-icon {
+            color: #dc3545;
+        }
+
+        .role-selector {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .role-selector label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .role-selector select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            background-color: white;
+        }
+
+        .btn-login-submit {
+            background-color: var(--pink-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-login-submit:hover {
+            background-color: #e00d83;
+        }
+
+        .back-to-home {
+            margin-top: 1rem;
+            display: block;
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .back-to-home:hover {
+            color: var(--pink-color);
+        }
+
+        .pink-footer {
+            background-color: var(--lightest-pink);
+            height: 3.625rem;
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .facebook-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            transition: transform 0.3s ease-in-out;
+            padding-top: 0.625rem;
+            padding-right: 3.25rem;
+        }
+
+        .facebook-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        @media screen and (max-width: 768px) {
+            .login-container {
+                padding: 1.5rem;
+                width: 90%;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .content-wrapper {
+                padding: 1rem;
+            }
+            
+            .login-container {
+                padding: 1rem;
+            }
+            
+            .btn-login-submit {
+                width: 100%;
+            }
+
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body>
+    <div class="main-container">
+        <!-- Top Bar with Auth Buttons -->
+        <div class="top-bar">
+            <div class="auth-buttons">
+                <a href="Home.html" class="btn btn-login">HOME</a>
+                <a href="Login.html" class="btn btn-login">LOG IN</a>
+            </div>
+        </div>
+        
+        <!-- Header Section -->
+        <div class="header">
+            <div class="header-left">
+                <img src="Logo/SK.png" alt="SK Logo">
+                <h1>
+                    <span class="pink">SANGGUNIANG KABATAAN</span>
+                    <div class="header-line"></div>
+                    <span class="black">BARANGAY SAN ISIDRO</span>
+                </h1>
+            </div>
+            
+            <!-- Navigation Bar -->
+            <div class="navbar">
+                <a href="Home.html">HOME</a>
+                <a href="About.html">ABOUT</a>
+                <a href="Officials.html">OFFICIALS</a>
+                <a href="News.html">NEWS</a>
+                <a href="Projects.html">PROJECTS</a>
+                <a href="Contact.html">CONTACT</a>
+            </div>
+        </div>
+        
+        <div class="content-wrapper">
+            <div class="login-container">
+                <h2>REGISTRATION</h2>
+                <div class="input-group">
+                    <div class="input-group">
+                <label for="accessCode">Registration Code</label>
+                <div style="position: relative;">
+                    <input type="password" id="accessCode" name="accessCode" required placeholder="Enter code">
+                    <button type="button" class="toggle-password" onclick="toggleVisibility('accessCode', this)">
+                    <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+                </div>
+
+                <form id="registrationForm">
+                    <div class="input-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="input-group">
+                    <label for="password">Password</label>
+                    <div style="position: relative;">
+                        <input type="password" id="password" name="password" required>
+                        <button type="button" class="toggle-password" onclick="toggleVisibility('password', this)">
+                        <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    </div>
+
+                    <div class="input-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <div style="position: relative;">
+                        <input type="password" id="confirmPassword" name="confirmPassword" required>
+                        <button type="button" class="toggle-password" onclick="toggleVisibility('confirmPassword', this)">
+                        <i class="fas fa-eye"></i>
+                        </button>
+                        <span class="validation-icon check-icon">✓</span>
+                        <span class="validation-icon x-icon">✗</span>
+                    </div>
+                    </div>
+
+                    <button type="button" class="btn-login-submit" onclick="handleRegistration()">REGISTER</button>
+                </form>
+                <a href="Home.html" class="back-to-home">Back to Home</a>
+            </div>
+        </div>
+
+        <!-- Pink Footer -->
+        <div class="pink-footer">
+            <div class="footer-content">
+                <a href="https://www.facebook.com/BrgySanIsidroSK" target="_blank">
+                    <img src="Logo/face.png" alt="Facebook" class="facebook-icon">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to validate password and confirmation match
+        function validatePasswordMatch() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const confirmField = document.getElementById('confirmPassword');
+            const checkIcon = document.querySelector('.check-icon');
+            const xIcon = document.querySelector('.x-icon');
+            
+            // Only validate if confirm password field has some input
+            if (confirmPassword.length > 0) {
+                if (password === confirmPassword) {
+                    // Passwords match - show green with check
+                    confirmField.classList.add('valid-input');
+                    confirmField.classList.remove('invalid-input');
+                    checkIcon.style.display = 'inline';
+                    xIcon.style.display = 'none';
+                } else {
+                    // Passwords don't match - show red with X
+                    confirmField.classList.add('invalid-input');
+                    confirmField.classList.remove('valid-input');
+                    checkIcon.style.display = 'none';
+                    xIcon.style.display = 'inline';
+                }
+            } else {
+                // Clear validation if field is empty
+                confirmField.classList.remove('valid-input', 'invalid-input');
+                checkIcon.style.display = 'none';
+                xIcon.style.display = 'none';
+            }
+        }
+        
+                // Add event listeners to both password fields
+                document.getElementById('password').addEventListener('input', validatePasswordMatch);
+                document.getElementById('confirmPassword').addEventListener('input', validatePasswordMatch);
+                
+                function handleRegistration() {
+    const accessCode = document.getElementById('accessCode').value;
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+
+    const correctCode = "SK@SAN1SIDRO!*";
+
+    if (accessCode !== correctCode) {
+        alert('Invalid registration code');
+        return;
+    }
+
+    if (!name || !email || !password || !confirmPassword) {
+        alert('Please fill in all fields');
+        return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        alert('Please enter a valid email address');
+        return;
+    }
+
+    if (password !== confirmPassword) {
+        alert('Passwords do not match');
+        return;
+    }
+
+    // Send data to the backend
+    fetch('register.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+            name: name,
+            email: email,
+            password: password
+        })
+    })
+    .then(response => response.text())
+    .then(result => {
+        if (result === 'success') {
+            alert('Registration successful!');
+            window.location.href = 'Home.html';
+        } else {
+            alert('Registration failed: ' + result);
+        }
+    })
+    .catch(error => {
+        alert('Error connecting to the server.');
+        console.error('Error:', error);
+    });
+}
+
+
+        function toggleVisibility(inputId, button) {
+    const input = document.getElementById(inputId);
+    const icon = button.querySelector('i');
+
+    if (input.type === "password") {
+        input.type = "text";
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+    } else {
+        input.type = "password";
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+    }
+}
+
+        
+    </script>
+</body>
+</html>

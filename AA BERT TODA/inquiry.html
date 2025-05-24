@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inquiry History - SK Barangay San Isidro</title>
-        <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="180x180" href="Logo/SK_LOGO.jpg">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Link to external CSS file -->
+    <!-- Link to external CSS files -->
     <link rel="stylesheet" href="css/admin-dashboard.css">
     <link rel="stylesheet" href="css/inquiry.css">
+    <link rel="stylesheet" href="css/dropdown.css">
 </head>
 <body>
     <div class="main-container">
@@ -39,34 +38,64 @@
             <div class="sidebar" id="sidebar">
                 <ul>
                     <li>
-                        <a href="inventory-system.html" id="inventory-link">
+                        <a href="#" id="inventory-link" class="dropdown-toggle">
                             <span class="icon"><i class="fas fa-box"></i></span>
                             <span class="text">Inventory System</span>
+                            <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>                
                         </a>
+                        <ul class="submenu">
+                            <li>
+                                <a href="items_overview.php" id="items-overview-link" class="active">
+                                    <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
+                                    <span class="text">Items Overview</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="categories.php" id="categories-link">
+                                    <span class="icon"><i class="fas fa-list"></i></span>
+                                    <span class="text">Categories</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="items.php" id="items-link">
+                                    <span class="icon"><i class="fas fa-boxes"></i></span>
+                                    <span class="text">Items</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="usage.php" id="usage-link">
+                                    <span class="icon"><i class="fas fa-undo"></i></span>
+                                    <span class="text">Use/Return</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
-                        <a href="admin-dashboard.html" id="dashboard-link">
-                            <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
-                            <span class="text">Dashboard</span>
+                        <a href="#" id="posts-link" class="dropdown-toggle">
+                            <span class="icon"><i class="fas fa-newspaper"></i></span>
+                            <span class="text">Posts</span>
+                            <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
                         </a>
-                    </li>
-                    <li>
-                        <a href="categories.html" id="categories-link">
-                            <span class="icon"><i class="fas fa-list"></i></span>
-                            <span class="text">Categories</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="items.html" id="items-link">
-                            <span class="icon"><i class="fas fa-boxes"></i></span>
-                            <span class="text">Items</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="usage.html" id="usage-link">
-                            <span class="icon"><i class="fas fa-undo"></i></span>
-                            <span class="text">Use/Return</span>
-                        </a>
+                        <ul class="submenu">
+                            <li>
+                                <a href="post-news.html" id="post-news-link">
+                                    <span class="icon"><i class="fas fa-bullhorn"></i></span>
+                                    <span class="text">Post News</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="post-project.html" id="post-project-link">
+                                    <span class="icon"><i class="fas fa-project-diagram"></i></span>
+                                    <span class="text">Post Project</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="manage-posts.html" id="manage-posts-link">
+                                    <span class="icon"><i class="fas fa-tasks"></i></span>
+                                    <span class="text">Manage Posts</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         <a href="events.html" id="events-link">
@@ -113,7 +142,6 @@
                                 <option value="today">Today</option>
                                 <option value="week">This Week</option>
                                 <option value="month">This Month</option>
-                                <option value="quarter">This Quarter</option>
                             </select>
                             <button id="resetFilters">Reset Filters</button>
                         </div>
@@ -172,15 +200,19 @@
                         <table id="inquiryTable">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Subject</th>
-                                    <th>Date Submitted</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
+                                  <th>ID</th>
+                                  <th>Full Name</th>
+                                  <th>Email</th>
+                                  <th>Age</th>
+                                  <th>Contact Number</th>
+                                  <th>Gender</th>
+                                  <th>Address</th>
+                                  <th>Inquiry Type</th>
+                                  <th>Message</th>
+                                  <th>Date</th>
+                                  <th>Status</th>
                                 </tr>
-                            </thead>
+                              </thead>                              
                             <tbody>
                                 <!-- Table rows will be populated by JavaScript -->
                             </tbody>
@@ -191,73 +223,45 @@
                 <!-- Inquiry Details Modal -->
                 <div id="inquiryModal" class="modal">
                     <div class="modal-content">
-                        <span class="close-modal">&times;</span>
-                        <h2>Inquiry Details</h2>
-                        <div class="inquiry-details">
-                            <div class="detail-row">
-                                <div class="detail-label">Inquiry ID:</div>
-                                <div id="modalInquiryId" class="detail-value"></div>
-                            </div>
-                            <div class="detail-row">
-                                <div class="detail-label">Name:</div>
-                                <div id="modalName" class="detail-value"></div>
-                            </div>
-                            <div class="detail-row">
-                                <div class="detail-label">Email:</div>
-                                <div id="modalEmail" class="detail-value"></div>
-                            </div>
-                            <div class="detail-row">
-                                <div class="detail-label">Phone:</div>
-                                <div id="modalPhone" class="detail-value"></div>
-                            </div>
-                            <div class="detail-row">
-                                <div class="detail-label">Subject:</div>
-                                <div id="modalSubject" class="detail-value"></div>
-                            </div>
-                            <div class="detail-row">
-                                <div class="detail-label">Date Submitted:</div>
-                                <div id="modalDate" class="detail-value"></div>
-                            </div>
-                            <div class="detail-row">
-                                <div class="detail-label">Status:</div>
-                                <div id="modalStatus" class="detail-value"></div>
-                            </div>
-                            <div class="detail-row full-width">
-                                <div class="detail-label">Message:</div>
-                                <div id="modalMessage" class="detail-value message-content"></div>
-                            </div>
-                        </div>
-                        <div class="inquiry-response">
-                            <h3>Response</h3>
-                            <textarea id="responseText" placeholder="Enter your response..."></textarea>
-                            <div class="status-update">
-                                <label for="statusUpdate">Update Status:</label>
-                                <select id="statusUpdate">
-                                    <option value="pending">Pending</option>
-                                    <option value="processing">Processing</option>
-                                    <option value="resolved">Resolved</option>
-                                    <option value="closed">Closed</option>
-                                </select>
-                            </div>
-                            <div class="modal-actions">
-                                <button id="sendResponse" class="btn btn-primary">Send Response</button>
-                                <button id="closeInquiry" class="btn btn-secondary">Close Inquiry</button>
-                            </div>
-                        </div>
+                      <span class="close-modal">&times;</span>
+                      <h2>Inquiry Details</h2>
+                      <p><strong>ID:</strong> <span id="modalInquiryId"></span></p>
+                      <p><strong>Name:</strong> <span id="modalName"></span></p>
+                      <p><strong>Email:</strong> <span id="modalEmail"></span></p>
+                      <p><strong>Age:</strong> <span id="modalAge"></span></p>
+                      <p><strong>Contact Number:</strong> <span id="modalPhone"></span></p>
+                      <p><strong>Gender:</strong> <span id="modalGender"></span></p>
+                      <p><strong>Address:</strong> <span id="modalAddress"></span></p>
+                      <p><strong>Subject:</strong> <span id="modalSubject"></span></p>
+                      <p><strong>Message:</strong></p>
+                      <p id="modalMessage"></p>
+                      <p><strong>Status:</strong> <span id="modalStatus"></span></p>
+                      <p><strong>Submitted At:</strong> <span id="modalDate"></span></p>
+                  
+                      <!-- Optional response fields -->
+                      <div>
+                        <label for="statusUpdate">Update Status:</label>
+                        <select id="statusUpdate">
+                          <option value="pending">Pending</option>
+                          <option value="processing">Processing</option>
+                          <option value="resolved">Resolved</option>
+                          <option value="closed">Closed</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label for="responseText">Response:</label><br>
+                        <textarea id="responseText" rows="4" style="width: 100%;"></textarea>
+                      </div>
+                      <button id="sendResponse">Send Response</button>
+                      <button id="closeInquiry">Close Inquiry</button>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <!-- Pink Footer -->
-        <div class="pink-footer">
-            <a href="https://www.facebook.com" target="_blank">
-                <i class="fab fa-facebook fa-2x facebook-icon"></i>
-            </a>
-        </div>
     </div>
     
     <!-- JavaScript files -->
-    <script src="inquiry.js"></script>
+    <script src="js/dropdown.js"></script>
+    <script src="inquiries.js"></script>
 </body>
 </html>

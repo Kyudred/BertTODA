@@ -1,3 +1,4 @@
+
 :root {
     --pink-color: #ff1493;
     --light-pink: #fdd8ef;
@@ -13,7 +14,7 @@
     --sidebar-width: 250px;
     --sidebar-collapsed-width: 60px;
     --transition-speed: 0.3s;
-}
+}   
 
 .facebook-icon {
     width: 2.5rem;
@@ -334,6 +335,69 @@ html, body {
 
 .sidebar:hover .text {
     opacity: 1;
+}
+
+/* Dropdown Toggle */
+.dropdown-toggle {
+    position: relative;
+    cursor: pointer;
+}
+
+.toggle-icon {
+    margin-left: auto;
+    transition: transform 0.3s ease;
+}
+
+.dropdown-toggle.active .toggle-icon {
+    transform: rotate(180deg);
+}
+
+/* Submenu */
+.submenu {
+    display: none;
+    background-color: var(--light-grey);
+    padding-left: 1rem;
+    list-style: none;
+}
+
+.submenu li {
+    margin: 0;
+    padding: 0;
+}
+
+.submenu a {
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    color: var(--dark-grey);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+}
+
+.submenu a:hover {
+    background-color: var(--lightest-pink);
+    border-left: 3px solid var(--pink-color);
+    color: var(--pink-color);
+}
+
+.submenu a.active {
+    background-color: var(--lightest-pink);
+    border-left: 3px solid var(--pink-color);
+    color: var(--pink-color);
+}
+
+.dropdown-toggle.active + .submenu {
+    display: block;
+}
+
+/* When sidebar is expanded */
+.sidebar:hover .submenu {
+    display: block;
+}
+
+.sidebar:hover .dropdown-toggle.active + .submenu {
+    display: block;
 }
 
 /* Main Content */

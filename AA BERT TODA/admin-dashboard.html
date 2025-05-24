@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - SK Barangay San Isidro</title>
-        <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="180x180" href="Logo/SK_LOGO.jpg">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Link to external CSS file -->
@@ -34,7 +32,7 @@
         </div>
         
         <div class="dashboard-container">
-            <!-- Sidebar - Now with links to separate pages -->
+            <!-- Sidebar - Now with added Posts section -->
             <div class="sidebar" id="sidebar">
                 <ul>
                     <li>
@@ -68,6 +66,33 @@
                         </a>
                     </li>
                     <li>
+                        <a href="#" id="posts-link" class="dropdown-toggle">
+                            <span class="icon"><i class="fas fa-newspaper"></i></span>
+                            <span class="text">Posts</span>
+                            <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                        </a>
+                        <ul class="submenu">
+                            <li>
+                                <a href="post-news.html" id="post-news-link">
+                                    <span class="icon"><i class="fas fa-bullhorn"></i></span>
+                                    <span class="text">Post News</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="post-project.html" id="post-project-link">
+                                    <span class="icon"><i class="fas fa-project-diagram"></i></span>
+                                    <span class="text">Post Project</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="manage-posts.html" id="manage-posts-link">
+                                    <span class="icon"><i class="fas fa-tasks"></i></span>
+                                    <span class="text">Manage Posts</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
                         <a href="events.html" id="events-link">
                             <span class="icon"><i class="fas fa-calendar"></i></span>
                             <span class="text">Events Calendar</span>
@@ -75,7 +100,7 @@
                     </li>
                     <li>
                         <a href="inquiry.html" id="inquiry-link">
-                            <span class="icon"><i class="fa-solid fa-clipboard"></i></i></span>
+                            <span class="icon"><i class="fa-solid fa-clipboard"></i></span>
                             <span class="text">Inquiry History</span>
                         </a>
                     </li>
@@ -247,5 +272,46 @@
             </a>
         </div>
     </div>
+
+    <!-- JavaScript for dropdown functionality -->
+    <script src="js/sidebar.js"></script>
+
+    <!-- Additional CSS for submenu styling -->
+    <style>
+        .submenu {
+            display: none;
+            padding-left: 20px;
+            list-style: none;
+        }
+        
+        .submenu li {
+            margin: 5px 0;
+        }
+        
+        .submenu a {
+            padding: 8px 15px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+        
+        .submenu a:hover {
+            background-color: rgba(255, 105, 180, 0.1);
+            color: #ff69b4;
+        }
+        
+        .toggle-icon {
+            margin-left: auto;
+        }
+        
+        .dropdown-toggle {
+            display: flex !important;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
 </body>
 </html>

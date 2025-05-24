@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory System - SK Barangay San Isidro</title>
-        <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="180x180" href="Logo/SK_LOGO.jpg">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Link to external CSS file -->
@@ -37,17 +35,17 @@
         </div>
         
         <div class="dashboard-container">
-            <!-- Sidebar -->
+            <!-- Sidebar - Now with added Posts section -->
             <div class="sidebar" id="sidebar">
                 <ul>
                     <li>
-                        <a href="inventory-system.html" id="inventory-link" class="active">
+                        <a href="inventory-system.html" id="inventory-link">
                             <span class="icon"><i class="fas fa-box"></i></span>
                             <span class="text">Inventory System</span>
                         </a>
                     </li>
                     <li>
-                        <a href="admin-dashboard.html" id="dashboard-link">
+                        <a href="admin-dashboard.html" id="dashboard-link" class="active">
                             <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
                             <span class="text">Dashboard</span>
                         </a>
@@ -69,6 +67,33 @@
                             <span class="icon"><i class="fas fa-undo"></i></span>
                             <span class="text">Use/Return</span>
                         </a>
+                    </li>
+                    <li>
+                        <a href="#" id="posts-link" class="dropdown-toggle">
+                            <span class="icon"><i class="fas fa-newspaper"></i></span>
+                            <span class="text">Posts</span>
+                            <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                        </a>
+                        <ul class="submenu">
+                            <li>
+                                <a href="post-news.html" id="post-news-link">
+                                    <span class="icon"><i class="fas fa-bullhorn"></i></span>
+                                    <span class="text">Post News</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="post-project.html" id="post-project-link">
+                                    <span class="icon"><i class="fas fa-project-diagram"></i></span>
+                                    <span class="text">Post Project</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="manage-posts.html" id="manage-posts-link">
+                                    <span class="icon"><i class="fas fa-tasks"></i></span>
+                                    <span class="text">Manage Posts</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         <a href="events.html" id="events-link">
@@ -364,6 +389,8 @@
         </div>
     </div>
 
+     <!-- JavaScript for dropdown functionality -->
+    <script src="js/sidebar.js"></script>
     <script src="js/inventory-system.js"></script>
 </body>
 </html>
