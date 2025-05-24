@@ -1,3 +1,4 @@
+usage.php
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -5,7 +6,7 @@ ini_set('display_errors', 1);
 $host = 'localhost';
 $user = 'root';
 $password = ''; // Default password in XAMPP is empty
-$dbname = 'inventorysystemdb'; // Replace with your actual database name
+$dbname = 'InventorySystemdb';
 
 $conn = new mysqli($host, $user, $password, $dbname);
 
@@ -39,7 +40,7 @@ try {
         // Instead of sample data, fetch from the main items table
         $fetch_items = "INSERT INTO items (name, category, quantity, status, dateAdded, lastUpdated, description, notes)
                        SELECT name, category, quantity, status, dateAdded, lastUpdated, description, notes
-                       FROM items
+                       FROM items_main
                        WHERE status = 'available'";
         
         if ($conn->query($fetch_items) === FALSE) {
